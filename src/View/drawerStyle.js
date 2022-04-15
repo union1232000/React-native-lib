@@ -1,0 +1,144 @@
+import React, {Component} from 'react';
+import {Text, View, Image, TouchableOpacity} from 'react-native';
+import {
+  DrawerContentScrollView,
+  DrawerItem,
+  DrawerItemList,
+} from '@react-navigation/drawer';
+import {
+  Avatar,
+  Title,
+  Paragraph,
+  Drawer,
+  TouchableRipple,
+  Switch,
+} from 'react-native-paper';
+import Entypo from 'react-native-vector-icons/Entypo';
+import Feather from 'react-native-vector-icons/Feather';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+const DrawerStyle = ({navigation}, props) => {
+  return (
+    <DrawerContentScrollView>
+      <View
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: 15,
+        }}>
+        {/* Thong tin người dùng  */}
+        <Image
+          source={require('../Images/ic_avatar.png')}
+          style={{borderRadius: 200 / 2}}></Image>
+        <Text style={{fontSize: 20, color: '#345173'}}>Nguyễn Võ Vũ Văn</Text>
+        <Text style={{fontSize: 15, color: '#345173'}}>Vannvv2@fpt.com.vn</Text>
+        <Image
+          source={require('../Images/stripe.png')}
+          style={{
+            resizeMode: 'contain',
+            width: '50%',
+            paddingBottom: 30,
+          }}></Image>
+        {/* Tạo mới khóa học  */}
+        <View
+          style={{
+            borderBottomWidth: 1,
+            width: '100%',
+            padding: 10,
+            marginTop: 20,
+            borderColor: '#c2c2c2',
+          }}>
+          <TouchableOpacity
+            style={{flexDirection: 'row'}}
+            onPress={() => {
+              navigation.navigate('Create');
+            }}>
+            <Entypo
+              name="add-to-list"
+              size={25}
+              style={{marginRight: 10, color: '#345173'}}></Entypo>
+            <Text>Tạo mới khóa học </Text>
+          </TouchableOpacity>
+        </View>
+        {/* tạo mới buổi học */}
+        <View
+          style={{
+            borderBottomWidth: 1,
+            width: '100%',
+            padding: 10,
+            borderColor: '#c2c2c2',
+          }}>
+          <TouchableOpacity
+            style={{flexDirection: 'row'}}
+            onPress={() => {
+              navigation.navigate('CreateManager');
+            }}>
+            <AntDesign
+              name="addfile"
+              size={25}
+              style={{marginRight: 10, color: '#345173'}}></AntDesign>
+            <Text>Tạo mới buổi học </Text>
+          </TouchableOpacity>
+        </View>
+        {/* Quản lý Buổi học  */}
+        <View
+          style={{
+            borderBottomWidth: 1,
+            width: '100%',
+            padding: 10,
+            borderColor: '#c2c2c2',
+          }}>
+          <TouchableOpacity
+            style={{flexDirection: 'row'}}
+            onPress={() => {
+              navigation.navigate('Manager');
+            }}>
+            <Entypo
+              name="text-document"
+              size={25}
+              style={{marginRight: 10, color: '#345173'}}></Entypo>
+            <Text>Quản lý buổi học </Text>
+          </TouchableOpacity>
+        </View>
+        {/* Thông tin ứng dụng  */}
+        <View
+          style={{
+            borderBottomWidth: 1,
+            width: '100%',
+            padding: 10,
+            borderColor: '#c2c2c2',
+          }}>
+          <TouchableOpacity
+            style={{flexDirection: 'row'}}
+            onPress={() => {
+              navigation.navigate('Info');
+            }}>
+            <Entypo
+              name="info-with-circle"
+              size={25}
+              style={{marginRight: 10, color: '#00C2FC'}}></Entypo>
+            <Text>Thông tin ứng dụng </Text>
+          </TouchableOpacity>
+        </View>
+        {/* Đăng xuất  */}
+        <View
+          style={{
+            width: '100%',
+            padding: 10,
+          }}>
+          <TouchableOpacity
+            style={{flexDirection: 'row'}}
+            onPress={() => {
+              navigation.navigate('Login');
+            }}>
+            <Feather
+              name="log-out"
+              size={25}
+              style={{marginRight: 15, color: '#345173'}}></Feather>
+            <Text> Đăng Xuất</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </DrawerContentScrollView>
+  );
+};
+export default DrawerStyle;
