@@ -1,5 +1,5 @@
 import {DateTimePickerAndroid} from '@react-native-community/datetimepicker';
-import React, {Component, useState} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -16,7 +16,26 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Calender from './Calender';
 import Time from './Time';
+import {POST_CREATE} from '../Redux/Action/CreateAction';
+import {useDispatch, useSelector} from 'react-redux';
+import Home from './Home';
 export default ({navigation}, props) => {
+  // const createState = useSelector(b => b.Createreducers.response);
+  const dispatch = useDispatch();
+  const Savehandler = async () => {
+    const action = {
+      type: POST_CREATE,
+      data: {
+        courseName: TK,
+        trainer: TGV,
+        startedDate: date,
+        endedDate: date2,
+        buildingId: chontoanha,
+        roomId: chonphong,
+      },
+    };
+    dispatch(action);
+  };
   //Tên khóa
   const [TK, onChangeTK] = useState('');
   const [isValidTK, setValidTK] = useState(true);
@@ -51,7 +70,6 @@ export default ({navigation}, props) => {
   };
   // Tòa nhà
   const [open3, setOpen3] = useState(false);
-  const [value, setValue] = useState(null);
   const [items, setItems] = useState([
     {label: 'KangNam', value: 'Kangnam'},
     {label: 'Tân Thuận 3', value: 'Tân Thuận 3'},
@@ -212,6 +230,7 @@ export default ({navigation}, props) => {
               verifychonphong();
               verifyDatetime();
               verifychontoanha();
+              Savehandler();
             }}
             style={{
               width: '40%',

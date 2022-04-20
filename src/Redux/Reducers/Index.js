@@ -1,4 +1,8 @@
 import {combineReducers} from 'redux';
-
-const reducers = combineReducers({});
-export default (State, action) => reducers(State, action);
+import Loginreducers from './Loginreducers';
+import Createreducers from './Createreducers';
+const allReducers = combineReducers({
+  Loginreducers,
+  Createreducers,
+});
+export default allReducers;

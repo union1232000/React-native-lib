@@ -1,6 +1,7 @@
 export const POST_LOGIN = 'POST_LOGIN';
-export const POST_LOGIN_SUCCESS = 'POST_LOGIN_SUCCESS';
-export const POST_LOGIN_ERROR = 'POST_LOGIN_ERROR';
+export const SIGNIN_SUCCESS = 'LOGIN_SUCCESS';
+export const SIGNIN_ERROR = 'LOGIN_ERROR';
+export const DID_LOGIN_ACTION = ' DID_LOGIN_ACTION';
 
 export const loginAction = (user, password) => {
   return {

@@ -9,6 +9,12 @@ import {
   FlatList,
   ScrollView,
 } from 'react-native';
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from 'react-native-popup-menu';
 export class Studentsitem extends Component {
   state = {};
   render() {
@@ -22,10 +28,23 @@ export class Studentsitem extends Component {
             borderRadius: 5,
             color: '#c2c2c2',
           }}>
-          <TouchableOpacity
-            style={{position: 'absolute', right: 0, padding: 10}}>
-            <Entypo name="dots-three-vertical" size={20}></Entypo>
-          </TouchableOpacity>
+          <Menu
+            style={{
+              position: 'absolute',
+              right: 1,
+              top: 10,
+              padding: 10,
+            }}>
+            <MenuTrigger>
+              <Entypo name="dots-three-vertical" size={20}></Entypo>
+            </MenuTrigger>
+            <MenuOptions>
+              <MenuOption onSelect={() => alert(`Thêm`)} text="Thêm" />
+              <MenuOption onSelect={() => alert(`Xóa`)}>
+                <Text style={{color: 'red'}}>Xóa</Text>
+              </MenuOption>
+            </MenuOptions>
+          </Menu>
           {/* Tựa mục  */}
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Text>

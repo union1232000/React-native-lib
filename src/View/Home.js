@@ -1,17 +1,9 @@
 import React, {Component, useState} from 'react';
-import {
-  Text,
-  View,
-  SafeAreaView,
-  TouchableOpacity,
-  ImageBackground,
-  TextInput,
-  FlatList,
-  ScrollView,
-} from 'react-native';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import DropDownPicker from 'react-native-dropdown-picker';
-import {MenuProvider} from 'react-native-popup-menu';
+import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import Entypo from 'react-native-vector-icons/Entypo';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import KeyboardAvoidingView from 'react-native/Libraries/Components/Keyboard/KeyboardAvoidingView';
+import Header from './Header';
 import {
   Menu,
   MenuOptions,
@@ -120,11 +112,6 @@ export class Studentsitem extends Component {
     );
   }
 }
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import Entypo from 'react-native-vector-icons/Entypo';
-import Header from './Header';
-import KeyboardAvoidingView from 'react-native/Libraries/Components/Keyboard/KeyboardAvoidingView';
 export default Home = ({navigation}, props) => {
   let DATA = [
     {
@@ -153,10 +140,24 @@ export default Home = ({navigation}, props) => {
           {DATA.map((item, index) => (
             <Studentsitem key={index} items={item} index={index} />
           ))}
-          <TouchableOpacity
-            style={{position: 'absolute', right: 1, top: 20, padding: 10}}>
-            <Entypo name="dots-three-vertical" size={20}></Entypo>
-          </TouchableOpacity>
+
+          <Menu
+            style={{
+              position: 'absolute',
+              right: 1,
+              top: 20,
+              padding: 10,
+            }}>
+            <MenuTrigger>
+              <Entypo name="dots-three-vertical" size={20}></Entypo>
+            </MenuTrigger>
+            <MenuOptions>
+              <MenuOption onSelect={() => alert(`Thêm`)} text="Thêm" />
+              <MenuOption onSelect={() => alert(`Xóa`)}>
+                <Text style={{color: 'red'}}>Xóa</Text>
+              </MenuOption>
+            </MenuOptions>
+          </Menu>
         </View>
       </ScrollView>
     </View>
