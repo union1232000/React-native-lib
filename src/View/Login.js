@@ -21,7 +21,7 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import {postLogin} from '../API/Login.js';
 import {useDispatch, useSelector} from 'react-redux';
 import {loginAction, POST_LOGIN} from '../Redux/Action/LoginAction.js';
-import {token} from '../Redux/Setting/Token.js';
+import {user} from '../Redux/Setting/Token.js';
 
 export default Login = ({navigation}, props) => {
   const loginState = useSelector(a => a.Loginreducers.response);
@@ -29,23 +29,21 @@ export default Login = ({navigation}, props) => {
 
   const [getPasswordVisible, setPasswordVisible] = useState(false);
   const [getCheckboxvisible, setCheckboxVisible] = useState(false);
-  const [Username, setUsername] = useState('');
-  const [Password, setPassword] = useState('');
+  const [Username, setUsername] = useState('vannvv2@fpt.com.vn');
+  const [Password, setPassword] = useState('chuonng1080@');
   const [Login, setLogin] = useState(0);
 
   const Loginhandler = async () => {
-    const action = {
-      type: POST_LOGIN,
-      data: {user: Username, password: Password},
-    };
-    dispatch(action);
+    dispatch(loginAction(Username, Password));
   };
   useEffect(() => {
-    if (loginState?.resultCode == 1) {
-      token = loginState?.data.token;
-      navigation.navigate('DrawerNavigator');
-    } else {
-      Alert.alert('Tên đăng nhập và mật khẩu không được để trống!');
+    if (loginState?.resultCode) {
+      if (loginState?.resultCode == 1) {
+        user.token = loginState?.data.token;
+        navigation.navigate('DrawerNavigator');
+      } else {
+        Alert.alert('Tên đăng nhập và mật khẩu không được để trống!');
+      }
     }
     return () => {};
   }, [loginState]);

@@ -1,1 +1,3 @@
-export let token = '';
+export const user = {
+  token: '',
+};

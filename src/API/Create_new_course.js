@@ -1,18 +1,22 @@
+import {useTransition} from 'react';
 import {useSelector} from 'react-redux';
-import {token} from '../Redux/Setting/Token';
+import {user} from '../Redux/Setting/Token';
 
 export async function postCreate(Create) {
+  const {courseName, trainer, startedDate, endedDate, buildingId, roomId} =
+    Create;
   var myHeaders = new Headers();
-  myHeaders.append('Authorization', 'Bearer' + token);
+  myHeaders.append('Authorization', `Bearer ${user}`);
+  console.log(' đưa ra cái token ngu loz', user);
   myHeaders.append('Content-Type', 'application/json');
 
   var raw = JSON.stringify({
-    courseName,
-    trainer,
-    startedDate,
-    endedDate,
-    buildingId,
-    roomId,
+    courseName: courseName,
+    trainer: trainer,
+    startedDate: startedDate,
+    endedDate: endedDate,
+    buildingId: buildingId,
+    roomId: roomId,
   });
 
   var requestOptions = {

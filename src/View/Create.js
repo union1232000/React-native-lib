@@ -16,26 +16,70 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Calender from './Calender';
 import Time from './Time';
-import {POST_CREATE} from '../Redux/Action/CreateAction';
+import CreateAction, {POST_CREATE} from '../Redux/Action/CreateAction';
 import {useDispatch, useSelector} from 'react-redux';
 import Home from './Home';
+import {user} from '../Redux/Setting/Token';
+import {get_building} from '../API/Getbuilding';
+import {get_buildingaction} from '../Redux/Action/Getbuilding';
 export default ({navigation}, props) => {
-  // const createState = useSelector(b => b.Createreducers.response);
+  const createState = useSelector(b => b.Createreducers.response);
   const dispatch = useDispatch();
+  const [buildingState, setBuildingState] = useState([]);
+  const getbuildingstate = useSelector(c => c.Getbuildingreducers.response);
+  // lấy phòng
+  const [buildingState2, setBuildingState2] = useState([]);
+  const getbuildingstate2 = useSelector(d => d.Getbuildingreducers.response);
+  // lấy tòa nhà
+  useEffect(() => {
+    dispatch(get_buildingaction());
+  }, []);
+
+  useEffect(() => {
+    if (getbuildingstate?.data) {
+      const listBuilding = [];
+      getbuildingstate.data.map((item, index) => {
+        listBuilding.push({label: item.buildingName, value: item.buildingName});
+      });
+      setBuildingState(listBuilding);
+    }
+  }, [getbuildingstate]);
+  console.log(getbuildingstate);
+
+  // lấy phòng học
+  useEffect(() => {
+    dispatch(get_buildingaction());
+  }, []);
+  useEffect(() => {
+    if (getbuildingstate2?.data) {
+      const listBuilding2 = [];
+      getbuildingstate2.data.map((item, index) => {
+        listBuilding2.push({
+          label: item.room.roomName,
+          value: item.room.roomName,
+        });
+      });
+      setBuildingState2(listBuilding2);
+    }
+  }, [getbuildingstate]);
+  console.log(getbuildingstate2);
+
+  // nút lưu API
   const Savehandler = async () => {
-    const action = {
-      type: POST_CREATE,
-      data: {
-        courseName: TK,
-        trainer: TGV,
-        startedDate: date,
-        endedDate: date2,
-        buildingId: chontoanha,
-        roomId: chonphong,
-      },
-    };
-    dispatch(action);
+    dispatch(CreateAction(TK, TGV, date, date2, chonphong, chontoanha));
   };
+  useEffect(() => {
+    if (createState?.resultCode == 1) {
+      console.log('asdasdasd', createState);
+      user.token = createState.data;
+      {
+        {
+          createState.data;
+        }
+      }
+    }
+    return () => {};
+  }, [createState]);
   //Tên khóa
   const [TK, onChangeTK] = useState('');
   const [isValidTK, setValidTK] = useState(true);
@@ -62,7 +106,7 @@ export default ({navigation}, props) => {
   const [date2, setDate2] = useState(new Date());
   const [isValidDatime, setValidDatetime] = useState(true);
   const verifyDatetime = () => {
-    if (date2 > date) {
+    if (date2 < date) {
       setValidDatetime(false);
     } else {
       setValidDatetime(true);
@@ -97,6 +141,14 @@ export default ({navigation}, props) => {
     } else {
       setValidchonphong(true);
     }
+  };
+
+  const getBuildingFetch = async () => {
+    console.log('12312312923612');
+    try {
+      const res = await get_building();
+      console.log(res);
+    } catch (error) {}
   };
   return (
     <ScrollView style={{flex: 1, width: '100%'}}>
@@ -188,7 +240,7 @@ export default ({navigation}, props) => {
             style={{borderColor: '#c2c2c2'}}
             open={open3}
             value={chontoanha}
-            items={items}
+            items={buildingState}
             setOpen={setOpen3}
             setValue={onChangechontoanha}
             setItems={setItems}
@@ -209,7 +261,7 @@ export default ({navigation}, props) => {
             style={{borderColor: '#c2c2c2'}}
             open={open4}
             value={chonphong}
-            items={items2}
+            items={buildingState2}
             setOpen={setOpen4}
             setValue={onChangechonphong}
             setItems={setItems2}
@@ -253,6 +305,13 @@ export default ({navigation}, props) => {
               LƯU
             </Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => getBuildingFetch()}
+            style={{
+              width: 200,
+              height: 50,
+              backgroundColor: 'blue',
+            }}></TouchableOpacity>
         </View>
       </View>
     </ScrollView>

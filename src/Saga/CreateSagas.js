@@ -3,15 +3,16 @@ import {
   CREATE_SUCCESS,
   CREATE_ERROR,
 } from '../Redux/Action/CreateAction.js';
-import {call, takeEvery, put, takeLatest} from 'react-native-reanimated';
+import {call, takeEvery, put, takeLatest} from 'redux-saga/effects';
 import {postCreate} from '../API/Create_new_course.js';
 
 export function* watchCreate() {
   yield takeEvery(POST_CREATE, createFlow);
 }
-export function* createFlow(action) {
+function* createFlow(action) {
   const {courseName, trainer, startedDate, endedDate, buildingId, roomId} =
     action.data;
+  console.log('courseName', action);
   const response = yield postCreate(
     courseName,
     trainer,

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, View, SafeAreaView, TouchableOpacity} from 'react-native';
+import {Text, View, SafeAreaView, TouchableOpacity, Image} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -23,12 +23,11 @@ export default Header = (props, {navigation}) => {
       }}>
       {isLeftDisalbe && !isBack && (
         <TouchableOpacity
-          style={{position: 'absolute', left: 0, padding: 10}}
+          style={{position: 'absolute', left: 0, padding: 5}}
           onPress={() => props.navigation.openDrawer()}>
-          <FontAwesome
-            name="bars"
-            size={25}
-            style={{left: 0, color: '#d4d5da'}}></FontAwesome>
+          <Image
+            source={require('../Images/ic_menu.png')}
+            style={{resizeMode: 'contain', height: 30}}></Image>
         </TouchableOpacity>
       )}
       {isBack && (
@@ -43,12 +42,22 @@ export default Header = (props, {navigation}) => {
       )}
       {isRightDisalbe && (
         <TouchableOpacity
-          style={{position: 'absolute', right: 0, padding: 10}}
+          style={{
+            position: 'absolute',
+            right: -11,
+          }}
           onPress={() => props.navigation.navigate('Create')}>
-          <Ionicons
+          <Image
+            source={require('../Images/ic_plus.png')}
+            style={{
+              resizeMode: 'contain',
+              height: 25,
+              tintColor: '#d4d5da',
+            }}></Image>
+          {/* <Ionicons
             name="add"
             size={30}
-            style={{right: 0, color: '#d4d5da'}}></Ionicons>
+            style={{right: 0, color: '#d4d5da'}}></Ionicons> */}
         </TouchableOpacity>
       )}
       <Text
