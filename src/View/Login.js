@@ -1,26 +1,17 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
-  View,
-  Text,
-  TouchableOpacity,
-  ImageBackground,
-  StatusBar,
-  Dimensions,
-  TextInput,
-  ScrollView,
-  StyleSheet,
-  SafeAreaView,
-  Image,
   Alert,
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import icon from '../Images/index.js';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
-import CheckBox from '@react-native-community/checkbox';
-import Fontisto from 'react-native-vector-icons/Fontisto';
-import {postLogin} from '../API/Login.js';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useDispatch, useSelector} from 'react-redux';
-import {loginAction, POST_LOGIN} from '../Redux/Action/LoginAction.js';
+import {loginAction} from '../Redux/Action/LoginAction.js';
 import {user} from '../Redux/Setting/Token.js';
 
 export default Login = ({navigation}, props) => {
@@ -40,6 +31,7 @@ export default Login = ({navigation}, props) => {
     if (loginState?.resultCode) {
       if (loginState?.resultCode == 1) {
         user.token = loginState?.data.token;
+        console.log(loginState);
         navigation.navigate('DrawerNavigator');
       } else {
         Alert.alert('Tên đăng nhập và mật khẩu không được để trống!');
@@ -49,206 +41,205 @@ export default Login = ({navigation}, props) => {
   }, [loginState]);
 
   return (
-    <ScrollView>
+    <View
+      style={{
+        width: '100%',
+        backgroundColor: '#f4f8fb',
+        paddingHorizontal: 40,
+        paddingVertical: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+      {/* Hình FPT IS */}
       <View
         style={{
-          flex: 1,
-          backgroundColor: '#f4f8fb',
-          paddingHorizontal: 40,
-          paddingVertical: 20,
+          width: '100%',
+          alignItems: 'center',
+          justifyContent: 'center',
+          paddingTop: 15,
         }}>
-        {/* Hình FPT IS */}
+        <Image
+          source={require('../Images/logo.png')}
+          style={{
+            width: '100%',
+            height: 90,
+            resizeMode: 'center',
+          }}></Image>
+      </View>
+      {/* FPT INSIGHT Portal */}
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={{color: '#335271', fontSize: 28, fontWeight: '700'}}>
+          FIS INSIGHT PORTAL
+        </Text>
+        <Image
+          source={require('../Images/stripe.png')}
+          style={{height: '6%', marginTop: 8}}
+          resizeMode="contain"></Image>
+      </View>
+      {/* đăng nhập  */}
+      <View style={{alignItems: 'center', justifyContent: 'center'}}>
+        <Text style={{color: '#fea026', fontSize: 25, fontWeight: '700'}}>
+          ĐĂNG NHẬP HỆ THỐNG{' '}
+        </Text>
+      </View>
+      {/* Tài khoảng mật khẩu  */}
+      <View
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: 20,
+        }}>
         <View
           style={{
             width: '100%',
-            alignItems: 'center',
-            justifyContent: 'center',
-            paddingTop: 15,
-          }}>
-          <Image
-            source={require('../Images/logo.png')}
-            style={{
-              width: '100%',
-              height: 100,
-              resizeMode: 'center',
-            }}></Image>
-        </View>
-        {/* FPT INSIGHT Portal */}
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          <Text style={{color: '#335271', fontSize: 28, fontWeight: '700'}}>
-            FIS INSIGHT PORTAL
-          </Text>
-          <Image
-            source={require('../Images/stripe.png')}
-            style={{height: '6%', marginTop: 8}}
-            resizeMode="contain"></Image>
-        </View>
-        {/* đăng nhập  */}
-        <View style={{alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={{color: '#fea026', fontSize: 25, fontWeight: '700'}}>
-            ĐĂNG NHẬP HỆ THỐNG{' '}
-          </Text>
-        </View>
-        {/* Tài khoảng mật khẩu  */}
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: 20,
-          }}>
-          <View
-            style={{
-              width: '100%',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <TextInput
-              style={{
-                width: '100%',
-                height: '100%',
-                textAlign: 'center',
-                paddingLeft: 30,
-                paddingRight: 50,
-                fontWeight: '600',
-                backgroundColor: '#e6eaed',
-                fontSize: 20,
-              }}
-              onChangeText={value => setUsername(value)}
-              value={Username}
-              placeholderTextColor={'#335271'}
-              placeholder="Tài Khoản"></TextInput>
-            <FontAwesome
-              style={style.icon}
-              name={'user'}
-              color="#b2bcc6"
-              size={25}></FontAwesome>
-          </View>
-          {/* mật khẩu  */}
-          <View
-            style={{
-              width: '100%',
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginTop: 10,
-            }}>
-            <TextInput
-              style={{
-                width: '100%',
-                height: '100%',
-                textAlign: 'center',
-                paddingLeft: 30,
-                fontWeight: '600',
-                paddingRight: 50,
-                backgroundColor: '#e6eaed',
-                fontSize: 20,
-              }}
-              onChangeText={value => setPassword(value)}
-              placeholder="Mật khẩu"
-              placeholderTextColor={'#335271'}
-              value={Password}
-              secureTextEntry={getPasswordVisible ? false : true}></TextInput>
-            <FontAwesome
-              style={style.icon}
-              name={'lock'}
-              color="#b2bcc6"
-              size={25}></FontAwesome>
-            <TouchableOpacity
-              style={{alignItems: 'center', justifyContent: 'center'}}
-              onPress={() => {
-                setPasswordVisible(!getPasswordVisible);
-              }}>
-              {getPasswordVisible ? (
-                <Feather
-                  name={'eye'}
-                  color="#b2bcc6"
-                  size={25}
-                  style={{
-                    right: 0,
-                    position: 'absolute',
-                    padding: 10,
-                  }}></Feather>
-              ) : (
-                <Feather
-                  name={'eye-off'}
-                  color="#b2bcc6"
-                  size={25}
-                  style={{
-                    right: 0,
-                    position: 'absolute',
-                    padding: 10,
-                  }}></Feather>
-              )}
-            </TouchableOpacity>
-          </View>
-        </View>
-        {/* ghi nhớ đăng nhập */}
-        <View
-          style={{
-            width: '100%',
-            alignItems: 'flex-start',
             flexDirection: 'row',
-            marginTop: 15,
+            alignItems: 'center',
+            justifyContent: 'center',
           }}>
+          <TextInput
+            style={{
+              width: '100%',
+              height: '100%',
+              textAlign: 'center',
+              paddingLeft: 30,
+              paddingRight: 50,
+              fontWeight: '600',
+              backgroundColor: '#e6eaed',
+              fontSize: 20,
+            }}
+            onChangeText={value => setUsername(value)}
+            value={Username}
+            placeholderTextColor={'#335271'}
+            placeholder="Tài Khoản"></TextInput>
+          <FontAwesome
+            style={style.icon}
+            name={'user'}
+            color="#b2bcc6"
+            size={25}></FontAwesome>
+        </View>
+        {/* mật khẩu  */}
+        <View
+          style={{
+            width: '100%',
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginTop: 10,
+          }}>
+          <TextInput
+            style={{
+              width: '100%',
+              height: '100%',
+              textAlign: 'center',
+              paddingLeft: 30,
+              fontWeight: '600',
+              paddingRight: 50,
+              backgroundColor: '#e6eaed',
+              fontSize: 20,
+            }}
+            onChangeText={value => setPassword(value)}
+            placeholder="Mật khẩu"
+            placeholderTextColor={'#335271'}
+            value={Password}
+            secureTextEntry={getPasswordVisible ? false : true}></TextInput>
+          <FontAwesome
+            style={style.icon}
+            name={'lock'}
+            color="#b2bcc6"
+            size={25}></FontAwesome>
           <TouchableOpacity
+            style={{alignItems: 'center', justifyContent: 'center'}}
             onPress={() => {
-              setCheckboxVisible(!getCheckboxvisible);
-              console.log(getCheckboxvisible);
+              setPasswordVisible(!getPasswordVisible);
             }}>
-            {getCheckboxvisible ? (
-              <Feather name={'circle'} color="#ff9336" size={20}></Feather>
+            {getPasswordVisible ? (
+              <Feather
+                name={'eye'}
+                color="#b2bcc6"
+                size={25}
+                style={{
+                  right: 0,
+                  position: 'absolute',
+                  padding: 10,
+                }}></Feather>
             ) : (
               <Feather
-                name={'check-circle'}
-                color="#ff9336"
-                size={20}></Feather>
+                name={'eye-off'}
+                color="#b2bcc6"
+                size={25}
+                style={{
+                  right: 0,
+                  position: 'absolute',
+                  padding: 10,
+                }}></Feather>
             )}
           </TouchableOpacity>
-          <Text
-            style={{
-              fontWeight: '500',
-              color: '#ff9336',
-              fontSize: 15,
-              fontStyle: 'italic',
-            }}>
-            {' '}
-            Ghi nhớ đăng nhập
-          </Text>
         </View>
-        {/* đăng nhập  */}
-        <View style={{width: '100%', padding: 10}}>
-          <TouchableOpacity
-            onPress={() => {
-              Loginhandler();
-            }}
-            style={{
-              width: '100%',
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: '#ff9336',
-              borderRadius: 5,
-              marginTop: 10,
-              padding: 15,
-            }}>
-            <Text style={{fontWeight: '500', fontSize: 25, color: 'white'}}>
-              ĐĂNG NHẬP
-            </Text>
-          </TouchableOpacity>
-        </View>
-        {/* Hình cuối  */}
-        <View
+      </View>
+      {/* ghi nhớ đăng nhập */}
+      <View
+        style={{
+          width: '100%',
+          alignItems: 'flex-start',
+          flexDirection: 'row',
+          marginTop: 15,
+          alignItems: 'center',
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            setCheckboxVisible(!getCheckboxvisible);
+            console.log(getCheckboxvisible);
+          }}>
+          {getCheckboxvisible ? (
+            <Feather name={'circle'} color="#ff9336" size={20}></Feather>
+          ) : (
+            <Feather name={'check-circle'} color="#ff9336" size={20}></Feather>
+          )}
+        </TouchableOpacity>
+        <Text
+          style={{
+            fontWeight: '500',
+            color: '#ff9336',
+            fontSize: 18,
+            fontStyle: 'italic',
+            marginLeft: 10,
+          }}>
+          Ghi nhớ đăng nhập
+        </Text>
+      </View>
+      {/* đăng nhập  */}
+      <View style={{width: '100%', padding: 10}}>
+        <TouchableOpacity
+          onPress={() => {
+            Loginhandler();
+          }}
           style={{
             width: '100%',
             justifyContent: 'center',
             alignItems: 'center',
-            padding: 20,
+            backgroundColor: '#ff9336',
+            borderRadius: 5,
+            marginTop: 10,
+            padding: 15,
           }}>
-          <Image
-            source={require('../Images/swipe.png')}
-            style={{resizeMode: 'contain', height: 150}}></Image>
-        </View>
+          <Text style={{fontWeight: 'bold', fontSize: 25, color: 'white'}}>
+            ĐĂNG NHẬP
+          </Text>
+        </TouchableOpacity>
       </View>
-    </ScrollView>
+      {/* Hình cuối  */}
+      <View
+        style={{
+          width: '100%',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: 20,
+        }}>
+        <Image
+          source={require('../Images/swipe.png')}
+          style={{resizeMode: 'contain', height: 150}}></Image>
+      </View>
+      <Text>Copyright C 2019, FPT Information system </Text>
+    </View>
   );
 };
 

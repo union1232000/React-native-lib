@@ -10,7 +10,6 @@ export function* whatGetbuilding() {
   yield takeEvery(POST_GETBUILDING, GetbuildingFlow);
 }
 export function* GetbuildingFlow() {
-  console.log('saga running');
   const response = yield get_building();
 
   const error = response.message;

@@ -59,7 +59,7 @@ const images = {
   ic_fpt_is: require('./ic_fpt_is.png'),
   ic_fpt_shop: require('./ic_fpt_shop.png'),
   ic_fpt_telecom: require('./ic_fpt_telecom.png'),
-  ic_logojgp: require('./logo.jpg'),
+  // ic_logojgp: require('./logo.jpg'),
   // ic_tech_insight: require("./ic_tech_insight.png"),
   ic_fpt: require('./ic_fpt.png'),
   // ic_fpt_synnex: require("./ic_fpt_synnex.png"),

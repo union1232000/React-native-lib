@@ -15,11 +15,13 @@ import {
   MenuOption,
   MenuTrigger,
 } from 'react-native-popup-menu';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 export class Studentsitem extends Component {
   state = {};
   render() {
     return (
-      <ScrollView>
+      <ScrollView style={{backgroundColor: 'white'}}>
         <View
           style={{
             flex: 1,
@@ -33,10 +35,10 @@ export class Studentsitem extends Component {
               position: 'absolute',
               right: 1,
               top: 10,
-              padding: 10,
+              padding: 5,
             }}>
             <MenuTrigger>
-              <Entypo name="dots-three-vertical" size={20}></Entypo>
+              <Entypo name="dots-three-vertical" size={30}></Entypo>
             </MenuTrigger>
             <MenuOptions>
               <MenuOption onSelect={() => alert(`Thêm`)} text="Thêm" />
@@ -57,10 +59,10 @@ export class Studentsitem extends Component {
           </View>
           {/* Giảng viên  */}
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <FontAwesome
-              name="user"
+            <FontAwesome5
+              name="user-tie "
               size={30}
-              style={{color: '#ffd237', padding: 5}}></FontAwesome>
+              style={{color: '#ffd237', padding: 5}}></FontAwesome5>
             <Text>
               {this.props.items.id}
               <Text
@@ -72,15 +74,15 @@ export class Studentsitem extends Component {
           </View>
           {/* cán bộ quản lý  */}
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <FontAwesome
-              name="vcard-o"
+            <FontAwesome5
+              name="address-card"
               size={25}
-              style={{color: '#40304d', padding: 5}}></FontAwesome>
+              style={{color: '#40304d', padding: 5}}></FontAwesome5>
             <Text>
               {this.props.items.name}
               <Text
                 style={{color: '#f0943f', fontSize: 15, fontWeight: 'bold'}}>
-                : trinhntk
+                trinhntk
               </Text>
             </Text>
           </View>
@@ -94,30 +96,30 @@ export class Studentsitem extends Component {
               {this.props.items.calender}
               <Text
                 style={{color: '#345173', fontSize: 15, fontWeight: 'bold'}}>
-                : 21/01/2021 - 21/01/2021
+                21/01/2021
               </Text>
             </Text>
           </View>
           {/* Thời gian  */}
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <FontAwesome
-              name="clock-o"
+            <AntDesign
+              name="clockcircleo"
               size={25}
-              style={{color: '#345173', padding: 5}}></FontAwesome>
+              style={{color: '#345173', padding: 5}}></AntDesign>
             <Text>
               {this.props.items.calenderTime}
               <Text
                 style={{color: '#345173', fontSize: 15, fontWeight: 'bold'}}>
-                : 20:35 - 20:46
+                20:35 - 20:46
               </Text>
             </Text>
           </View>
           {/* Tòa nhà  */}
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <FontAwesome
-              name="building-o"
+            <FontAwesome5
+              name="building"
               size={25}
-              style={{color: '#0090d7', padding: 5}}></FontAwesome>
+              style={{color: '#0090d7', padding: 5}}></FontAwesome5>
             <Text>
               {this.props.items.building}
               <Text
@@ -129,10 +131,10 @@ export class Studentsitem extends Component {
           </View>
           {/* Phòng  */}
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <FontAwesome
-              name="vcard-o"
+            <FontAwesome5
+              name="chalkboard-teacher"
               size={25}
-              style={{color: '#ff9126', padding: 5}}></FontAwesome>
+              style={{color: '#ff9126', padding: 5}}></FontAwesome5>
             <Text>
               {this.props.items.room}
               <Text
@@ -144,10 +146,10 @@ export class Studentsitem extends Component {
           </View>
           {/* wifi */}
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <FontAwesome
+            <FontAwesome5
               name="wifi"
               size={25}
-              style={{color: '#34c96b', padding: 5}}></FontAwesome>
+              style={{color: '#34c96b', padding: 5}}></FontAwesome5>
             <Text>
               {this.props.items.wifi}
               <Text
@@ -201,7 +203,7 @@ export default Home = ({navigation}, props) => {
   return (
     <View style={{flex: 1, width: '100%', borderWidth: 2}}>
       {/* header */}
-      <Header title="Quản lý buổi học" navigation={navigation} />
+      <Header title="QUẢN LÝ BUỔI HỌC" navigation={navigation} />
 
       <ScrollView>
         <View style={{padding: 10}}>

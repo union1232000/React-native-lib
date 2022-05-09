@@ -1,5 +1,5 @@
 import {user} from '../Redux/Setting/Token';
-export async function get_building() {
+export async function get_allcourse() {
   var myHeaders = new Headers();
   myHeaders.append('Authorization', 'Bearer ' + user.token);
 
@@ -8,17 +8,17 @@ export async function get_building() {
     headers: myHeaders,
     redirect: 'follow',
   };
-
+  var data;
   const response = await fetch(
-    'http://10.86.224.37:5001/api/edu/get_building',
+    'http://10.86.224.37:5001/api/edu/get_all_course',
     requestOptions,
   )
     .then(response => response.json())
     .then(result => {
-      console.log(result);
-      return result;
+      data = result;
+      // console.log(result);
     })
-    .catch(error => console.log('error12312312', error));
-
-  return response;
+    .catch(error => console.log('error', error));
+  // console.log(data);
+  return data;
 }

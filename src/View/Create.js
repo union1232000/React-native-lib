@@ -1,35 +1,49 @@
-import {DateTimePickerAndroid} from '@react-native-community/datetimepicker';
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  Button,
   ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import Header from './Header';
-import DatePicker from 'react-native-date-picker';
-import moment from 'moment';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import DropDownPicker from 'react-native-dropdown-picker';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import Calender from './Calender';
-import Time from './Time';
-import CreateAction, {POST_CREATE} from '../Redux/Action/CreateAction';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useDispatch, useSelector} from 'react-redux';
-import Home from './Home';
-import {user} from '../Redux/Setting/Token';
-import {get_building} from '../API/Getbuilding';
+import CreateAction from '../Redux/Action/CreateAction';
 import {get_buildingaction} from '../Redux/Action/Getbuilding';
+import {user} from '../Redux/Setting/Token';
+import Calender from './Calender';
+import Header from './Header';
+import Icon from './icon';
+import icon from './icon';
 export default ({navigation}, props) => {
   const createState = useSelector(b => b.Createreducers.response);
   const dispatch = useDispatch();
   const [buildingState, setBuildingState] = useState([]);
+  const [buildingChoosen, setbuldingChoosen] = useState([]);
+  const [roomstate, setroomstate] = useState([]);
   const getbuildingstate = useSelector(c => c.Getbuildingreducers.response);
-  // lấy phòng
-  const [buildingState2, setBuildingState2] = useState([]);
-  const getbuildingstate2 = useSelector(d => d.Getbuildingreducers.response);
+  const [chontoanha, setChontoanha] = useState('');
+  const [isValidchontoanha, setValidchontoanha] = useState(true);
+  // Phòng
+  const [open4, setOpen4] = useState(false);
+  const [items2, setItems2] = useState([]);
+  const [chonphong, onChangechonphong] = useState('');
+  const [isValidchonphong, setValidchonphong] = useState(true);
+  useEffect(() => {
+    if (chontoanha !== '') {
+      let obj = getbuildingstate?.data.find(o => o._id === chontoanha);
+      let listroom = [];
+      obj.room.map((item, index) => {
+        listroom.push({
+          label: item.roomName,
+          value: item._id,
+        });
+      });
+      setbuldingChoosen(listroom);
+    }
+  }, [chontoanha]);
+
   // lấy tòa nhà
   useEffect(() => {
     dispatch(get_buildingaction());
@@ -39,47 +53,23 @@ export default ({navigation}, props) => {
     if (getbuildingstate?.data) {
       const listBuilding = [];
       getbuildingstate.data.map((item, index) => {
-        listBuilding.push({label: item.buildingName, value: item.buildingName});
+        listBuilding.push({label: item.buildingName, value: item._id});
       });
       setBuildingState(listBuilding);
     }
   }, [getbuildingstate]);
-  console.log(getbuildingstate);
-
-  // lấy phòng học
-  useEffect(() => {
-    dispatch(get_buildingaction());
-  }, []);
-  useEffect(() => {
-    if (getbuildingstate2?.data) {
-      const listBuilding2 = [];
-      getbuildingstate2.data.map((item, index) => {
-        listBuilding2.push({
-          label: item.room.roomName,
-          value: item.room.roomName,
-        });
-      });
-      setBuildingState2(listBuilding2);
-    }
-  }, [getbuildingstate]);
-  console.log(getbuildingstate2);
-
   // nút lưu API
-  const Savehandler = async () => {
-    dispatch(CreateAction(TK, TGV, date, date2, chonphong, chontoanha));
+  const Savehandler = () => {
+    console.log(TK, TGV);
+    dispatch(CreateAction(TK, TGV, date, date2, chontoanha, chonphong));
   };
   useEffect(() => {
     if (createState?.resultCode == 1) {
-      console.log('asdasdasd', createState);
       user.token = createState.data;
-      {
-        {
-          createState.data;
-        }
-      }
     }
     return () => {};
   }, [createState]);
+
   //Tên khóa
   const [TK, onChangeTK] = useState('');
   const [isValidTK, setValidTK] = useState(true);
@@ -118,8 +108,10 @@ export default ({navigation}, props) => {
     {label: 'KangNam', value: 'Kangnam'},
     {label: 'Tân Thuận 3', value: 'Tân Thuận 3'},
   ]);
-  const [chontoanha, onChangechontoanha] = useState('');
-  const [isValidchontoanha, setValidchontoanha] = useState(true);
+
+  const toggleBuilding = () => {
+    setOpen3(!open3);
+  };
   const verifychontoanha = () => {
     if (chontoanha == '') {
       setValidchontoanha(false);
@@ -127,14 +119,7 @@ export default ({navigation}, props) => {
       setValidchontoanha(true);
     }
   };
-  // Phòng
-  const [open4, setOpen4] = useState(false);
-  const [items2, setItems2] = useState([
-    {label: 'Phòng 1', value: 'Phòng 1'},
-    {label: 'Phòng 2', value: 'Phòng 2'},
-  ]);
-  const [chonphong, onChangechonphong] = useState('');
-  const [isValidchonphong, setValidchonphong] = useState(true);
+
   const verifychonphong = () => {
     if (chonphong == '') {
       setValidchonphong(false);
@@ -142,16 +127,8 @@ export default ({navigation}, props) => {
       setValidchonphong(true);
     }
   };
-
-  const getBuildingFetch = async () => {
-    console.log('12312312923612');
-    try {
-      const res = await get_building();
-      console.log(res);
-    } catch (error) {}
-  };
   return (
-    <ScrollView style={{flex: 1, width: '100%'}}>
+    <ScrollView style={{flex: 1, width: '100%', backgroundColor: 'white'}}>
       <Header
         title="TẠO MỚI KHÓA HỌC"
         isRightDisable={true}
@@ -161,8 +138,14 @@ export default ({navigation}, props) => {
       {/* Tên Khóa  */}
       <View style={{padding: 10}}>
         <View View style={{width: '100%'}}>
-          <Text style={{color: '#345173', fontSize: 22, fontWeight: 'bold'}}>
-            Tên Khóa{' '}
+          <Text
+            style={{
+              color: '#345173',
+              fontSize: 22,
+              fontWeight: 'bold',
+              paddingBottom: 5,
+            }}>
+            Tên khóa
           </Text>
           <TextInput
             style={{
@@ -177,13 +160,19 @@ export default ({navigation}, props) => {
             }}
             value={TK}
             placeholder="Nhập tên khóa học"></TextInput>
-          <Text style={{color: 'red'}}>
+          <Text style={{color: 'red', fontStyle: 'italic', fontSize: 15}}>
             {isValidTK ? '' : 'Tên khóa không được bỏ trống '}
           </Text>
         </View>
         {/* Giảng viên  */}
         <View View style={{width: '100%'}}>
-          <Text style={{color: '#345173', fontSize: 22, fontWeight: 'bold'}}>
+          <Text
+            style={{
+              color: '#345173',
+              fontSize: 22,
+              fontWeight: 'bold',
+              paddingBottom: 5,
+            }}>
             Giảng viên{' '}
           </Text>
           <TextInput
@@ -199,7 +188,7 @@ export default ({navigation}, props) => {
             }}
             value={TGV}
             placeholder="Nhập tên giảng viên"></TextInput>
-          <Text style={{color: 'red'}}>
+          <Text style={{color: 'red', fontStyle: 'italic', fontSize: 15}}>
             {isValidTGV ? '' : 'Tên giảng viên không thể để trống'}
           </Text>
         </View>
@@ -208,30 +197,49 @@ export default ({navigation}, props) => {
           style={{
             flexDirection: 'row',
             alignItems: 'center',
+            width: '100%',
             justifyContent: 'space-between',
           }}>
           {/* Từ Ngày  */}
-          <View>
-            <Text style={{color: '#345173', fontSize: 20, fontWeight: '500'}}>
-              Từ Ngày
+          <View style={{width: '48%'}}>
+            <Text
+              style={{
+                color: '#345173',
+                fontSize: 20,
+                fontWeight: 'bold',
+                paddingBottom: 5,
+              }}>
+              Từ ngày
             </Text>
             <Calender onPressSetDateTime={setDate} dateTime={date} />
           </View>
           {/* Đến Ngày  */}
-          <View>
-            <Text style={{color: '#345173', fontSize: 20, fontWeight: '500'}}>
-              Đến Ngày
+          <View style={{width: '48%'}}>
+            <Text
+              style={{
+                color: '#345173',
+                fontSize: 20,
+                fontWeight: 'bold',
+                paddingBottom: 5,
+              }}>
+              Đến ngày
             </Text>
             <Calender onPressSetDateTime={setDate2} dateTime={date2} />
           </View>
         </View>
-        <Text style={{color: 'red'}}>
+        <Text style={{color: 'red', fontStyle: 'italic', fontSize: 15}}>
           {isValidDatime ? '' : 'ngày bắt đầu không được sau ngày kết thúc'}
         </Text>
         {/* chọn tòa nhà  */}
         <View style={{width: '100%'}}>
-          <Text style={{fontSize: 20, color: '#345173', fontWeight: '500'}}>
-            Tòa Nhà
+          <Text
+            style={{
+              fontSize: 20,
+              color: '#345173',
+              fontWeight: 'bold',
+              paddingBottom: 5,
+            }}>
+            Tòa nhà
           </Text>
           <DropDownPicker
             listMode="SCROLLVIEW"
@@ -242,18 +250,31 @@ export default ({navigation}, props) => {
             value={chontoanha}
             items={buildingState}
             setOpen={setOpen3}
-            setValue={onChangechontoanha}
+            setValue={setChontoanha}
             setItems={setItems}
+            searchPlaceholderTextColor="#d4d5da"
             placeholder="Chọn Tòa Nhà"
             dropDownDirection="BOTTOM"
+            ArrowDownIconComponent={({style}) => (
+              <Icon toggle={toggleBuilding} isUp style={style} />
+            )}
+            ArrowUpIconComponent={({style}) => (
+              <Icon toggle={toggleBuilding} isDown style={style} />
+            )}
           />
-          <Text style={{color: 'red'}}>
+          <Text style={{color: 'red', fontStyle: 'italic', fontSize: 15}}>
             {isValidchontoanha ? '' : 'Vui lòng chọn tòa nhà '}
           </Text>
         </View>
         {/* chọn phòng  */}
         <View style={{width: '100%'}}>
-          <Text style={{fontSize: 20, color: '#345173', fontWeight: '500'}}>
+          <Text
+            style={{
+              fontSize: 20,
+              color: '#345173',
+              fontWeight: 'bold',
+              paddingBottom: 5,
+            }}>
             Phòng
           </Text>
           <DropDownPicker
@@ -261,7 +282,7 @@ export default ({navigation}, props) => {
             style={{borderColor: '#c2c2c2'}}
             open={open4}
             value={chonphong}
-            items={buildingState2}
+            items={buildingChoosen}
             setOpen={setOpen4}
             setValue={onChangechonphong}
             setItems={setItems2}
@@ -269,8 +290,14 @@ export default ({navigation}, props) => {
             dropDownDirection="BOTTOM"
             zIndex={2000}
             zIndexInverse={2000}
+            ArrowDownIconComponent={({style}) => (
+              <Icon toggle={toggleBuilding} isUp style={style} />
+            )}
+            ArrowUpIconComponent={({style}) => (
+              <Icon toggle={toggleBuilding} isDown style={style} />
+            )}
           />
-          <Text style={{color: 'red'}}>
+          <Text style={{color: 'red', fontStyle: 'italic', fontSize: 15}}>
             {isValidchonphong ? '' : 'Vui lòng chọn phòng '}
           </Text>
         </View>
@@ -305,13 +332,6 @@ export default ({navigation}, props) => {
               LƯU
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => getBuildingFetch()}
-            style={{
-              width: 200,
-              height: 50,
-              backgroundColor: 'blue',
-            }}></TouchableOpacity>
         </View>
       </View>
     </ScrollView>

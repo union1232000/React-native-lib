@@ -13,15 +13,8 @@ function* createFlow(action) {
   const {courseName, trainer, startedDate, endedDate, buildingId, roomId} =
     action.data;
   console.log('courseName', action);
-  const response = yield postCreate(
-    courseName,
-    trainer,
-    startedDate,
-    endedDate,
-    buildingId,
-    roomId,
-  );
-  const error = response.message;
+  const response = yield postCreate(action.data);
+  // const error = response.message;
   if (response !== undefined) {
     if (response !== undefined) {
       yield put({type: CREATE_SUCCESS, response: response});

@@ -7,7 +7,7 @@ export default ({navigation}, props) => {
     <View style={{flex: 1, width: '100%'}}>
       <View style={{width: '100%'}}>
         <Header
-          title="Thông Tin Ứng Dụng"
+          title="THÔNG TIN ỨNG DỤNG"
           isRightDisable={true}
           isBack={true}
           navigation={navigation}
@@ -19,7 +19,13 @@ export default ({navigation}, props) => {
           <Image
             source={require('../Images/ic_fis.png')}
             style={{height: 150, resizeMode: 'contain'}}></Image>
-          <Text style={{fontSize: 25, fontWeight: 'bold', color: '#345173'}}>
+          <Text
+            style={{
+              fontSize: 25,
+              fontWeight: 'bold',
+              color: '#345173',
+              paddingTop: 15,
+            }}>
             FIS INSIGHT APP
           </Text>
           <Text>Phiên bản 1.55.10805</Text>

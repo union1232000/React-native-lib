@@ -23,19 +23,23 @@ const DrawerStyle = ({navigation}, props) => {
         style={{
           justifyContent: 'center',
           alignItems: 'center',
-          padding: 15,
+          padding: 25,
         }}>
         {/* Thong tin người dùng  */}
         <Image
           source={require('../Images/ic_avatar.png')}
           style={{borderRadius: 200 / 2}}></Image>
-        <Text style={{fontSize: 20, color: '#345173'}}>Nguyễn Võ Vũ Văn</Text>
-        <Text style={{fontSize: 15, color: '#345173'}}>Vannvv2@fpt.com.vn</Text>
+        <Text style={{fontSize: 20, color: '#345173', paddingTop: 20}}>
+          Nguyễn Võ Vũ Văn
+        </Text>
+        <Text style={{fontSize: 15, color: '#345173', paddingTop: 5}}>
+          Vannvv2@fpt.com.vn
+        </Text>
         <Image
           source={require('../Images/stripe.png')}
           style={{
             resizeMode: 'contain',
-            width: '50%',
+            width: '40%',
             paddingBottom: 30,
           }}></Image>
         {/* Tạo mới khóa học  */}
@@ -56,7 +60,7 @@ const DrawerStyle = ({navigation}, props) => {
               name="add-to-list"
               size={25}
               style={{marginRight: 10, color: '#345173'}}></Entypo>
-            <Text>Tạo mới khóa học </Text>
+            <Text style={{fontSize: 17}}>Tạo mới khóa học </Text>
           </TouchableOpacity>
         </View>
         {/* tạo mới buổi học */}
@@ -76,7 +80,7 @@ const DrawerStyle = ({navigation}, props) => {
               name="addfile"
               size={25}
               style={{marginRight: 10, color: '#345173'}}></AntDesign>
-            <Text>Tạo mới buổi học </Text>
+            <Text style={{fontSize: 17}}>Tạo mới buổi học </Text>
           </TouchableOpacity>
         </View>
         {/* Quản lý Buổi học  */}
@@ -96,7 +100,7 @@ const DrawerStyle = ({navigation}, props) => {
               name="text-document"
               size={25}
               style={{marginRight: 10, color: '#345173'}}></Entypo>
-            <Text>Quản lý buổi học </Text>
+            <Text style={{fontSize: 17}}>Quản lý buổi học </Text>
           </TouchableOpacity>
         </View>
         {/* Thông tin ứng dụng  */}
@@ -116,7 +120,7 @@ const DrawerStyle = ({navigation}, props) => {
               name="info-with-circle"
               size={25}
               style={{marginRight: 10, color: '#00C2FC'}}></Entypo>
-            <Text>Thông tin ứng dụng </Text>
+            <Text style={{fontSize: 17}}>Thông tin ứng dụng </Text>
           </TouchableOpacity>
         </View>
         {/* Đăng xuất  */}
@@ -134,7 +138,7 @@ const DrawerStyle = ({navigation}, props) => {
               name="log-out"
               size={25}
               style={{marginRight: 15, color: '#345173'}}></Feather>
-            <Text> Đăng Xuất</Text>
+            <Text style={{fontSize: 17}}> Đăng xuất</Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -48,16 +48,12 @@ export default Header = (props, {navigation}) => {
           }}
           onPress={() => props.navigation.navigate('Create')}>
           <Image
-            source={require('../Images/ic_plus.png')}
+            source={require('../Images/ic_add.png')}
             style={{
               resizeMode: 'contain',
-              height: 25,
+              height: 20,
               tintColor: '#d4d5da',
             }}></Image>
-          {/* <Ionicons
-            name="add"
-            size={30}
-            style={{right: 0, color: '#d4d5da'}}></Ionicons> */}
         </TouchableOpacity>
       )}
       <Text

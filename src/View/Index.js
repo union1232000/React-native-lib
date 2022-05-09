@@ -19,7 +19,7 @@ const DrawerNavigator = props => {
     <Drawer.Navigator
       drawerContent={props => <DrawerStyle {...props} />}
       initialRouteName="Home"
-      screenOptions={{headerShown: false}}>
+      screenOptions={{headerShown: false, drawerStyle: {width: 330}}}>
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Create" component={Create} />
       <Drawer.Screen name="Manager" component={Manager} />

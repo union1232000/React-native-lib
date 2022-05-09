@@ -29,6 +29,8 @@ export default props => {
           padding: 15,
           borderRadius: 5,
           borderColor: '#c2c2c2',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}>
         <Text
           style={{
@@ -41,7 +43,9 @@ export default props => {
           name="caret-down"
           style={{
             fontSize: 25,
-            marginLeft: 10,
+            right: 1,
+            padding: 10,
+            position: 'absolute',
           }}></FontAwesome>
       </TouchableOpacity>
       <DateTimePickerModal

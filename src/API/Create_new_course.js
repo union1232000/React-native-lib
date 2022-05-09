@@ -1,13 +1,10 @@
-import {useTransition} from 'react';
-import {useSelector} from 'react-redux';
 import {user} from '../Redux/Setting/Token';
 
-export async function postCreate(Create) {
+export async function postCreate(data) {
   const {courseName, trainer, startedDate, endedDate, buildingId, roomId} =
-    Create;
+    data;
   var myHeaders = new Headers();
-  myHeaders.append('Authorization', `Bearer ${user}`);
-  console.log(' đưa ra cái token ngu loz', user);
+  myHeaders.append('Authorization', `Bearer ${user.token}`);
   myHeaders.append('Content-Type', 'application/json');
 
   var raw = JSON.stringify({
@@ -18,6 +15,7 @@ export async function postCreate(Create) {
     buildingId: buildingId,
     roomId: roomId,
   });
+  console.log(data, 'apiiiiiiiiiiiiiiiiiiiiiii');
 
   var requestOptions = {
     method: 'POST',
@@ -26,9 +24,12 @@ export async function postCreate(Create) {
     redirect: 'follow',
   };
 
-  fetch('http://10.86.224.37:5001/api/edu/create_new_course', requestOptions)
+  const response = await fetch(
+    'http://10.86.224.37:5001/api/edu/create_new_course',
+    requestOptions,
+  )
     .then(response => response.json())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
-  return Create;
+  return response;
 }

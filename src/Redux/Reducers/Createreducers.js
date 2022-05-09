@@ -1,9 +1,8 @@
-import {create} from 'react-test-renderer';
 import {
-  DID_CREATE_ACTION,
-  CREATE_SUCCESS,
   CREATE_ERROR,
-} from '../Action/CreateAction.js';
+  CREATE_SUCCESS,
+  DID_CREATE_ACTION,
+} from '../Action/CreateAction';
 const initialState = {
   Loa11111111ding: false,
 };

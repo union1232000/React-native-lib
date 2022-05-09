@@ -29,19 +29,22 @@ export default props => {
           padding: 15,
           borderRadius: 5,
           borderColor: '#c2c2c2',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}>
         <Text
           style={{
             fontSize: 20,
             color: '#345173',
           }}>
-          {moment(props.time).format('LT')}
+          {moment(props.time).format('HH:mm')}
         </Text>
         <FontAwesome
           name="caret-down"
           style={{
             fontSize: 25,
-            marginLeft: 10,
+            right: 10,
+            position: 'absolute',
           }}></FontAwesome>
       </TouchableOpacity>
       <DateTimePickerModal

@@ -15,6 +15,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Time from './Time';
 import Calender from './Calender';
+import Icon from './icon';
 
 export default ({navigation}, props) => {
   // tên buổi học
@@ -59,6 +60,10 @@ export default ({navigation}, props) => {
     {label: 'KangNam', value: 'Kangnam'},
     {label: 'Tân Thuận 3', value: 'Tân Thuận 3'},
   ]);
+
+  const toggleBuilding = () => {
+    setOpen3(!open3);
+  };
   const [chontoanha, onChangechontoanha] = useState('');
   const [isValidchontoanha, setValidchontoanha] = useState(true);
   const verifychontoanha = () => {
@@ -90,7 +95,7 @@ export default ({navigation}, props) => {
   }, [date]);
 
   return (
-    <ScrollView style={{flex: 1, width: '100%'}}>
+    <ScrollView style={{flex: 1, width: '100%', backgroundColor: 'white'}}>
       <Header
         title="TẠO MỚI BUỔI HỌC"
         isRightDisable={true}
@@ -100,8 +105,14 @@ export default ({navigation}, props) => {
       {/* Tên buổi học  */}
       <View style={{padding: 5}}>
         <View View style={{width: '100%'}}>
-          <Text style={{color: '#345173', fontSize: 22, fontWeight: 'bold'}}>
-            Tên Buổi Học{' '}
+          <Text
+            style={{
+              color: '#345173',
+              fontSize: 22,
+              fontWeight: 'bold',
+              paddingBottom: 5,
+            }}>
+            Tên buổi học{' '}
           </Text>
           <TextInput
             value={tenbuoihoc}
@@ -116,14 +127,20 @@ export default ({navigation}, props) => {
               padding: 15,
             }}
             placeholder="Nhập tên buổi học"></TextInput>
-          <Text style={{color: 'red'}}>
+          <Text style={{color: 'red', fontStyle: 'italic', fontSize: 15}}>
             {isValidtenbuoihoc ? '' : 'Tên buổi học không thể để trống'}
           </Text>
         </View>
         {/* Giảng viên  */}
         <View View style={{width: '100%'}}>
-          <Text style={{color: '#345173', fontSize: 22, fontWeight: 'bold'}}>
-            Tên Giảng viên
+          <Text
+            style={{
+              color: '#345173',
+              fontSize: 22,
+              fontWeight: 'bold',
+              paddingBottom: 5,
+            }}>
+            Tên giảng viên
           </Text>
           <TextInput
             value={tengiangvien}
@@ -138,7 +155,7 @@ export default ({navigation}, props) => {
               padding: 15,
             }}
             placeholder="Nhập tên giảng viên"></TextInput>
-          <Text style={{color: 'red'}}>
+          <Text style={{color: 'red', fontStyle: 'italic', fontSize: 15}}>
             {isValidtengiangvien ? '' : 'Tên giảng viên không thể để trống'}
           </Text>
         </View>
@@ -150,9 +167,15 @@ export default ({navigation}, props) => {
             justifyContent: 'space-between',
           }}>
           {/* Chọn Ngày  */}
-          <View>
-            <Text style={{color: '#345173', fontSize: 20, fontWeight: '500'}}>
-              Chọn Ngày
+          <View style={{width: '48%'}}>
+            <Text
+              style={{
+                color: '#345173',
+                fontSize: 20,
+                fontWeight: 'bold',
+                paddingBottom: 5,
+              }}>
+              Chọn ngày
             </Text>
             <Calender onPressSetDateTime={setDate} dateTime={date} />
           </View>
@@ -163,31 +186,49 @@ export default ({navigation}, props) => {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
+            width: '100%',
           }}>
           {/* Chọn giờ bắt đầu  */}
-          <View>
-            <Text style={{color: '#345173', fontSize: 20, fontWeight: '500'}}>
+          <View style={{width: '48%'}}>
+            <Text
+              style={{
+                color: '#345173',
+                fontSize: 20,
+                fontWeight: 'bold',
+                paddingBottom: 5,
+              }}>
               Chọn giờ bắt đầu
             </Text>
             <Time onPressSetTime={setDate2} time={date2} />
           </View>
 
           {/* chọn giờ kết thúc  */}
-          <View>
-            <Text style={{color: '#345173', fontSize: 20, fontWeight: '500'}}>
-              {' '}
+          <View style={{width: '48%'}}>
+            <Text
+              style={{
+                color: '#345173',
+                fontSize: 20,
+                fontWeight: 'bold',
+                paddingBottom: 5,
+              }}>
               Chọn giờ kết thúc
             </Text>
             <Time onPressSetTime={setDate3} time={date3} />
           </View>
         </View>
-        <Text style={{color: 'red'}}>
+        <Text style={{color: 'red', fontStyle: 'italic', fontSize: 15}}>
           {isValidtime ? '' : 'Giờ kết thúc không được bé hơn giờ bắt đầu'}
         </Text>
         {/* chọn tòa nhà  */}
         <View style={{width: '100%'}}>
-          <Text style={{fontSize: 20, color: '#345173', fontWeight: '500'}}>
-            Tòa Nhà
+          <Text
+            style={{
+              fontSize: 20,
+              color: '#345173',
+              fontWeight: 'bold',
+              paddingBottom: 5,
+            }}>
+            Tòa nhà
           </Text>
           <DropDownPicker
             listMode="SCROLLVIEW"
@@ -200,16 +241,31 @@ export default ({navigation}, props) => {
             setOpen={setOpen3}
             setValue={onChangechontoanha}
             setItems={setItems}
+            placeholderStyle={{
+              color: 'grey',
+            }}
             placeholder="Chọn Tòa Nhà"
             dropDownDirection="BOTTOM"
+            ArrowDownIconComponent={({style}) => (
+              <Icon toggle={toggleBuilding} isUp style={style} />
+            )}
+            ArrowUpIconComponent={({style}) => (
+              <Icon toggle={toggleBuilding} isDown style={style} />
+            )}
           />
         </View>
-        <Text style={{color: 'red'}}>
+        <Text style={{color: 'red', fontStyle: 'italic', fontSize: 15}}>
           {isValidchontoanha ? '' : 'Vui lòng chọn tòa nhà '}
         </Text>
         {/* chọn phòng  */}
         <View style={{width: '100%'}}>
-          <Text style={{fontSize: 20, color: '#345173', fontWeight: '500'}}>
+          <Text
+            style={{
+              fontSize: 20,
+              color: '#345173',
+              fontWeight: 'bold',
+              paddingBottom: 5,
+            }}>
             Phòng
           </Text>
           <DropDownPicker
@@ -222,12 +278,21 @@ export default ({navigation}, props) => {
             setValue={onChangechonphong}
             setItems={setItems2}
             placeholder="Chọn Phòng"
+            placeholderStyle={{
+              color: 'grey',
+            }}
             dropDownDirection="BOTTOM"
             zIndex={2000}
             zIndexInverse={2000}
+            ArrowDownIconComponent={({style}) => (
+              <Icon toggle={toggleBuilding} isUp style={style} />
+            )}
+            ArrowUpIconComponent={({style}) => (
+              <Icon toggle={toggleBuilding} isDown style={style} />
+            )}
           />
         </View>
-        <Text style={{color: 'red'}}>
+        <Text style={{color: 'red', fontStyle: 'italic', fontSize: 15}}>
           {isValidchonphong ? '' : 'Vui lòng chọn phòng '}
         </Text>
         <View
