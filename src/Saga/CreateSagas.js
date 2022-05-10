@@ -12,7 +12,6 @@ export function* watchCreate() {
 function* createFlow(action) {
   const {courseName, trainer, startedDate, endedDate, buildingId, roomId} =
     action.data;
-  console.log('courseName', action);
   const response = yield postCreate(action.data);
   // const error = response.message;
   if (response !== undefined) {

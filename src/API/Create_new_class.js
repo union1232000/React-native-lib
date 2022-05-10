@@ -1,17 +1,27 @@
 import {user} from '../Redux/Setting/Token';
+export async function postClass(data) {
+  const {
+    courseId,
+    className,
+    trainer,
+    date,
+    startedTime,
+    endedTime,
+    buildingId,
+    roomId,
+  } = data;
 
-export async function postCreate(data) {
-  const {courseName, trainer, startedDate, endedDate, buildingId, roomId} =
-    data;
   var myHeaders = new Headers();
-  myHeaders.append('Authorization', `Bearer ${user.token}`);
   myHeaders.append('Content-Type', 'application/json');
+  myHeaders.append('Authorization', `Bearer ${user.token}`);
 
   var raw = JSON.stringify({
-    courseName: courseName,
+    courseId: courseId,
+    className: className,
     trainer: trainer,
-    startedDate: startedDate,
-    endedDate: endedDate,
+    date: date,
+    startedTime: startedTime,
+    endedTime: endedTime,
     buildingId: buildingId,
     roomId: roomId,
   });
@@ -22,9 +32,8 @@ export async function postCreate(data) {
     body: raw,
     redirect: 'follow',
   };
-
   const response = await fetch(
-    'http://10.86.224.37:5001/api/edu/create_new_course',
+    'http://10.86.224.37:5001/api/edu/create_new_class',
     requestOptions,
   )
     .then(response => response.json())

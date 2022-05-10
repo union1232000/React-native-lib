@@ -1,23 +1,24 @@
-import React, {Component, useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  Button,
   ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import Header from './Header';
-import DatePicker from 'react-native-date-picker';
-import moment from 'moment';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import DropDownPicker from 'react-native-dropdown-picker';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import Time from './Time';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {user} from '../Redux/Setting/Token';
+import {useDispatch, useSelector} from 'react-redux';
 import Calender from './Calender';
+import Header from './Header';
 import Icon from './icon';
+import Time from './Time';
+import createclass from '../Redux/Action/Createclassaction';
 
 export default ({navigation}, props) => {
+  const createState = useSelector(b => b.Createclassreducers.response);
+  const dispatch = useDispatch();
   // tên buổi học
   const [tenbuoihoc, onChangetenbuoihoc] = useState('');
   const [isValidtenbuoihoc, setValidtenbuoihoc] = useState(true);
@@ -93,7 +94,27 @@ export default ({navigation}, props) => {
     setDate2(date);
     setDate3(date);
   }, [date]);
-
+  //  Nút lưu API tạo lớp
+  const Savehandler = () => {
+    dispatch(
+      createclass(
+        tenbuoihoc,
+        tengiangvien,
+        date,
+        date2,
+        date3,
+        chontoanha,
+        chonphong,
+      ),
+    );
+  };
+  useEffect(() => {
+    if (createState?.resultCode == 1) {
+      user.token = createState.data;
+    }
+    return () => {};
+  }, [createState]);
+  console.log(createState, 'cccccccccccccccccccccc.___________');
   return (
     <ScrollView style={{flex: 1, width: '100%', backgroundColor: 'white'}}>
       <Header
@@ -307,6 +328,7 @@ export default ({navigation}, props) => {
               verifytime();
               verifychontoanha();
               verifychonphong();
+              Savehandler();
             }}
             style={{
               width: '40%',

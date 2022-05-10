@@ -52,7 +52,7 @@ export default Home = ({navigation}, props) => {
                     padding: 15,
                   }}>
                   <MenuTrigger>
-                    <Entypo name="dots-three-vertical" size={25}></Entypo>
+                    <Entypo name="dots-three-vertical" size={26}></Entypo>
                   </MenuTrigger>
                   <MenuOptions>
                     <MenuOption onSelect={() => alert(`Thêm`)} text="Thêm" />
@@ -83,10 +83,10 @@ export default Home = ({navigation}, props) => {
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <FontAwesome5
                     name="user-tie"
-                    size={30}
+                    size={25}
                     style={{color: '#ffd237', padding: 7}}></FontAwesome5>
                   <Text
-                    style={{color: '#345173', fontSize: 18, paddingLeft: 10}}>
+                    style={{color: '#345173', fontSize: 18, paddingLeft: 12}}>
                     Giảng viên:
                     <Text
                       style={{

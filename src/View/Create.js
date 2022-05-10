@@ -15,7 +15,6 @@ import {user} from '../Redux/Setting/Token';
 import Calender from './Calender';
 import Header from './Header';
 import Icon from './icon';
-import icon from './icon';
 export default ({navigation}, props) => {
   const createState = useSelector(b => b.Createreducers.response);
   const dispatch = useDispatch();
