@@ -7,8 +7,8 @@ import Createclassreducers from './Createclassreducers';
 const allReducers = combineReducers({
   Loginreducers,
   Createreducers,
-  Createclassreducers,
   Getbuildingreducers,
   Getallcoursereducers,
+  Createclassreducers,
 });
 export default allReducers;

@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import {
   Text,
   View,
@@ -19,6 +19,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 export class Studentsitem extends Component {
   state = {};
+
   render() {
     return (
       <ScrollView style={{backgroundColor: 'white'}}>
@@ -186,7 +187,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 import Header from './Header';
-export default Home = ({navigation}, props) => {
+export default Home = props => {
   let DATA = [
     {
       id: 'Giảng Viên: ',
@@ -200,26 +201,37 @@ export default Home = ({navigation}, props) => {
     },
     ,
   ];
-  return (
-    <View style={{flex: 1, width: '100%', borderWidth: 2}}>
-      {/* header */}
-      <Header title="QUẢN LÝ BUỔI HỌC" navigation={navigation} />
+  useEffect(() => {
+    console.log(props.route.params.courseId);
+  }, []);
 
+  return (
+    <View
+      style={{
+        flex: 1,
+        width: '100%',
+        borderWidth: 2,
+        backgroundColor: 'white',
+      }}>
+      {/* header */}
+      <Header title="QUẢN LÝ BUỔI HỌC" {...props} name={'CreateManager'} />
       <ScrollView>
-        <View style={{padding: 10}}>
-          <Text
-            style={{
-              padding: 5,
-              color: '#0a8dc3',
-              fontSize: 20,
-              fontWeight: 'bold',
-            }}>
-            Test Thêm
-          </Text>
-          {DATA.map((item, index) => (
-            <Studentsitem key={index} items={item} index={index} />
-          ))}
-        </View>
+        <TouchableOpacity>
+          <View style={{padding: 10}}>
+            <Text
+              style={{
+                padding: 5,
+                color: '#0a8dc3',
+                fontSize: 20,
+                fontWeight: 'bold',
+              }}>
+              Test Thêm
+            </Text>
+            {DATA.map((item, index) => (
+              <Studentsitem key={index} items={item} index={index} />
+            ))}
+          </View>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );

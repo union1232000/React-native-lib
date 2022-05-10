@@ -16,7 +16,7 @@ import Icon from './icon';
 import Time from './Time';
 import createclass from '../Redux/Action/Createclassaction';
 
-export default ({navigation}, props) => {
+export default props => {
   const createState = useSelector(b => b.Createclassreducers.response);
   const dispatch = useDispatch();
   // tên buổi học
@@ -98,6 +98,7 @@ export default ({navigation}, props) => {
   const Savehandler = () => {
     dispatch(
       createclass(
+        courseId,
         tenbuoihoc,
         tengiangvien,
         date,
@@ -108,20 +109,22 @@ export default ({navigation}, props) => {
       ),
     );
   };
+
   useEffect(() => {
     if (createState?.resultCode == 1) {
       user.token = createState.data;
     }
     return () => {};
   }, [createState]);
-  console.log(createState, 'cccccccccccccccccccccc.___________');
+
   return (
     <ScrollView style={{flex: 1, width: '100%', backgroundColor: 'white'}}>
       <Header
         title="TẠO MỚI BUỔI HỌC"
         isRightDisable={true}
         isBack={true}
-        navigation={navigation}
+        {...props}
+        name={'Manager'}
       />
       {/* Tên buổi học  */}
       <View style={{padding: 5}}>

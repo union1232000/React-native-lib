@@ -3,7 +3,7 @@ import {Text, View, SafeAreaView, TouchableOpacity, Image} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-export default Header = (props, {navigation}) => {
+export default Header = props => {
   const [isLeftDisalbe, setIsLeftDisable] = useState(
     props.isLeftDisable ? false : true,
   );
@@ -46,7 +46,7 @@ export default Header = (props, {navigation}) => {
             position: 'absolute',
             right: -11,
           }}
-          onPress={() => props.navigation.navigate('Create')}>
+          onPress={() => props.navigation.navigate(props.name)}>
           <Image
             source={require('../Images/ic_add.png')}
             style={{

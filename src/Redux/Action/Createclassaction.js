@@ -13,6 +13,7 @@ export default createclass = (
   buildingId,
   roomId,
 ) => {
+  console.log('action chạy rồi nè bro');
   return {
     type: POST_CREATECLASS,
     data: {

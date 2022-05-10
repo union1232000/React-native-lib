@@ -7,6 +7,8 @@ const initialState = {
   Loa11111111ding: false,
 };
 const Createreducers = (create = initialState, action) => {
+  console.log('redu chạy rồi nè bro');
+
   try {
     const response = action.response;
     switch (action.type) {

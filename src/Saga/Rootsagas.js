@@ -8,8 +8,8 @@ export default function* rootSaga() {
   yield all([
     watchLogin(),
     watchCreate(),
-    watchCreateclass(),
     whatGetbuilding(),
     whatGetallcourse(),
+    watchCreateclass(),
   ]);
 }
