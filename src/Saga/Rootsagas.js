@@ -4,6 +4,7 @@ import {whatGetbuilding} from './Getbuildingsagas';
 import {watchLogin} from './Loginsagas';
 import {whatGetallcourse} from './Getallcoursesagas';
 import {watchCreateclass} from './Createclasssagas';
+import {whatGetallclass} from './Getallclasssagas';
 export default function* rootSaga() {
   yield all([
     watchLogin(),
@@ -11,5 +12,6 @@ export default function* rootSaga() {
     whatGetbuilding(),
     whatGetallcourse(),
     watchCreateclass(),
+    whatGetallclass,
   ]);
 }
