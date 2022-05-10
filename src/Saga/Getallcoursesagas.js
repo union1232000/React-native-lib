@@ -11,7 +11,6 @@ export function* whatGetallcourse() {
 }
 export function* GetallcourseFlow() {
   const response = yield get_allcourse();
-  console.log('sagasss chạy như con chó', response);
   if (response !== undefined) {
     if (response.resuiltcode == 1) {
       yield put({type: GETALLCOURSE_SUCCESS, response: response});

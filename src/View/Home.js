@@ -31,7 +31,7 @@ export default Home = props => {
     <View style={{flex: 1, width: '100%'}}>
       {/* header */}
       <Header title="QUẢN LÝ KHÓA HỌC " {...props} name={'Create'} />
-      <View style={{}}>
+      <View>
         <FlatList
           data={data}
           keyExtractor={item => item.course_id}
