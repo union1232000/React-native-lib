@@ -23,7 +23,7 @@ const DrawerNavigator = props => {
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Create" component={Create} />
       <Drawer.Screen name="Manager" component={Manager} />
-      <Drawer.Screen name="CreateManager" component={CreateManger} />
+      <Drawer.Screen name="CreateManger" component={CreateManger} />
       <Drawer.Screen name="Info" component={Info} />
     </Drawer.Navigator>
   );

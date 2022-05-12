@@ -20,7 +20,7 @@ export default ({navigation}, props) => {
   const dispatch = useDispatch();
   const [buildingState, setBuildingState] = useState([]);
   const [buildingChoosen, setbuldingChoosen] = useState([]);
-  const [roomstate, setroomstate] = useState([]);
+
   const getbuildingstate = useSelector(c => c.Getbuildingreducers.response);
   const [chontoanha, setChontoanha] = useState('');
   const [isValidchontoanha, setValidchontoanha] = useState(true);
@@ -126,6 +126,7 @@ export default ({navigation}, props) => {
       setValidchonphong(true);
     }
   };
+
   return (
     <ScrollView style={{flex: 1, width: '100%', backgroundColor: 'white'}}>
       <Header
