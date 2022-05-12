@@ -1,27 +1,17 @@
-import React, {Component, useEffect, useState} from 'react';
-import {
-  Text,
-  View,
-  SafeAreaView,
-  TouchableOpacity,
-  ImageBackground,
-  TextInput,
-  FlatList,
-  ScrollView,
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {FlatList, Text, View} from 'react-native';
 import {
   Menu,
-  MenuOptions,
   MenuOption,
+  MenuOptions,
   MenuTrigger,
 } from 'react-native-popup-menu';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
-import Header from './Header';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {get_allclass} from '../API/Get_all_class';
+import Header from './Header';
 export default Home = props => {
   const [data, setData] = useState([]);
   const getdata = async () => {
@@ -44,7 +34,15 @@ export default Home = props => {
         backgroundColor: 'white',
       }}>
       {/* header */}
-      <Header title="QUẢN LÝ BUỔI HỌC" {...props} name={'CreateManager'} />
+      <Header
+        title="QUẢN LÝ BUỔI HỌC"
+        {...props}
+        onClick={() => {
+          props.navigation.navigate('CreateManger', {
+            courseId: props.route.params.courseId,
+          });
+        }}
+      />
       <View>
         <FlatList
           data={data}
@@ -59,6 +57,7 @@ export default Home = props => {
                   borderColor: '#c2c2c2',
                   marginTop: 10,
                   borderRadius: 5,
+                  justifyContent: 'flex-start',
                 }}>
                 <Menu
                   style={{
@@ -93,10 +92,12 @@ export default Home = props => {
                 {/* Giảng viên  */}
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <FontAwesome5
-                    name="user-tie "
-                    size={30}
+                    name="user-tie"
+                    size={25}
                     style={{color: '#ffd237', padding: 5}}></FontAwesome5>
-                  <Text>
+                  <Text
+                    style={{color: '#345173', fontSize: 18, paddingLeft: 22}}>
+                    Giảng viên: {/**/}
                     <Text
                       style={{
                         color: '#0a8dc3',
@@ -113,7 +114,9 @@ export default Home = props => {
                     name="address-card"
                     size={25}
                     style={{color: '#40304d', padding: 5}}></FontAwesome5>
-                  <Text>
+                  <Text
+                    style={{color: '#345173', fontSize: 18, paddingLeft: 18}}>
+                    Cán bộ quản lý : {/**/}
                     <Text
                       style={{
                         color: '#f0943f',
@@ -130,7 +133,9 @@ export default Home = props => {
                     name="calendar-check-o"
                     size={25}
                     style={{color: '#42c8fb', padding: 5}}></FontAwesome>
-                  <Text>
+                  <Text
+                    style={{color: '#345173', fontSize: 18, paddingLeft: 22}}>
+                    Ngày: {/**/}
                     <Text
                       style={{
                         color: '#345173',
@@ -147,7 +152,9 @@ export default Home = props => {
                     name="clockcircleo"
                     size={25}
                     style={{color: '#345173', padding: 5}}></AntDesign>
-                  <Text>
+                  <Text
+                    style={{color: '#345173', fontSize: 18, paddingLeft: 22}}>
+                    Thời gian: {/**/}
                     <Text
                       style={{
                         color: '#345173',
@@ -164,7 +171,9 @@ export default Home = props => {
                     name="building"
                     size={25}
                     style={{color: '#0090d7', padding: 5}}></FontAwesome5>
-                  <Text>
+                  <Text
+                    style={{color: '#345173', fontSize: 18, paddingLeft: 25}}>
+                    Tòa nhà: {/**/}
                     <Text
                       style={{
                         color: '#345173',
@@ -181,7 +190,9 @@ export default Home = props => {
                     name="chalkboard-teacher"
                     size={25}
                     style={{color: '#ff9126', padding: 5}}></FontAwesome5>
-                  <Text>
+                  <Text
+                    style={{color: '#345173', fontSize: 18, paddingLeft: 18}}>
+                    Phòng: {/**/}
                     <Text
                       style={{
                         color: '#345173',
@@ -198,7 +209,7 @@ export default Home = props => {
                     name="wifi"
                     size={25}
                     style={{color: '#34c96b', padding: 5}}></FontAwesome5>
-                  <Text>
+                  <Text style={{paddingLeft: 18}}>
                     <Text
                       style={{
                         color: '#345173',

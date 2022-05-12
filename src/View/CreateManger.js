@@ -14,11 +14,16 @@ import Calender from './Calender';
 import Header from './Header';
 import Icon from './icon';
 import Time from './Time';
+import {get_buildingaction} from '../Redux/Action/Getbuilding';
 import createclass from '../Redux/Action/Createclassaction';
 
 export default props => {
   const createState = useSelector(b => b.Createclassreducers.response);
   const dispatch = useDispatch();
+  const getbuildingstate = useSelector(c => c.Getbuildingreducers.response);
+  const [buildingState, setBuildingState] = useState([]);
+  const [buildingChoosen, setbuldingChoosen] = useState([]);
+  const [courseId, setcourseId] = useState([]);
   // tên buổi học
   const [tenbuoihoc, onChangetenbuoihoc] = useState('');
   const [isValidtenbuoihoc, setValidtenbuoihoc] = useState(true);
@@ -54,13 +59,23 @@ export default props => {
       setValidtime(true);
     }
   };
-  // Tòa nhà
+
+  // lấy tòa nhà
+  useEffect(() => {
+    dispatch(get_buildingaction());
+  }, []);
+
+  useEffect(() => {
+    if (getbuildingstate?.data) {
+      const listBuilding = [];
+      getbuildingstate.data.map((item, index) => {
+        listBuilding.push({label: item.buildingName, value: item._id});
+      });
+      setBuildingState(listBuilding);
+    }
+  }, [getbuildingstate]);
   const [open3, setOpen3] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    {label: 'KangNam', value: 'Kangnam'},
-    {label: 'Tân Thuận 3', value: 'Tân Thuận 3'},
-  ]);
+  const [items, setItems] = useState([]);
 
   const toggleBuilding = () => {
     setOpen3(!open3);
@@ -76,11 +91,8 @@ export default props => {
   };
   // Phòng
   const [open4, setOpen4] = useState(false);
-  const [value2, setValue2] = useState(null);
-  const [items2, setItems2] = useState([
-    {label: 'Phòng 1', value: 'Phòng 1'},
-    {label: 'Phòng 2', value: 'Phòng 2'},
-  ]);
+
+  const [items2, setItems2] = useState([]);
   const [chonphong, onChangechonphong] = useState('');
   const [isValidchonphong, setValidchonphong] = useState(true);
   const verifychonphong = () => {
@@ -91,10 +103,29 @@ export default props => {
     }
   };
   useEffect(() => {
+    if (chontoanha !== '') {
+      let obj = getbuildingstate?.data.find(o => o._id === chontoanha);
+      let listroom = [];
+      obj.room.map((item, index) => {
+        listroom.push({
+          label: item.roomName,
+          value: item._id,
+        });
+      });
+      setbuldingChoosen(listroom);
+    }
+  }, [chontoanha]);
+
+  // truyền ID
+  useEffect(() => {
+    console.log(props.route.params.courseId);
+  }, []);
+  //  Nút lưu API tạo lớp
+  useEffect(() => {
     setDate2(date);
     setDate3(date);
   }, [date]);
-  //  Nút lưu API tạo lớp
+
   const Savehandler = () => {
     dispatch(
       createclass(
@@ -261,7 +292,7 @@ export default props => {
             style={{borderColor: '#c2c2c2'}}
             open={open3}
             value={chontoanha}
-            items={items}
+            items={buildingState}
             setOpen={setOpen3}
             setValue={onChangechontoanha}
             setItems={setItems}
@@ -297,7 +328,7 @@ export default props => {
             style={{borderColor: '#c2c2c2'}}
             open={open4}
             value={chonphong}
-            items={items2}
+            items={buildingChoosen}
             setOpen={setOpen4}
             setValue={onChangechonphong}
             setItems={setItems2}

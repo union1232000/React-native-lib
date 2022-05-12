@@ -10,7 +10,7 @@ export async function get_building() {
   };
 
   const response = await fetch(
-    'http://10.86.224.37:5001/api/edu/get_building',
+    'http://118.69.123.51:5000/fis/api/edu/get_building',
     requestOptions,
   )
     .then(response => response.json())

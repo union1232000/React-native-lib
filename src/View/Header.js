@@ -46,7 +46,7 @@ export default Header = props => {
             position: 'absolute',
             right: -11,
           }}
-          onPress={() => props.navigation.navigate(props.name)}>
+          onPress={() => props.onClick()}>
           <Image
             source={require('../Images/ic_add.png')}
             style={{
@@ -64,8 +64,7 @@ export default Header = props => {
           position: 'absolute',
           fontSize: 25,
         }}>
-        {' '}
-        {props.title}{' '}
+        {props.title}
       </Text>
     </View>
   );

@@ -14,6 +14,7 @@ import Header from './Header';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {ID} from '../Redux/Setting/Token';
 export default Home = props => {
   const [data, setData] = useState([]);
   const getdata = async () => {
@@ -30,7 +31,12 @@ export default Home = props => {
   return (
     <View style={{flex: 1, width: '100%'}}>
       {/* header */}
-      <Header title="QUẢN LÝ KHÓA HỌC " {...props} name={'Create'} />
+      <Header
+        title="QUẢN LÝ KHÓA HỌC "
+        onClick={() => {
+          props.navigation.navigate('Create');
+        }}
+      />
       <View>
         <FlatList
           data={data}
@@ -59,7 +65,7 @@ export default Home = props => {
                       padding: 15,
                     }}>
                     <MenuTrigger>
-                      <Entypo name="dots-three-vertical" size={26}></Entypo>
+                      <Entypo name="dots-three-vertical" size={27}></Entypo>
                     </MenuTrigger>
                     <MenuOptions>
                       <MenuOption onSelect={() => alert(`Thêm`)} text="Thêm" />
@@ -94,7 +100,7 @@ export default Home = props => {
                       style={{color: '#ffd237', padding: 7}}></FontAwesome5>
                     <Text
                       style={{color: '#345173', fontSize: 18, paddingLeft: 12}}>
-                      Giảng viên:
+                      Giảng viên: {/**/}
                       <Text
                         style={{
                           color: '#0a8dc3',
@@ -113,7 +119,7 @@ export default Home = props => {
                       style={{color: '#40304d', padding: 7}}></FontAwesome5>
                     <Text
                       style={{color: '#345173', fontSize: 18, paddingLeft: 9}}>
-                      Cán bộ quản lý:
+                      Cán bộ quản lý: {/**/}
                       {item.name}
                       <Text
                         style={{
@@ -133,7 +139,7 @@ export default Home = props => {
                       style={{color: '#42c8fb', padding: 7}}></FontAwesome>
                     <Text
                       style={{color: '#345173', fontSize: 18, paddingLeft: 14}}>
-                      Thời gian:
+                      Thời gian: {/**/}
                       <Text
                         style={{
                           color: '#345173',
@@ -153,7 +159,7 @@ export default Home = props => {
                       style={{color: '#0090d7', padding: 7}}></FontAwesome5>
                     <Text
                       style={{color: '#345173', fontSize: 18, paddingLeft: 18}}>
-                      Tòa nhà:
+                      Tòa nhà: {/**/}
                       <Text
                         style={{
                           color: '#345173',
@@ -172,7 +178,7 @@ export default Home = props => {
                       style={{color: '#ff9126', padding: 7}}></FontAwesome5>
                     <Text
                       style={{color: '#345173', fontSize: 18, paddingLeft: 10}}>
-                      Phòng:
+                      Phòng: {/**/}
                       <Text
                         style={{
                           color: '#345173',

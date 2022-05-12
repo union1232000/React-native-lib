@@ -33,7 +33,7 @@ export async function postClass(data) {
     redirect: 'follow',
   };
   const response = await fetch(
-    'http://10.86.224.37:5001/api/edu/create_new_class',
+    'http://118.69.123.51:5000/fis/api/edu/create_new_class',
     requestOptions,
   )
     .then(response => response.json())

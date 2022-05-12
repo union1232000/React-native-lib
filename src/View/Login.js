@@ -13,7 +13,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useDispatch, useSelector} from 'react-redux';
 import {loginAction} from '../Redux/Action/LoginAction.js';
 import {user} from '../Redux/Setting/Token.js';
-
+import AntDesign from 'react-native-vector-icons/AntDesign';
 export default Login = ({navigation}, props) => {
   const loginState = useSelector(a => a.Loginreducers.response);
   const dispatch = useDispatch();
@@ -43,8 +43,8 @@ export default Login = ({navigation}, props) => {
   return (
     <View
       style={{
-        width: '100%',
-        backgroundColor: '#f4f8fb',
+        flex: 1,
+        backgroundColor: 'white',
         paddingHorizontal: 40,
         paddingVertical: 20,
         justifyContent: 'center',
@@ -56,14 +56,14 @@ export default Login = ({navigation}, props) => {
           width: '100%',
           alignItems: 'center',
           justifyContent: 'center',
-          paddingTop: 15,
+          paddingTop: 30,
         }}>
         <Image
           source={require('../Images/logo.png')}
           style={{
             width: '100%',
-            height: 90,
-            resizeMode: 'center',
+            height: 75,
+            resizeMode: 'contain',
           }}></Image>
       </View>
       {/* FPT INSIGHT Portal */}
@@ -192,14 +192,17 @@ export default Login = ({navigation}, props) => {
           {getCheckboxvisible ? (
             <Feather name={'circle'} color="#ff9336" size={20}></Feather>
           ) : (
-            <Feather name={'check-circle'} color="#ff9336" size={20}></Feather>
+            <AntDesign
+              name={'checkcircleo'}
+              color="#ff9336"
+              size={20}></AntDesign>
           )}
         </TouchableOpacity>
         <Text
           style={{
             fontWeight: '500',
             color: '#ff9336',
-            fontSize: 18,
+            fontSize: 20,
             fontStyle: 'italic',
             marginLeft: 10,
           }}>
