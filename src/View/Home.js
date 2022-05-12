@@ -33,6 +33,7 @@ export default Home = props => {
       {/* header */}
       <Header
         title="QUẢN LÝ KHÓA HỌC "
+        {...props}
         onClick={() => {
           props.navigation.navigate('Create');
         }}
