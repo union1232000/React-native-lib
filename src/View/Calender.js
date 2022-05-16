@@ -36,6 +36,7 @@ export default props => {
           style={{
             fontSize: 20,
             color: '#345173',
+            paddingRight: 12,
           }}>
           {moment(props.dateTime).format('L')}
         </Text>

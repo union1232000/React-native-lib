@@ -25,7 +25,7 @@ export async function postClass(data) {
     buildingId: buildingId,
     roomId: roomId,
   });
-  console.log('API chạy rồi nè bro');
+  console.log('API chạy rồi nè bro', data);
   var requestOptions = {
     method: 'POST',
     headers: myHeaders,

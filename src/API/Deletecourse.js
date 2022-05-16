@@ -1,6 +1,5 @@
 import {user} from '../Redux/Setting/Token';
-
-export const get_allclass = data => {
+export const Deletecourse = course_id => {
   var myHeaders = new Headers();
   myHeaders.append('Authorization', `Bearer ${user.token}`);
 
@@ -11,10 +10,10 @@ export const get_allclass = data => {
   };
 
   return fetch(
-    `http://118.69.123.51:5000/fis/api/edu/get_class_by_course?courseId=${data}`,
+    `http://118.69.123.51:5000/fis/api/edu/delete_course?courseId=${course_id}`,
     requestOptions,
   )
-    .then(response => response.json())
+    .then(response => response.text())
     .then(result => {
       return result;
     })

@@ -1,16 +1,15 @@
+import {put, takeEvery} from 'redux-saga/effects';
+import {get_allclass} from '../API/Get_all_class';
 import {
-  POST_GETALLCLASS,
   GETALLCLASS_ERROR,
   GETALLCLASS_SUCCESS,
+  POST_GETALLCLASS,
 } from '../Redux/Action/Createclassaction';
-import {get_allclass} from '../API/Get_all_class';
-import {call, takeEvery, put, takeLatest} from 'redux-saga/effects';
-
 export function* whatGetallclass() {
   yield takeEvery(POST_GETALLCLASS, GetallclassFlow);
 }
-export function* GetallclassFlow() {
-  const response = yield get_allclass();
+export function* GetallclassFlow(action) {
+  const response = yield get_allclass(action.data);
   console.log('sagasss chạy như con chó', response);
   if (response !== undefined) {
     if (response.resuiltcode == 1) {

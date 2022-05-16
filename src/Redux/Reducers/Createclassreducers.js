@@ -9,7 +9,6 @@ const initialState = {
 
 const Createclassreducers = (createclass = initialState, action) => {
   try {
-    console.log('redu chạy rồi nè bro');
     const response = action.response;
     switch (action.type) {
       case CREATECLASS_SUCCESS:

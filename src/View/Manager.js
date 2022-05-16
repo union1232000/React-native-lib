@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import moment from 'moment';
 import {FlatList, Text, View} from 'react-native';
 import {
   Menu,
@@ -6,23 +7,39 @@ import {
   MenuOptions,
   MenuTrigger,
 } from 'react-native-popup-menu';
+import {Deleteclass} from '../API/Deleteclass';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {get_allclass} from '../API/Get_all_class';
 import Header from './Header';
+
 export default Home = props => {
   const [data, setData] = useState([]);
   const getdata = async () => {
-    const result = await get_allclass();
+    const result = await get_allclass(props.route.params.courseId);
     if (result.resultCode == 1) {
       setData(result.data);
+    }
+  };
+
+  // xóa
+  const deletedata = async id => {
+    try {
+      const result = await Deleteclass(id);
+      if (result.resultCode == 1) {
+        Alert.alert('xóa thành công');
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
   useEffect(() => {
     getdata();
   }, []);
+
+  // lấy courseID
   useEffect(() => {
     console.log(props.route.params.courseId);
   }, []);
@@ -43,10 +60,10 @@ export default Home = props => {
           });
         }}
       />
-      <View>
+      <View style={{padding: 20}}>
         <FlatList
           data={data}
-          keyExtractor={item => item.courseId}
+          keyExtractor={item => item.code}
           renderItem={({item}) => {
             return (
               <View
@@ -71,14 +88,23 @@ export default Home = props => {
                   </MenuTrigger>
                   <MenuOptions>
                     <MenuOption onSelect={() => alert(`Thêm`)} text="Thêm" />
-                    <MenuOption onSelect={() => alert(`Xóa`)}>
+                    <MenuOption
+                      onSelect={() => {
+                        deletedata(item.classId);
+                        console.log(item.classId);
+                      }}>
                       <Text style={{color: 'red'}}>Xóa</Text>
                     </MenuOption>
                   </MenuOptions>
                 </Menu>
                 {/* Tựa mục  */}
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Text>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    width: '95%',
+                  }}>
+                  <Text numberOfLines={2}>
                     <Text
                       style={{
                         fontSize: 25,
@@ -99,6 +125,7 @@ export default Home = props => {
                     style={{color: '#345173', fontSize: 18, paddingLeft: 22}}>
                     Giảng viên: {/**/}
                     <Text
+                      numberOfLines={1}
                       style={{
                         color: '#0a8dc3',
                         fontSize: 15,
@@ -142,7 +169,7 @@ export default Home = props => {
                         fontSize: 15,
                         fontWeight: 'bold',
                       }}>
-                      {item.date}
+                      {moment(item.date).format('L')}
                     </Text>
                   </Text>
                 </View>
@@ -161,7 +188,8 @@ export default Home = props => {
                         fontSize: 15,
                         fontWeight: 'bold',
                       }}>
-                      {item.startedTime} - {item.endedTime}
+                      {moment(item.startedDate).format('l')}-
+                      {moment(item.endedDate).format('l')}
                     </Text>
                   </Text>
                 </View>

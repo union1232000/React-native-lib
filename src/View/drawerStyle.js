@@ -29,10 +29,10 @@ const DrawerStyle = ({navigation}, props) => {
         <Image
           source={require('../Images/ic_avatar.png')}
           style={{borderRadius: 200 / 2}}></Image>
-        <Text style={{fontSize: 20, color: '#345173', paddingTop: 20}}>
+        <Text style={{fontSize: 25, color: '#345173', paddingTop: 20}}>
           Nguyễn Võ Vũ Văn
         </Text>
-        <Text style={{fontSize: 15, color: '#345173', paddingTop: 5}}>
+        <Text style={{fontSize: 18, color: '#345173', paddingTop: 5}}>
           Vannvv2@fpt.com.vn
         </Text>
         <Image
@@ -74,7 +74,7 @@ const DrawerStyle = ({navigation}, props) => {
           <TouchableOpacity
             style={{flexDirection: 'row'}}
             onPress={() => {
-              navigation.navigate('CreateManager');
+              navigation.navigate('CreateManger');
             }}>
             <AntDesign
               name="addfile"
@@ -137,7 +137,7 @@ const DrawerStyle = ({navigation}, props) => {
             <Feather
               name="log-out"
               size={25}
-              style={{marginRight: 15, color: '#345173'}}></Feather>
+              style={{marginRight: 10, color: '#345173'}}></Feather>
             <Text style={{fontSize: 17}}> Đăng xuất</Text>
           </TouchableOpacity>
         </View>

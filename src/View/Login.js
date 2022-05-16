@@ -14,6 +14,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {loginAction} from '../Redux/Action/LoginAction.js';
 import {user} from '../Redux/Setting/Token.js';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 export default Login = ({navigation}, props) => {
   const loginState = useSelector(a => a.Loginreducers.response);
   const dispatch = useDispatch();
@@ -37,7 +38,6 @@ export default Login = ({navigation}, props) => {
         Alert.alert('Tên đăng nhập và mật khẩu không được để trống!');
       }
     }
-    return () => {};
   }, [loginState]);
 
   return (
@@ -152,7 +152,7 @@ export default Login = ({navigation}, props) => {
               setPasswordVisible(!getPasswordVisible);
             }}>
             {getPasswordVisible ? (
-              <Feather
+              <FontAwesome5
                 name={'eye'}
                 color="#b2bcc6"
                 size={25}
@@ -160,17 +160,17 @@ export default Login = ({navigation}, props) => {
                   right: 0,
                   position: 'absolute',
                   padding: 10,
-                }}></Feather>
+                }}></FontAwesome5>
             ) : (
-              <Feather
-                name={'eye-off'}
+              <FontAwesome5
+                name={'eye-slash'}
                 color="#b2bcc6"
                 size={25}
                 style={{
                   right: 0,
                   position: 'absolute',
                   padding: 10,
-                }}></Feather>
+                }}></FontAwesome5>
             )}
           </TouchableOpacity>
         </View>
@@ -190,7 +190,10 @@ export default Login = ({navigation}, props) => {
             console.log(getCheckboxvisible);
           }}>
           {getCheckboxvisible ? (
-            <Feather name={'circle'} color="#ff9336" size={20}></Feather>
+            <FontAwesome5
+              name={'circle'}
+              color="#ff9336"
+              size={20}></FontAwesome5>
           ) : (
             <AntDesign
               name={'checkcircleo'}
