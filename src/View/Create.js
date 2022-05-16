@@ -59,7 +59,6 @@ export default ({navigation}, props) => {
   }, [getbuildingstate]);
   // nút lưu API
   const Savehandler = () => {
-    console.log(TK, TGV);
     dispatch(CreateAction(TK, TGV, date, date2, chontoanha, chonphong));
   };
   useEffect(() => {
@@ -252,7 +251,9 @@ export default ({navigation}, props) => {
             setOpen={setOpen3}
             setValue={setChontoanha}
             setItems={setItems}
-            searchPlaceholderTextColor="#d4d5da"
+            placeholderStyle={{
+              color: 'grey',
+            }}
             placeholder="Chọn Tòa Nhà"
             dropDownDirection="BOTTOM"
             ArrowDownIconComponent={({style}) => (
@@ -286,8 +287,12 @@ export default ({navigation}, props) => {
             setOpen={setOpen4}
             setValue={onChangechonphong}
             setItems={setItems2}
+            searchPlaceholderTextColor={'#345173'}
             placeholder="Chọn Phòng"
             dropDownDirection="BOTTOM"
+            placeholderStyle={{
+              color: 'grey',
+            }}
             zIndex={2000}
             zIndexInverse={2000}
             ArrowDownIconComponent={({style}) => (

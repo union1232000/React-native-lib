@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import {Text, View, SafeAreaView, TouchableOpacity, Image} from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default Header = props => {

@@ -23,7 +23,7 @@ export default props => {
   const getbuildingstate = useSelector(c => c.Getbuildingreducers.response);
   const [buildingState, setBuildingState] = useState([]);
   const [buildingChoosen, setbuldingChoosen] = useState([]);
-  const [courseId, setcourseId] = useState([]);
+  const [courseId, setcourseId] = useState(props.route.params.courseId);
   // tên buổi học
   const [tenbuoihoc, onChangetenbuoihoc] = useState('');
   const [isValidtenbuoihoc, setValidtenbuoihoc] = useState(true);

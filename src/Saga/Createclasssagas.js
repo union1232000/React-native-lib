@@ -20,7 +20,6 @@ function* createclassFlow(action) {
     buildingId,
     roomId,
   } = action.data;
-  console.log('saga chạy rồi nè bro');
 
   const response = yield postClass(action.data);
   // const error = response.message;

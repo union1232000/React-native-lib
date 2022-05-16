@@ -5,6 +5,8 @@ import Getbuildingreducers from './Getbuildingreducers';
 import Getallcoursereducers from './Getallcoursereducers';
 import Createclassreducers from './Createclassreducers';
 import Getallclassreducers from './Getallclassreducers';
+import Deletecoursereducers from './Deletecoursereducers';
+import Deleteclassreducers from './Deleteclassreducers';
 const allReducers = combineReducers({
   Loginreducers,
   Createreducers,
@@ -12,5 +14,7 @@ const allReducers = combineReducers({
   Getallcoursereducers,
   Createclassreducers,
   Getallclassreducers,
+  Deletecoursereducers,
+  Deleteclassreducers,
 });
 export default allReducers;
