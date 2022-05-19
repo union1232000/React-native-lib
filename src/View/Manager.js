@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import moment from 'moment';
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, Text, View, Alert} from 'react-native';
 import {
   Menu,
   MenuOption,
@@ -27,19 +27,22 @@ export default Home = props => {
 
   // xóa
   const deletedata = async id => {
-    try {
-      const result = await Deleteclass(id);
-      if (result.resultCode == 1) {
-        Alert.alert('xóa thành công');
-      }
-    } catch (error) {
-      console.log(error);
+    const result = await Deleteclass(id);
+
+    if (result.resultCode === 1) {
+      getdata();
+      console.log(result.resultCode);
     }
   };
-  useEffect(() => {
-    getdata();
-  }, []);
 
+  // call back
+  useEffect(() => {
+    const willFocusSubscription = props.navigation.addListener('focus', () => {
+      getdata();
+      Deleteclass();
+    });
+    return willFocusSubscription;
+  }, []);
   // lấy courseID
   useEffect(() => {
     console.log(props.route.params.courseId);
@@ -82,7 +85,6 @@ export default Home = props => {
                     borderRadius: 5,
                     justifyContent: 'flex-start',
                   }}>
-                  <View></View>
                   <Menu
                     style={{
                       position: 'absolute',

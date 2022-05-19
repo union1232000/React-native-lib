@@ -13,7 +13,7 @@ export const Deletecourse = course_id => {
     `http://118.69.123.51:5000/fis/api/edu/delete_course?courseId=${course_id}`,
     requestOptions,
   )
-    .then(response => response.text())
+    .then(response => response.json())
     .then(result => {
       return result;
     })

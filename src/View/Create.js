@@ -9,6 +9,7 @@ import {
 import DropDownPicker from 'react-native-dropdown-picker';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useDispatch, useSelector} from 'react-redux';
+import {get_allcourse} from '../API/Get_all_course';
 import CreateAction from '../Redux/Action/CreateAction';
 import {get_buildingaction} from '../Redux/Action/Getbuilding';
 import {user} from '../Redux/Setting/Token';
@@ -29,19 +30,6 @@ export default props => {
   const [items2, setItems2] = useState([]);
   const [chonphong, onChangechonphong] = useState('');
   const [isValidchonphong, setValidchonphong] = useState(true);
-  useEffect(() => {
-    if (chontoanha !== '') {
-      let obj = getbuildingstate?.data.find(o => o._id === chontoanha);
-      let listroom = [];
-      obj.room.map((item, index) => {
-        listroom.push({
-          label: item.roomName,
-          value: item._id,
-        });
-      });
-      setbuldingChoosen(listroom);
-    }
-  }, [chontoanha]);
 
   // lấy tòa nhà
   useEffect(() => {
@@ -57,6 +45,21 @@ export default props => {
       setBuildingState(listBuilding);
     }
   }, [getbuildingstate]);
+
+  // phòng
+  useEffect(() => {
+    if (chontoanha !== '') {
+      let obj = getbuildingstate?.data.find(o => o._id === chontoanha);
+      let listroom = [];
+      obj.room.map((item, index) => {
+        listroom.push({
+          label: item.roomName,
+          value: item._id,
+        });
+      });
+      setbuldingChoosen(listroom);
+    }
+  }, [chontoanha]);
   // nút lưu API
   const Savehandler = () => {
     dispatch(CreateAction(TK, TGV, date, date2, chontoanha, chonphong));
@@ -64,8 +67,8 @@ export default props => {
   useEffect(() => {
     if (createState?.resultCode == 1) {
       user.token = createState.data;
+      props.navigation.navigate('Home');
     }
-    return () => {};
   }, [createState]);
 
   //Tên khóa
@@ -127,7 +130,7 @@ export default props => {
   };
 
   return (
-    <ScrollView style={{flex: 1, width: '100%', backgroundColor: 'white'}}>
+    <ScrollView style={{flex: 1, backgroundColor: 'white'}}>
       <Header
         title="TẠO MỚI KHÓA HỌC"
         isRightDisable={true}

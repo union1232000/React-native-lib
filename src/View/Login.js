@@ -23,7 +23,6 @@ export default Login = ({navigation}, props) => {
   const [getCheckboxvisible, setCheckboxVisible] = useState(false);
   const [Username, setUsername] = useState('vannvv2@fpt.com.vn');
   const [Password, setPassword] = useState('chuonng1080@');
-  const [Login, setLogin] = useState(0);
 
   const Loginhandler = async () => {
     dispatch(loginAction(Username, Password));
