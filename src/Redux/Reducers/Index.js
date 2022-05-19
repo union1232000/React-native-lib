@@ -7,6 +7,8 @@ import Createclassreducers from './Createclassreducers';
 import Getallclassreducers from './Getallclassreducers';
 import Deletecoursereducers from './Deletecoursereducers';
 import Deleteclassreducers from './Deleteclassreducers';
+import Editcoursereducers from './Editcoursereducers';
+import Editclassreducers from './Editclassreducers';
 const allReducers = combineReducers({
   Loginreducers,
   Createreducers,
@@ -16,5 +18,7 @@ const allReducers = combineReducers({
   Getallclassreducers,
   Deletecoursereducers,
   Deleteclassreducers,
+  Editcoursereducers,
+  Editclassreducers,
 });
 export default allReducers;

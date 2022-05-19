@@ -155,7 +155,9 @@ export default props => {
         isRightDisable={true}
         isBack={true}
         {...props}
-        name={'Manager'}
+        onClick={() => {
+          props.navigation.navigate('Manager');
+        }}
       />
       {/* Tên buổi học  */}
       <View style={{padding: 5}}>

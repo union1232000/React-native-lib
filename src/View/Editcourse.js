@@ -15,20 +15,26 @@ import {user} from '../Redux/Setting/Token';
 import Calender from './Calender';
 import Header from './Header';
 import Icon from './icon';
+import Editcourseaction from '../Redux/Action/Editcourseaction';
 export default props => {
   const createState = useSelector(b => b.Createreducers.response);
   const dispatch = useDispatch();
   const [buildingState, setBuildingState] = useState([]);
   const [buildingChoosen, setbuldingChoosen] = useState([]);
+  const [courseId, setcourseId] = useState(props.route.params.courseId);
 
   const getbuildingstate = useSelector(c => c.Getbuildingreducers.response);
-  const [chontoanha, setChontoanha] = useState('');
+  const [chontoanha, setChontoanha] = useState(props.route.params.buildingId);
   const [isValidchontoanha, setValidchontoanha] = useState(true);
   // Phòng
   const [open4, setOpen4] = useState(false);
   const [items2, setItems2] = useState([]);
-  const [chonphong, onChangechonphong] = useState('');
+  const [chonphong, onChangechonphong] = useState(props.route.params.roomId);
   const [isValidchonphong, setValidchonphong] = useState(true);
+  // lấy Courseid
+  useEffect(() => {
+    console.log(props.route.params.courseId);
+  }, []);
   useEffect(() => {
     if (chontoanha !== '') {
       let obj = getbuildingstate?.data.find(o => o._id === chontoanha);
@@ -59,17 +65,18 @@ export default props => {
   }, [getbuildingstate]);
   // nút lưu API
   const Savehandler = () => {
-    dispatch(CreateAction(TK, TGV, date, date2, chontoanha, chonphong));
+    dispatch(
+      Editcourseaction(courseId, TK, TGV, date, date2, chontoanha, chonphong),
+    );
   };
   useEffect(() => {
     if (createState?.resultCode == 1) {
       user.token = createState.data;
     }
-    return () => {};
   }, [createState]);
 
   //Tên khóa
-  const [TK, onChangeTK] = useState('');
+  const [TK, onChangeTK] = useState(props.route.params.courseName);
   const [isValidTK, setValidTK] = useState(true);
   const verifyTK = () => {
     if (TK == '') {
@@ -79,7 +86,7 @@ export default props => {
     }
   };
   // Tên Giảng viên
-  const [TGV, onChangeTGV] = useState('');
+  const [TGV, onChangeTGV] = useState(props.route.params.trainer);
   const [isValidTGV, setValidTGV] = useState(true);
   const verifyTGV = () => {
     if (TGV == '') {
@@ -89,9 +96,10 @@ export default props => {
     }
   };
   // Từ Ngày
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(props.route.params.startedDate);
   // Đến Ngày
-  const [date2, setDate2] = useState(new Date());
+  const [date2, setDate2] = useState(props.route.params.endedDate);
+  console.log(date, date2, '-..as.d.asd.asd.as.d.as');
   const [isValidDatime, setValidDatetime] = useState(true);
   const verifyDatetime = () => {
     if (date2 < date) {
@@ -129,11 +137,10 @@ export default props => {
   return (
     <ScrollView style={{flex: 1, width: '100%', backgroundColor: 'white'}}>
       <Header
-        title="TẠO MỚI KHÓA HỌC"
+        title="SỬA KHÓA HỌC"
+        {...props}
         isRightDisable={true}
         isBack={true}
-        {...props}
-        name={'Home'}
         onClick={() => {
           props.navigation.navigate('Home');
         }}
@@ -258,7 +265,7 @@ export default props => {
             placeholderStyle={{
               color: 'grey',
             }}
-            placeholder="Chọn tòa nhà"
+            placeholder="Chọn Tòa Nhà"
             dropDownDirection="BOTTOM"
             ArrowDownIconComponent={({style}) => (
               <Icon toggle={toggleBuilding} isUp style={style} />
@@ -292,7 +299,7 @@ export default props => {
             setValue={onChangechonphong}
             setItems={setItems2}
             searchPlaceholderTextColor={'#345173'}
-            placeholder="Chọn phòng"
+            placeholder="Chọn Phòng"
             dropDownDirection="BOTTOM"
             placeholderStyle={{
               color: 'grey',

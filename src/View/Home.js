@@ -14,6 +14,9 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {Deletecourse} from '../API/Deletecourse';
 import {get_allcourse} from '../API/Get_all_course';
 import Header from './Header';
+import {useDispatch, useSelector} from 'react-redux';
+import Editcourseaction from '../Redux/Action/Editcourseaction';
+import Editcourse from './Editcourse';
 export default Home = props => {
   const [data, setData] = useState([]);
   const getdata = async () => {
@@ -22,6 +25,7 @@ export default Home = props => {
       setData(result.data);
     }
   };
+
   // xóa
   const deletedata = async id => {
     try {
@@ -46,7 +50,7 @@ export default Home = props => {
           props.navigation.navigate('Create');
         }}
       />
-      <View>
+      <View style={{padding: 15}}>
         <FlatList
           data={data}
           keyExtractor={item => item.course_id}
@@ -58,7 +62,7 @@ export default Home = props => {
                   width: '100%',
                 }}>
                 <TouchableOpacity
-                  style={{width: '100%', padding: 15, paddingBottom: 0}}
+                  style={{width: '100%'}}
                   onPress={() =>
                     props.navigation.navigate('Manager', {
                       courseId: item.course_id,
@@ -66,18 +70,15 @@ export default Home = props => {
                   }>
                   <View
                     style={{
-                      flex: 1,
-                      padding: 10,
                       borderWidth: 1,
                       borderColor: '#c2c2c2',
                       marginTop: 10,
                       borderRadius: 5,
+                      padding: 10,
                     }}>
                     {/* Tựa mục  */}
                     <View
                       style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
                         width: '95%',
                       }}>
                       <Text numberOfLines={2}>
@@ -221,15 +222,33 @@ export default Home = props => {
                 <Menu
                   style={{
                     position: 'absolute',
-                    right: 5,
-                    padding: 15,
-                    top: 30,
+                    right: 1,
+                    top: 20,
+                    padding: 5,
                   }}>
                   <MenuTrigger>
-                    <Entypo name="dots-three-vertical" size={27}></Entypo>
+                    <Entypo name="dots-three-vertical" size={30}></Entypo>
                   </MenuTrigger>
                   <MenuOptions>
-                    <MenuOption onSelect={() => alert(`Thêm`)} text="Thêm" />
+                    <MenuOption
+                      onSelect={() => {
+                        props.navigation.navigate('Editcourse', {
+                          courseId: item.course_id,
+                          courseName: item.courseName,
+                          trainer: item.trainer,
+                          startedDate: item.startedDate,
+                          endedDate: item.endedDate,
+                          buildingId: item.buildingId,
+                          roomId: item.roomId,
+                        });
+                        console.log(
+                          item.startedDate,
+                          item.endedDate,
+                          '->>>>>>',
+                        );
+                      }}
+                      text="Sửa"
+                    />
                     <MenuOption
                       onSelect={() => {
                         deletedata(item.course_id);

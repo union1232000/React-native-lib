@@ -4,7 +4,7 @@ import {
   GETALLCLASS_ERROR,
   GETALLCLASS_SUCCESS,
   POST_GETALLCLASS,
-} from '../Redux/Action/Createclassaction';
+} from '../Redux/Action/GetclassAction';
 export function* whatGetallclass() {
   yield takeEvery(POST_GETALLCLASS, GetallclassFlow);
 }
@@ -21,3 +21,4 @@ export function* GetallclassFlow(action) {
     yield put({type: GETALLCLASS_ERROR, response: response});
   }
 }
+//action getallclass may dau???
