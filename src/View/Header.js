@@ -32,7 +32,7 @@ export default Header = props => {
       {isBack && (
         <TouchableOpacity
           style={{position: 'absolute', left: 0, padding: 10}}
-          onPress={() => props.navigation.goBack()}>
+          onPress={() => props.onClick()}>
           <Ionicons
             name="md-chevron-back"
             size={30}

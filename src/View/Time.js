@@ -1,8 +1,8 @@
-import React, {Component, useState} from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
+import moment from 'moment';
+import React, {useState} from 'react';
+import {Text, TouchableOpacity} from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import moment from 'moment';
 export default props => {
   // Từ Ngày
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);

@@ -8,6 +8,7 @@ export const Deleteclass = classId => {
     headers: myHeaders,
     redirect: 'follow',
   };
+
   return fetch(
     `http://118.69.123.51:5000/fis/api/edu/delete_class?classId=${classId}`,
     requestOptions,

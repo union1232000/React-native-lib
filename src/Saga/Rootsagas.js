@@ -7,6 +7,8 @@ import {watchCreateclass} from './Createclasssagas';
 import {whatGetallclass} from './Getallclasssagas';
 import {watchDeletecourse} from './Deletecoursesagas';
 import {WatchDeleteclass} from './Deleteclasssagas';
+import {watcheditcourse} from './Editcoursesagas';
+import {watcheditclass} from './Editclasssagas';
 export default function* rootSaga() {
   yield all([
     watchLogin(),
@@ -14,8 +16,10 @@ export default function* rootSaga() {
     whatGetbuilding(),
     whatGetallcourse(),
     watchCreateclass(),
-    whatGetallclass,
-    watchDeletecourse,
-    WatchDeleteclass,
+    whatGetallclass(),
+    watchDeletecourse(),
+    WatchDeleteclass(),
+    watcheditcourse(),
+    watcheditclass(),
   ]);
 }

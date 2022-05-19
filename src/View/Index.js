@@ -10,6 +10,8 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import DrawerStyle from './drawerStyle';
 import CreateManger from './CreateManger';
 import Info from './Info';
+import Editcourse from './Editcourse';
+import Editclass from './Editclass';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -25,6 +27,8 @@ const DrawerNavigator = props => {
       <Drawer.Screen name="Manager" component={Manager} />
       <Drawer.Screen name="CreateManger" component={CreateManger} />
       <Drawer.Screen name="Info" component={Info} />
+      <Drawer.Screen name="Editcourse" component={Editcourse} />
+      <Drawer.Screen name="Editclass" component={Editclass} />
     </Drawer.Navigator>
   );
 };
