@@ -21,4 +21,3 @@ export function* GetallclassFlow(action) {
     yield put({type: GETALLCLASS_ERROR, response: response});
   }
 }
-//action getallclass may dau???

@@ -2,7 +2,7 @@ import {
   DID_GETALLCLASS_ACTION,
   GETALLCLASS_SUCCESS,
   GETALLCLASS_ERROR,
-} from '../Action/Createclassaction';
+} from '../Action/GetclassAction.js';
 const initialState = {
   Loa11111111ding: false,
 };

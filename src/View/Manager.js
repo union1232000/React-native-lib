@@ -1,52 +1,56 @@
-import React, {useEffect, useState} from 'react';
 import moment from 'moment';
-import {FlatList, Text, View, Alert} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Alert, FlatList, Text, View} from 'react-native';
 import {
   Menu,
   MenuOption,
   MenuOptions,
   MenuTrigger,
 } from 'react-native-popup-menu';
-import {Deleteclass} from '../API/Deleteclass';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {get_allclass} from '../API/Get_all_class';
+import {Deleteclass} from '../API/Deleteclass';
+import {get_allclassaction} from '../Redux/Action/GetclassAction';
 import Header from './Header';
-import Editclass from './Editclass';
+import {useDispatch, useSelector} from 'react-redux';
 
 export default Home = props => {
+  // get all class
+  const dispatch = useDispatch();
   const [data, setData] = useState([]);
-  const getdata = async () => {
-    const result = await get_allclass(props.route.params.courseId);
-    if (result.resultCode == 1) {
-      setData(result.data);
+  const getallclassstate = useSelector(a => a.Getallclassreducers?.response);
+  useEffect(() => {
+    dispatch(get_allclassaction(props.route.params.courseId));
+  }, []);
+  useEffect(() => {
+    if (getallclassstate?.data) {
+      const listclass = [];
+      getallclassstate.data.map((item, index) => {
+        listclass.push(item);
+      });
+      setData(listclass);
     }
-  };
+  }, [getallclassstate]);
 
   // xóa
   const deletedata = async id => {
     const result = await Deleteclass(id);
 
-    if (result.resultCode === 1) {
-      getdata();
-      console.log(result.resultCode);
+    if (result.resultCode == 1) {
+      Alert.alert('Xóa buổi học thành công');
     }
   };
-
-  // call back
+  console.log(props.route.params.courseId, ' ->>>>>>>>>>>>> coacnacs');
+  // // call back
   useEffect(() => {
     const willFocusSubscription = props.navigation.addListener('focus', () => {
-      getdata();
-      Deleteclass();
+      dispatch(get_allclassaction());
     });
     return willFocusSubscription;
   }, []);
-  // lấy courseID
-  useEffect(() => {
-    console.log(props.route.params.courseId);
-  }, []);
+
   return (
     <View
       style={{
@@ -57,6 +61,7 @@ export default Home = props => {
       {/* header */}
       <Header
         title="QUẢN LÝ BUỔI HỌC"
+        isBack={true}
         {...props}
         onClick={() => {
           props.navigation.navigate('CreateManger', {
@@ -115,18 +120,12 @@ export default Home = props => {
                             buildingId: item.buildingId,
                             roomId: item.roomId,
                           });
-                          console.log(
-                            item.startedTime,
-                            item.endedTime,
-                            'asdasdasdasda',
-                          );
                         }}
                         text="Sửa"
                       />
                       <MenuOption
                         onSelect={() => {
                           deletedata(item.classId);
-                          console.log(item.classId);
                         }}>
                         <Text style={{color: 'red'}}>Xóa</Text>
                       </MenuOption>
@@ -157,13 +156,13 @@ export default Home = props => {
                       size={25}
                       style={{color: '#ffd237', padding: 5}}></FontAwesome5>
                     <Text
-                      style={{color: '#345173', fontSize: 18, paddingLeft: 22}}>
+                      style={{color: '#345173', fontSize: 20, paddingLeft: 22}}>
                       Giảng viên: {/**/}
                       <Text
                         numberOfLines={1}
                         style={{
                           color: '#0a8dc3',
-                          fontSize: 15,
+                          fontSize: 20,
                           fontWeight: 'bold',
                         }}>
                         {item.trainer}
@@ -177,12 +176,12 @@ export default Home = props => {
                       size={25}
                       style={{color: '#40304d', padding: 5}}></FontAwesome5>
                     <Text
-                      style={{color: '#345173', fontSize: 18, paddingLeft: 18}}>
+                      style={{color: '#345173', fontSize: 20, paddingLeft: 18}}>
                       Cán bộ quản lý : {/**/}
                       <Text
                         style={{
                           color: '#f0943f',
-                          fontSize: 15,
+                          fontSize: 20,
                           fontWeight: 'bold',
                         }}>
                         trinhntk
@@ -196,12 +195,12 @@ export default Home = props => {
                       size={25}
                       style={{color: '#42c8fb', padding: 5}}></FontAwesome>
                     <Text
-                      style={{color: '#345173', fontSize: 18, paddingLeft: 22}}>
+                      style={{color: '#345173', fontSize: 20, paddingLeft: 22}}>
                       Ngày: {/**/}
                       <Text
                         style={{
                           color: '#345173',
-                          fontSize: 15,
+                          fontSize: 20,
                           fontWeight: 'bold',
                         }}>
                         {moment(item.date).format('L')}
@@ -215,12 +214,13 @@ export default Home = props => {
                       size={25}
                       style={{color: '#345173', padding: 5}}></AntDesign>
                     <Text
-                      style={{color: '#345173', fontSize: 18, paddingLeft: 22}}>
+                      numberOfLines={1}
+                      style={{color: '#345173', fontSize: 20, paddingLeft: 22}}>
                       Thời gian: {/**/}
                       <Text
                         style={{
                           color: '#345173',
-                          fontSize: 15,
+                          fontSize: 20,
                           fontWeight: 'bold',
                         }}>
                         {moment(item.startedDate).format('l')}-
@@ -235,12 +235,12 @@ export default Home = props => {
                       size={25}
                       style={{color: '#0090d7', padding: 5}}></FontAwesome5>
                     <Text
-                      style={{color: '#345173', fontSize: 18, paddingLeft: 25}}>
+                      style={{color: '#345173', fontSize: 20, paddingLeft: 25}}>
                       Tòa nhà: {/**/}
                       <Text
                         style={{
                           color: '#345173',
-                          fontSize: 15,
+                          fontSize: 20,
                           fontWeight: 'bold',
                         }}>
                         {item.buildingName}
@@ -254,13 +254,13 @@ export default Home = props => {
                       size={25}
                       style={{color: '#ff9126', padding: 5}}></FontAwesome5>
                     <Text
-                      style={{color: '#345173', fontSize: 18, paddingLeft: 18}}>
+                      style={{color: '#345173', fontSize: 20, paddingLeft: 18}}>
                       Phòng: {/**/}
                       <Text
                         style={{
                           color: '#345173',
                           fontWeight: 'bold',
-                          fontSize: 15,
+                          fontSize: 20,
                         }}>
                         {item.roomName}
                       </Text>
@@ -277,7 +277,7 @@ export default Home = props => {
                         style={{
                           color: '#345173',
                           fontWeight: 'bold',
-                          fontSize: 15,
+                          fontSize: 20,
                         }}>
                         {item.wifi}
                       </Text>

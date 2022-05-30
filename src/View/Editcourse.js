@@ -5,19 +5,19 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Alert,
 } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useDispatch, useSelector} from 'react-redux';
-import CreateAction from '../Redux/Action/CreateAction';
+import Editcourseaction from '../Redux/Action/Editcourseaction';
 import {get_buildingaction} from '../Redux/Action/Getbuilding';
 import {user} from '../Redux/Setting/Token';
 import Calender from './Calender';
 import Header from './Header';
 import Icon from './icon';
-import Editcourseaction from '../Redux/Action/Editcourseaction';
 export default props => {
-  const createState = useSelector(b => b.Createreducers.response);
+  const editstate = useSelector(b => b.Editcoursereducers.response);
   const dispatch = useDispatch();
   const [buildingState, setBuildingState] = useState([]);
   const [buildingChoosen, setbuldingChoosen] = useState([]);
@@ -31,15 +31,12 @@ export default props => {
   const [items2, setItems2] = useState([]);
   const [chonphong, onChangechonphong] = useState(props.route.params.roomId);
   const [isValidchonphong, setValidchonphong] = useState(true);
-  // lấy Courseid
-  useEffect(() => {
-    console.log(props.route.params.courseId);
-  }, []);
+
   useEffect(() => {
     if (chontoanha !== '') {
       let obj = getbuildingstate?.data.find(o => o._id === chontoanha);
       let listroom = [];
-      obj.room.map((item, index) => {
+      obj?.room?.map((item, index) => {
         listroom.push({
           label: item.roomName,
           value: item._id,
@@ -53,7 +50,6 @@ export default props => {
   useEffect(() => {
     dispatch(get_buildingaction());
   }, []);
-
   useEffect(() => {
     if (getbuildingstate?.data) {
       const listBuilding = [];
@@ -70,10 +66,11 @@ export default props => {
     );
   };
   useEffect(() => {
-    if (createState?.resultCode == 1) {
-      user.token = createState.data;
+    if (editstate?.resultCode == 1) {
+      Alert.alert('Sửa khóa học thành công');
+      props.navigation.navigate('Home');
     }
-  }, [createState]);
+  }, [editstate]);
 
   //Tên khóa
   const [TK, onChangeTK] = useState(props.route.params.courseName);
@@ -99,7 +96,7 @@ export default props => {
   const [date, setDate] = useState(props.route.params.startedDate);
   // Đến Ngày
   const [date2, setDate2] = useState(props.route.params.endedDate);
-  console.log(date, date2, '-..as.d.asd.asd.as.d.as');
+
   const [isValidDatime, setValidDatetime] = useState(true);
   const verifyDatetime = () => {
     if (date2 < date) {
@@ -114,6 +111,26 @@ export default props => {
     {label: 'KangNam', value: 'Kangnam'},
     {label: 'Tân Thuận 3', value: 'Tân Thuận 3'},
   ]);
+
+  useEffect(() => {
+    if (
+      (props.route.params.trainer !== TGV,
+      props.route.params.courseName !== TK,
+      props.route.params.startedDate !== date,
+      props.route.params.startedDate !== date2,
+      props.route.params.buildingId !== chontoanha,
+      props.route.params.roomId !== chonphong,
+      props.route.params.courseId !== courseId)
+    ) {
+      setcourseId(props.route.params.courseId);
+      onChangeTGV(props.route.params.trainer);
+      onChangeTK(props.route.params.courseName);
+      setDate(props.route.params.startedDate);
+      setDate2(props.route.params.endedDate);
+      setChontoanha(props.route.params.buildingId);
+      onChangechonphong(props.route.params.roomId);
+    }
+  }, [props.route.params]);
 
   const toggleBuilding = () => {
     setOpen3(!open3);
@@ -133,6 +150,7 @@ export default props => {
       setValidchonphong(true);
     }
   };
+  console.log(props.route.params);
 
   return (
     <ScrollView style={{flex: 1, width: '100%', backgroundColor: 'white'}}>

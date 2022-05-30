@@ -1,5 +1,5 @@
 import {user} from '../Redux/Setting/Token';
-export const Deletecourse = course_id => {
+export async function Deletecourse(courseId) {
   var myHeaders = new Headers();
   myHeaders.append('Authorization', `Bearer ${user.token}`);
 
@@ -9,8 +9,8 @@ export const Deletecourse = course_id => {
     redirect: 'follow',
   };
 
-  return fetch(
-    `http://118.69.123.51:5000/fis/api/edu/delete_course?courseId=${course_id}`,
+  const response = await fetch(
+    `http://118.69.123.51:5000/fis/api/edu/delete_course?courseId=${courseId}`,
     requestOptions,
   )
     .then(response => response.json())
@@ -18,4 +18,5 @@ export const Deletecourse = course_id => {
       return result;
     })
     .catch(error => console.log('error', error));
-};
+  return response;
+}

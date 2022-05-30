@@ -8,38 +8,46 @@ import {
   MenuOptions,
   MenuTrigger,
 } from 'react-native-popup-menu';
+import {useDispatch, useSelector} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {Deletecourse} from '../API/Deletecourse';
 import {get_allcourse} from '../API/Get_all_course';
 import Header from './Header';
+import {get_allcourseaction} from '../Redux/Action/GetallcourseAction';
+import {Deletecourseaction} from '../Redux/Action/Deletecourseaction';
 export default Home = props => {
+  const dispatch = useDispatch([]);
   const [data, setData] = useState([]);
-  const getdata = async () => {
-    const result = await get_allcourse();
-    if (result.resultCode == 1) {
-      setData(result.data);
+  const getallcoursestate = useSelector(a => a.Getallcoursereducers.response);
+
+  useEffect(() => {
+    if (getallcoursestate?.data) {
+      const listcourse = [];
+      getallcoursestate.data.map((item, index) => {
+        listcourse.push(item);
+      });
+      setData(listcourse);
     }
-  };
+  }, [getallcoursestate]);
 
   // xóa
-  const deletedata = async id => {
-    try {
-      const result = await Deletecourse(id);
-      if (result.resultCode == 1) {
-        getdata();
-        Alert.alert('Xóa thành công');
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const deletecoursestate = useSelector(b => b.Deletecoursereducers.response);
+  const deletedata = async course_id => {
+    dispatch(Deletecourseaction(course_id));
   };
+  useEffect(() => {
+    if (deletecoursestate?.resultCode == 1) {
+      Alert.alert('Xóa khóa học thành công');
+      dispatch(get_allcourseaction());
+    }
+  }, [deletecoursestate]);
 
   // call back
   useEffect(() => {
     const willFocusSubscription = props.navigation.addListener('focus', () => {
-      getdata();
+      dispatch(get_allcourseaction());
     });
     return willFocusSubscription;
   }, []);
@@ -54,7 +62,10 @@ export default Home = props => {
           props.navigation.navigate('Create');
         }}
       />
-      <View style={{paddingHorizontal: 15}}>
+      <View
+        style={{
+          paddingHorizontal: 15,
+        }}>
         <FlatList
           data={data}
           keyExtractor={item => item.course_id}
@@ -69,10 +80,9 @@ export default Home = props => {
                   borderWidth: 1,
                   borderColor: '#c2c2c2',
                   marginTop: 10,
-                  borderRadius: 5,
                 }}>
                 <TouchableOpacity
-                  style={{width: '95%'}}
+                  style={{width: '100%'}}
                   onPress={() =>
                     props.navigation.navigate('Manager', {
                       courseId: item.course_id,
@@ -229,9 +239,8 @@ export default Home = props => {
                   }}>
                   <Menu
                     style={{
-                      right: 1,
-                      top: 10,
-                      padding: 5,
+                      right: 5,
+                      top: 5,
                     }}>
                     <MenuTrigger>
                       <Entypo name="dots-three-vertical" size={30}></Entypo>
@@ -248,11 +257,6 @@ export default Home = props => {
                             buildingId: item.buildingId,
                             roomId: item.roomId,
                           });
-                          console.log(
-                            item.startedDate,
-                            item.endedDate,
-                            '->>>>>>',
-                          );
                         }}
                         text="Sửa"
                       />

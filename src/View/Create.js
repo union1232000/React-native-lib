@@ -5,17 +5,18 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Alert,
 } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useDispatch, useSelector} from 'react-redux';
-import {get_allcourse} from '../API/Get_all_course';
 import CreateAction from '../Redux/Action/CreateAction';
 import {get_buildingaction} from '../Redux/Action/Getbuilding';
 import {user} from '../Redux/Setting/Token';
 import Calender from './Calender';
 import Header from './Header';
 import Icon from './icon';
+
 export default props => {
   const createState = useSelector(b => b.Createreducers.response);
   const dispatch = useDispatch();
@@ -65,9 +66,14 @@ export default props => {
     dispatch(CreateAction(TK, TGV, date, date2, chontoanha, chonphong));
   };
   useEffect(() => {
-    if (createState?.resultCode == 1) {
-      user.token = createState.data;
-      props.navigation.navigate('Home');
+    if (createState?.resultCode) {
+      if (createState?.resultCode == 1) {
+        Alert.alert('Thông Báo', 'Tạo mới khóa học thành công', [
+          {Text: 'OK', onPress: () => props.navigation.goBack()},
+        ]);
+      } else {
+        Alert.alert('Tạo mới khóa học không thành công');
+      }
     }
   }, [createState]);
 
@@ -136,7 +142,6 @@ export default props => {
         isRightDisable={true}
         isBack={true}
         {...props}
-        name={'Home'}
         onClick={() => {
           props.navigation.navigate('Home');
         }}
