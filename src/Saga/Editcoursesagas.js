@@ -21,7 +21,6 @@ function* EditcourseFlow(action) {
   } = action.data;
 
   const response = yield Editcourse(action.data);
-
   if (response !== undefined) {
     if (response !== undefined) {
       yield put({type: EDITCOURSE_SUCCESS, response: response});

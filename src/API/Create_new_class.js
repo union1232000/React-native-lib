@@ -37,7 +37,9 @@ export async function postClass(data) {
     requestOptions,
   )
     .then(response => response.json())
-    .then(result => console.log(result))
+    .then(result => {
+      return result;
+    })
     .catch(error => console.log('error', error));
   return response;
 }

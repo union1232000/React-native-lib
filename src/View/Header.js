@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 export default Header = props => {
   const [isLeftDisalbe, setIsLeftDisable] = useState(
     props.isLeftDisable ? false : true,
@@ -32,7 +32,7 @@ export default Header = props => {
       {isBack && (
         <TouchableOpacity
           style={{position: 'absolute', left: 0, padding: 10}}
-          onPress={() => props.onClick()}>
+          onPress={() => props.navigation.goBack()}>
           <Ionicons
             name="md-chevron-back"
             size={30}
@@ -43,16 +43,15 @@ export default Header = props => {
         <TouchableOpacity
           style={{
             position: 'absolute',
-            right: -11,
+            right: 20,
           }}
           onPress={() => props.onClick()}>
-          <Image
-            source={require('../Images/ic_add.png')}
+          <FontAwesome5
+            name="plus"
+            size={25}
             style={{
-              resizeMode: 'contain',
-              height: 20,
-              tintColor: '#d4d5da',
-            }}></Image>
+              color: '#d4d5da',
+            }}></FontAwesome5>
         </TouchableOpacity>
       )}
       <Text

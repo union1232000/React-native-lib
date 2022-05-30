@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Alert,
 } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -15,6 +16,7 @@ import {user} from '../Redux/Setting/Token';
 import Calender from './Calender';
 import Header from './Header';
 import Icon from './icon';
+
 export default props => {
   const createState = useSelector(b => b.Createreducers.response);
   const dispatch = useDispatch();
@@ -29,19 +31,6 @@ export default props => {
   const [items2, setItems2] = useState([]);
   const [chonphong, onChangechonphong] = useState('');
   const [isValidchonphong, setValidchonphong] = useState(true);
-  useEffect(() => {
-    if (chontoanha !== '') {
-      let obj = getbuildingstate?.data.find(o => o._id === chontoanha);
-      let listroom = [];
-      obj.room.map((item, index) => {
-        listroom.push({
-          label: item.roomName,
-          value: item._id,
-        });
-      });
-      setbuldingChoosen(listroom);
-    }
-  }, [chontoanha]);
 
   // lấy tòa nhà
   useEffect(() => {
@@ -57,15 +46,35 @@ export default props => {
       setBuildingState(listBuilding);
     }
   }, [getbuildingstate]);
+
+  // phòng
+  useEffect(() => {
+    if (chontoanha !== '') {
+      let obj = getbuildingstate?.data.find(o => o._id === chontoanha);
+      let listroom = [];
+      obj.room.map((item, index) => {
+        listroom.push({
+          label: item.roomName,
+          value: item._id,
+        });
+      });
+      setbuldingChoosen(listroom);
+    }
+  }, [chontoanha]);
   // nút lưu API
   const Savehandler = () => {
     dispatch(CreateAction(TK, TGV, date, date2, chontoanha, chonphong));
   };
   useEffect(() => {
-    if (createState?.resultCode == 1) {
-      user.token = createState.data;
+    if (createState?.resultCode) {
+      if (createState?.resultCode == 1) {
+        Alert.alert('Thông Báo', 'Tạo mới khóa học thành công', [
+          {Text: 'OK', onPress: () => props.navigation.goBack()},
+        ]);
+      } else {
+        Alert.alert('Tạo mới khóa học không thành công');
+      }
     }
-    return () => {};
   }, [createState]);
 
   //Tên khóa
@@ -127,13 +136,12 @@ export default props => {
   };
 
   return (
-    <ScrollView style={{flex: 1, width: '100%', backgroundColor: 'white'}}>
+    <ScrollView style={{flex: 1, backgroundColor: 'white'}}>
       <Header
         title="TẠO MỚI KHÓA HỌC"
         isRightDisable={true}
         isBack={true}
         {...props}
-        name={'Home'}
         onClick={() => {
           props.navigation.navigate('Home');
         }}

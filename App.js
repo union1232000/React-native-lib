@@ -5,6 +5,7 @@ import {MenuProvider} from 'react-native-popup-menu';
 import RootComponent from './src/View/Index';
 import {Provider} from 'react-redux';
 import store from './src/Redux/Store';
+
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
   return (

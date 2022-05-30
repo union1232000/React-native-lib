@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  ScrollView,
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -15,6 +16,7 @@ import {loginAction} from '../Redux/Action/LoginAction.js';
 import {user} from '../Redux/Setting/Token.js';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import {SafeAreaView} from 'react-native-safe-area-context';
 export default Login = ({navigation}, props) => {
   const loginState = useSelector(a => a.Loginreducers.response);
   const dispatch = useDispatch();
@@ -23,7 +25,6 @@ export default Login = ({navigation}, props) => {
   const [getCheckboxvisible, setCheckboxVisible] = useState(false);
   const [Username, setUsername] = useState('vannvv2@fpt.com.vn');
   const [Password, setPassword] = useState('chuonng1080@');
-  const [Login, setLogin] = useState(0);
 
   const Loginhandler = async () => {
     dispatch(loginAction(Username, Password));
@@ -32,7 +33,7 @@ export default Login = ({navigation}, props) => {
     if (loginState?.resultCode) {
       if (loginState?.resultCode == 1) {
         user.token = loginState?.data.token;
-        console.log(loginState);
+
         navigation.navigate('DrawerNavigator');
       } else {
         Alert.alert('Tên đăng nhập và mật khẩu không được để trống!');

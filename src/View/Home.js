@@ -8,38 +8,50 @@ import {
   MenuOptions,
   MenuTrigger,
 } from 'react-native-popup-menu';
+import {useDispatch, useSelector} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {Deletecourse} from '../API/Deletecourse';
 import {get_allcourse} from '../API/Get_all_course';
 import Header from './Header';
-import {useDispatch, useSelector} from 'react-redux';
-import Editcourseaction from '../Redux/Action/Editcourseaction';
-import Editcourse from './Editcourse';
+import {get_allcourseaction} from '../Redux/Action/GetallcourseAction';
+import {Deletecourseaction} from '../Redux/Action/Deletecourseaction';
 export default Home = props => {
+  const dispatch = useDispatch([]);
   const [data, setData] = useState([]);
-  const getdata = async () => {
-    const result = await get_allcourse();
-    if (result.resultCode == 1) {
-      setData(result.data);
+  const getallcoursestate = useSelector(a => a.Getallcoursereducers.response);
+
+  useEffect(() => {
+    if (getallcoursestate?.data) {
+      const listcourse = [];
+      getallcoursestate.data.map((item, index) => {
+        listcourse.push(item);
+      });
+      setData(listcourse);
     }
-  };
+  }, [getallcoursestate]);
 
   // xóa
-  const deletedata = async id => {
-    try {
-      const result = await Deletecourse(id);
-      if (result.resultCode == 1) {
-        Alert.alert('xóa thành công');
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const deletecoursestate = useSelector(b => b.Deletecoursereducers.response);
+  const deletedata = async course_id => {
+    dispatch(Deletecourseaction(course_id));
   };
   useEffect(() => {
-    getdata();
+    if (deletecoursestate?.resultCode == 1) {
+      Alert.alert('Xóa khóa học thành công');
+      dispatch(get_allcourseaction());
+    }
+  }, [deletecoursestate]);
+
+  // call back
+  useEffect(() => {
+    const willFocusSubscription = props.navigation.addListener('focus', () => {
+      dispatch(get_allcourseaction());
+    });
+    return willFocusSubscription;
   }, []);
+
   return (
     <View style={{flex: 1}}>
       {/* header */}
@@ -50,7 +62,10 @@ export default Home = props => {
           props.navigation.navigate('Create');
         }}
       />
-      <View style={{padding: 15}}>
+      <View
+        style={{
+          paddingHorizontal: 15,
+        }}>
         <FlatList
           data={data}
           keyExtractor={item => item.course_id}
@@ -58,8 +73,13 @@ export default Home = props => {
             return (
               <View
                 style={{
+                  flex: 1,
                   flexDirection: 'row',
                   width: '100%',
+                  padding: 10,
+                  borderWidth: 1,
+                  borderColor: '#c2c2c2',
+                  marginTop: 10,
                 }}>
                 <TouchableOpacity
                   style={{width: '100%'}}
@@ -68,14 +88,7 @@ export default Home = props => {
                       courseId: item.course_id,
                     })
                   }>
-                  <View
-                    style={{
-                      borderWidth: 1,
-                      borderColor: '#c2c2c2',
-                      marginTop: 10,
-                      borderRadius: 5,
-                      padding: 10,
-                    }}>
+                  <View style={{}}>
                     {/* Tựa mục  */}
                     <View
                       style={{
@@ -219,44 +232,43 @@ export default Home = props => {
                     </View>
                   </View>
                 </TouchableOpacity>
-                <Menu
+                <View
                   style={{
-                    position: 'absolute',
-                    right: 1,
-                    top: 20,
-                    padding: 5,
+                    width: '100%',
+                    position: 'relative',
                   }}>
-                  <MenuTrigger>
-                    <Entypo name="dots-three-vertical" size={30}></Entypo>
-                  </MenuTrigger>
-                  <MenuOptions>
-                    <MenuOption
-                      onSelect={() => {
-                        props.navigation.navigate('Editcourse', {
-                          courseId: item.course_id,
-                          courseName: item.courseName,
-                          trainer: item.trainer,
-                          startedDate: item.startedDate,
-                          endedDate: item.endedDate,
-                          buildingId: item.buildingId,
-                          roomId: item.roomId,
-                        });
-                        console.log(
-                          item.startedDate,
-                          item.endedDate,
-                          '->>>>>>',
-                        );
-                      }}
-                      text="Sửa"
-                    />
-                    <MenuOption
-                      onSelect={() => {
-                        deletedata(item.course_id);
-                      }}>
-                      <Text style={{color: 'red'}}>Xóa</Text>
-                    </MenuOption>
-                  </MenuOptions>
-                </Menu>
+                  <Menu
+                    style={{
+                      right: 5,
+                      top: 5,
+                    }}>
+                    <MenuTrigger>
+                      <Entypo name="dots-three-vertical" size={30}></Entypo>
+                    </MenuTrigger>
+                    <MenuOptions>
+                      <MenuOption
+                        onSelect={() => {
+                          props.navigation.navigate('Editcourse', {
+                            courseId: item.course_id,
+                            courseName: item.courseName,
+                            trainer: item.trainer,
+                            startedDate: item.startedDate,
+                            endedDate: item.endedDate,
+                            buildingId: item.buildingId,
+                            roomId: item.roomId,
+                          });
+                        }}
+                        text="Sửa"
+                      />
+                      <MenuOption
+                        onSelect={() => {
+                          deletedata(item.course_id);
+                        }}>
+                        <Text style={{color: 'red'}}>Xóa</Text>
+                      </MenuOption>
+                    </MenuOptions>
+                  </Menu>
+                </View>
               </View>
             );
           }}

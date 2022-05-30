@@ -9,8 +9,10 @@ import {call, takeEvery, put, takeLatest} from 'redux-saga/effects';
 export function* whatGetallcourse() {
   yield takeEvery(POST_GETALLCOURSE, GetallcourseFlow);
 }
+
 export function* GetallcourseFlow() {
   const response = yield get_allcourse();
+
   if (response !== undefined) {
     if (response.resuiltcode == 1) {
       yield put({type: GETALLCOURSE_SUCCESS, response: response});

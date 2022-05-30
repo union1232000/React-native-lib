@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Alert,
 } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -116,10 +117,6 @@ export default props => {
     }
   }, [chontoanha]);
 
-  // truyền ID
-  useEffect(() => {
-    console.log(props.route.params.courseId);
-  }, []);
   //  Nút lưu API tạo lớp
   useEffect(() => {
     setDate2(date);
@@ -140,10 +137,12 @@ export default props => {
       ),
     );
   };
-
   useEffect(() => {
     if (createState?.resultCode == 1) {
-      user.token = createState.data;
+      Alert.alert('Thông Báo', 'Tạo mới buổi học thành công', [
+        {Text: 'OK', onPress: () => props.navigation.goBack()},
+      ]);
+      props.navigation.navigate('Manager');
     }
     return () => {};
   }, [createState]);

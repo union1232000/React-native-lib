@@ -113,7 +113,7 @@ export default props => {
     if (chontoanha !== '') {
       let obj = getbuildingstate?.data.find(o => o._id === chontoanha);
       let listroom = [];
-      obj.room.map((item, index) => {
+      obj?.room?.map((item, index) => {
         listroom.push({
           label: item.roomName,
           value: item._id,
@@ -140,7 +140,7 @@ export default props => {
 
   useEffect(() => {
     if (createState?.resultCode == 1) {
-      user.token = createState.data;
+      // user.token = createState.data;
     }
   }, [createState]);
 

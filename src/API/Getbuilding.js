@@ -1,7 +1,7 @@
 import {user} from '../Redux/Setting/Token';
 export async function get_building() {
   var myHeaders = new Headers();
-  myHeaders.append('Authorization', 'Bearer ' + user.token);
+  myHeaders.append('Authorization', `Bearer ${user.token}`);
 
   var requestOptions = {
     method: 'GET',

@@ -1,5 +1,6 @@
 import React, {Component, useState} from 'react';
-import {View, Text, SafeAreaView} from 'react-native';
+import {View, Text, SafeAreaView, Dimensions} from 'react-native';
+import 'react-native-gesture-handler';
 import Login from '../View/Login';
 import Home from '../View/Home';
 import Create from './Create';
@@ -12,7 +13,8 @@ import CreateManger from './CreateManger';
 import Info from './Info';
 import Editcourse from './Editcourse';
 import Editclass from './Editclass';
-
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -21,7 +23,10 @@ const DrawerNavigator = props => {
     <Drawer.Navigator
       drawerContent={props => <DrawerStyle {...props} />}
       initialRouteName="Home"
-      screenOptions={{headerShown: false, drawerStyle: {width: 330}}}>
+      screenOptions={{
+        headerShown: false,
+        drawerStyle: {width: 0.8 * windowWidth},
+      }}>
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Create" component={Create} />
       <Drawer.Screen name="Manager" component={Manager} />

@@ -13,7 +13,7 @@ export const Deleteclass = classId => {
     `http://118.69.123.51:5000/fis/api/edu/delete_class?classId=${classId}`,
     requestOptions,
   )
-    .then(response => response.text())
+    .then(response => response.json())
     .then(result => {
       return result;
     })
