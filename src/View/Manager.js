@@ -15,15 +15,21 @@ import {Deleteclass} from '../API/Deleteclass';
 import {get_allclassaction} from '../Redux/Action/GetclassAction';
 import Header from './Header';
 import {useDispatch, useSelector} from 'react-redux';
+import {Deleteclassaction} from '../Redux/Action/Deleteclassaction';
+import {Item} from 'react-native-paper/lib/typescript/components/List/List';
 
 export default Home = props => {
   // get all class
+  const [courseid, setcourseid] = useState(props.route.params.courseId);
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const getallclassstate = useSelector(a => a.Getallclassreducers?.response);
+  const getallclassstatus = useSelector(a => a.Getallclassreducers?.loading);
+
   useEffect(() => {
     dispatch(get_allclassaction(props.route.params.courseId));
-  }, []);
+  }, [props.route.params.courseId]);
+
   useEffect(() => {
     if (getallclassstate?.data) {
       const listclass = [];
@@ -34,23 +40,31 @@ export default Home = props => {
     }
   }, [getallclassstate]);
 
-  // xóa
-  const deletedata = async id => {
-    const result = await Deleteclass(id);
-
-    if (result.resultCode == 1) {
-      Alert.alert('Xóa buổi học thành công');
-    }
+  // xóa`
+  const deleteclassstate = useSelector(b => b.Deleteclassreducers.response);
+  const deletedata = async classId => {
+    dispatch(Deleteclassaction(classId));
   };
-  console.log(props.route.params.courseId, ' ->>>>>>>>>>>>> coacnacs');
+  useEffect(() => {
+    if (deleteclassstate?.resultCode == 1) {
+      Alert.alert('Xóa buổi học thành công');
+      dispatch(get_allclassaction(props.route.params.courseId));
+    }
+  }, [deleteclassstate]);
+
   // // call back
   useEffect(() => {
     const willFocusSubscription = props.navigation.addListener('focus', () => {
-      dispatch(get_allclassaction());
+      dispatch(get_allclassaction(props.route.params.courseId));
     });
     return willFocusSubscription;
   }, []);
-
+  if (getallclassstatus)
+    return (
+      <Text style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        LOADING.............
+      </Text>
+    );
   return (
     <View
       style={{
@@ -77,7 +91,11 @@ export default Home = props => {
             return (
               <View>
                 <Text
-                  style={{color: '#0a8dc3', fontSize: 25, fontWeight: 'bold'}}>
+                  style={{
+                    color: '#0a8dc3',
+                    fontSize: 25,
+                    fontWeight: 'bold',
+                  }}>
                   {item.className}
                 </Text>
                 <View
@@ -103,22 +121,16 @@ export default Home = props => {
                     <MenuOptions>
                       <MenuOption
                         onSelect={() => {
-                          let start = item.startedTime.split(':');
-                          let end = item.endedTime.split(':');
-                          let event = new Date(item.date);
-                          let starttime = event.setHours(start[0], start[1]);
-                          let endtime = event.setHours(end[0], end[1]);
-                          console.log(starttime, endtime, '->>>>>>>');
-
                           props.navigation.navigate('Editclass', {
                             classId: item.classId,
-                            className: item.className,
+                            courseName: item.courseName,
                             trainer: item.trainer,
                             date: item.date,
-                            startedTime: starttime,
-                            endedTime: endtime,
+                            startedTime: item.startedTime,
+                            endedTime: item.endedTime,
                             buildingId: item.buildingId,
                             roomId: item.roomId,
+                            courseId: item.course_id,
                           });
                         }}
                         text="Sửa"
@@ -156,7 +168,11 @@ export default Home = props => {
                       size={25}
                       style={{color: '#ffd237', padding: 5}}></FontAwesome5>
                     <Text
-                      style={{color: '#345173', fontSize: 20, paddingLeft: 22}}>
+                      style={{
+                        color: '#345173',
+                        fontSize: 20,
+                        paddingLeft: 22,
+                      }}>
                       Giảng viên: {/**/}
                       <Text
                         numberOfLines={1}
@@ -176,7 +192,11 @@ export default Home = props => {
                       size={25}
                       style={{color: '#40304d', padding: 5}}></FontAwesome5>
                     <Text
-                      style={{color: '#345173', fontSize: 20, paddingLeft: 18}}>
+                      style={{
+                        color: '#345173',
+                        fontSize: 20,
+                        paddingLeft: 18,
+                      }}>
                       Cán bộ quản lý : {/**/}
                       <Text
                         style={{
@@ -195,7 +215,11 @@ export default Home = props => {
                       size={25}
                       style={{color: '#42c8fb', padding: 5}}></FontAwesome>
                     <Text
-                      style={{color: '#345173', fontSize: 20, paddingLeft: 22}}>
+                      style={{
+                        color: '#345173',
+                        fontSize: 20,
+                        paddingLeft: 22,
+                      }}>
                       Ngày: {/**/}
                       <Text
                         style={{
@@ -215,7 +239,11 @@ export default Home = props => {
                       style={{color: '#345173', padding: 5}}></AntDesign>
                     <Text
                       numberOfLines={1}
-                      style={{color: '#345173', fontSize: 20, paddingLeft: 22}}>
+                      style={{
+                        color: '#345173',
+                        fontSize: 20,
+                        paddingLeft: 22,
+                      }}>
                       Thời gian: {/**/}
                       <Text
                         style={{
@@ -223,8 +251,8 @@ export default Home = props => {
                           fontSize: 20,
                           fontWeight: 'bold',
                         }}>
-                        {moment(item.startedDate).format('l')}-
-                        {moment(item.endedDate).format('l')}
+                        {moment(item.startedTime).format('LT')}-
+                        {moment(item.endedTime).format('LT')}
                       </Text>
                     </Text>
                   </View>
@@ -235,7 +263,11 @@ export default Home = props => {
                       size={25}
                       style={{color: '#0090d7', padding: 5}}></FontAwesome5>
                     <Text
-                      style={{color: '#345173', fontSize: 20, paddingLeft: 25}}>
+                      style={{
+                        color: '#345173',
+                        fontSize: 20,
+                        paddingLeft: 25,
+                      }}>
                       Tòa nhà: {/**/}
                       <Text
                         style={{
@@ -254,7 +286,11 @@ export default Home = props => {
                       size={25}
                       style={{color: '#ff9126', padding: 5}}></FontAwesome5>
                     <Text
-                      style={{color: '#345173', fontSize: 20, paddingLeft: 18}}>
+                      style={{
+                        color: '#345173',
+                        fontSize: 20,
+                        paddingLeft: 18,
+                      }}>
                       Phòng: {/**/}
                       <Text
                         style={{
@@ -293,7 +329,7 @@ export default Home = props => {
                       flexDirection: 'row',
                       padding: 15,
                       right: 0,
-                      marginTop: 15,
+                      margin: 5,
                       borderRadius: 30,
                       backgroundColor: '#e7ebee',
                       borderColor: '#c2c2c2',

@@ -3,6 +3,7 @@ import {
   SIGNIN_SUCCESS,
   SIGNIN_ERROR,
 } from '../Redux/Action/LoginAction';
+import {Alert} from 'react-native';
 import {call, takeEvery, put, takeLatest} from 'redux-saga/effects';
 import {postLogin} from '../API/Login';
 
@@ -17,6 +18,7 @@ export function* signInFlow(action) {
     if (response.resultCode == 1) {
       yield put({type: SIGNIN_SUCCESS, response: response});
     } else {
+      Alert.alert('đăng nhập thất bại');
       yield put({type: SIGNIN_ERROR, response: response});
     }
   } else {

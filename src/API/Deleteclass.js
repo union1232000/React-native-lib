@@ -1,5 +1,5 @@
 import {user} from '../Redux/Setting/Token';
-export const Deleteclass = classId => {
+export const Deleteclass = data => {
   var myHeaders = new Headers();
   myHeaders.append('Authorization', `Bearer ${user.token}`);
 
@@ -10,7 +10,7 @@ export const Deleteclass = classId => {
   };
 
   return fetch(
-    `http://118.69.123.51:5000/fis/api/edu/delete_class?classId=${classId}`,
+    `http://118.69.123.51:5000/fis/api/edu/delete_class?classId=${data}`,
     requestOptions,
   )
     .then(response => response.json())

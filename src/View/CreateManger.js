@@ -142,9 +142,7 @@ export default props => {
       Alert.alert('Thông Báo', 'Tạo mới buổi học thành công', [
         {Text: 'OK', onPress: () => props.navigation.goBack()},
       ]);
-      props.navigation.navigate('Manager');
     }
-    return () => {};
   }, [createState]);
 
   return (

@@ -10,7 +10,7 @@ export function* whatGetallclass() {
 }
 export function* GetallclassFlow(action) {
   const response = yield get_allclass(action.data);
-  console.log('sagasss chạy như con chó', response);
+
   if (response !== undefined) {
     if (response.resuiltcode == 1) {
       yield put({type: GETALLCLASS_SUCCESS, response: response});

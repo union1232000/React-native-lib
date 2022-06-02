@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Alert,
 } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -16,8 +17,9 @@ import Calender from './Calender';
 import Header from './Header';
 import Icon from './icon';
 import Time from './Time';
+import moment from 'moment';
 export default props => {
-  const createState = useSelector(b => b.Createclassreducers.response);
+  const createState = useSelector(b => b.Editclassreducers.response);
   const dispatch = useDispatch();
   const getbuildingstate = useSelector(c => c.Getbuildingreducers.response);
   const [buildingState, setBuildingState] = useState([]);
@@ -26,7 +28,7 @@ export default props => {
 
   // tên buổi học
   const [tenbuoihoc, onChangetenbuoihoc] = useState(
-    props.route.params.className,
+    props.route.params.courseName,
   );
   const [isValidtenbuoihoc, setValidtenbuoihoc] = useState(true);
   const verifytenbuoihoc = () => {
@@ -52,7 +54,6 @@ export default props => {
   const [date, setDate] = useState(props.route.params.date);
   // chọn giờ bắt đầu
   const [date2, setDate2] = useState(new Date(props.route.params.startedTime));
-
   //Chọn giờ kết thúc
   const [date3, setDate3] = useState(new Date(props.route.params.endedTime));
 
@@ -137,10 +138,12 @@ export default props => {
       ),
     );
   };
-
   useEffect(() => {
     if (createState?.resultCode == 1) {
-      // user.token = createState.data;
+      Alert.alert('Sửa thông tin buổi học thành công');
+      props.navigation.navigate('Manager', {
+        courseId: props.route.params.courseId,
+      });
     }
   }, [createState]);
 
