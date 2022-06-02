@@ -17,10 +17,19 @@ import {get_allcourse} from '../API/Get_all_course';
 import Header from './Header';
 import {get_allcourseaction} from '../Redux/Action/GetallcourseAction';
 import {Deletecourseaction} from '../Redux/Action/Deletecourseaction';
+import PushNotification from 'react-native-push-notification';
 export default Home = props => {
   const dispatch = useDispatch([]);
   const [data, setData] = useState([]);
   const getallcoursestate = useSelector(a => a.Getallcoursereducers.response);
+
+  const handlenofication = item => {
+    PushNotification.localNotification({
+      channelId: 'Test-chanel',
+      title: 'you click on ' + item.courseName,
+      message: item.message,
+    });
+  };
 
   useEffect(() => {
     if (getallcoursestate?.data) {
@@ -75,14 +84,17 @@ export default Home = props => {
                 style={{
                   flex: 1,
                   flexDirection: 'row',
-                  width: '100%',
+                  justifyContent: 'space-around',
                   padding: 10,
                   borderWidth: 1,
                   borderColor: '#c2c2c2',
                   marginTop: 10,
+                  borderRadius: 10,
                 }}>
                 <TouchableOpacity
-                  style={{width: '100%'}}
+                  style={{
+                    width: '99%',
+                  }}
                   onPress={() =>
                     props.navigation.navigate('Manager', {
                       courseId: item.course_id,
@@ -234,7 +246,7 @@ export default Home = props => {
                 </TouchableOpacity>
                 <View
                   style={{
-                    width: '100%',
+                    width: '5%',
                     position: 'relative',
                   }}>
                   <Menu
@@ -262,6 +274,7 @@ export default Home = props => {
                       />
                       <MenuOption
                         onSelect={() => {
+                          handlenofication(item);
                           deletedata(item.course_id);
                         }}>
                         <Text style={{color: 'red'}}>Xóa</Text>

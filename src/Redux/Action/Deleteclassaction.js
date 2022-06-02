@@ -3,7 +3,7 @@ export const DELETECLASS_SUCCESS = 'DELETECLASS_SUCCESS';
 export const DELETECLASS_ERROR = 'DELETECLASS_ERROR';
 export const DID_DELETECLASS_ACTION = ' DID_DELETECLASS_ACTION';
 
-export const Deleteclassaction = () => {
+export const Deleteclassaction = classId => {
   return {
     type: POST_DELETECLASS,
     data: classId,

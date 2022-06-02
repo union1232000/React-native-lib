@@ -94,6 +94,7 @@ export default props => {
   };
   // Từ Ngày
   const [date, setDate] = useState(props.route.params.startedDate);
+
   // Đến Ngày
   const [date2, setDate2] = useState(props.route.params.endedDate);
 

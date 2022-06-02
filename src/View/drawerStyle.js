@@ -17,10 +17,10 @@ const DrawerStyle = ({navigation}, props) => {
         <Image
           source={require('../Images/ic_avatar.png')}
           style={{borderRadius: 200 / 2}}></Image>
-        <Text style={{fontSize: 25, color: '#345173', paddingTop: 20}}>
+        <Text style={{fontSize: 28, color: '#345173', paddingTop: 20}}>
           Nguyễn Võ Vũ Văn
         </Text>
-        <Text style={{fontSize: 18, color: '#345173', paddingTop: 5}}>
+        <Text style={{fontSize: 20, color: '#345173', paddingTop: 5}}>
           Vannvv2@fpt.com.vn
         </Text>
         <Image
@@ -36,7 +36,8 @@ const DrawerStyle = ({navigation}, props) => {
           style={{
             borderBottomWidth: 1,
             width: '100%',
-            padding: 10,
+            padding: 20,
+            paddingLeft: 0,
             borderColor: '#c2c2c2',
           }}>
           <TouchableOpacity
@@ -55,7 +56,8 @@ const DrawerStyle = ({navigation}, props) => {
         <View
           style={{
             width: '100%',
-            padding: 10,
+            padding: 20,
+            paddingLeft: 0,
           }}>
           <TouchableOpacity
             style={{flexDirection: 'row'}}

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "988235665593",
+    "project_id": "fpt1-e0a72",
+    "storage_bucket": "fpt1-e0a72.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:988235665593:android:33e3065a7d3c9b8f4c4b68",
+        "android_client_info": {
+          "package_name": "com.fpt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "988235665593-7riu85pbam91i7ims9lc226agc9t48ep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6MDaNugOSe2Ub48YEG7_PUHsjS8Q2UWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "988235665593-7riu85pbam91i7ims9lc226agc9t48ep.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
