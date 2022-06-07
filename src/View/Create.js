@@ -163,8 +163,8 @@ export default props => {
               width: '100%',
               borderWidth: 1,
               borderColor: '#c2c2c2',
-              borderRadius: 5,
-              padding: 15,
+              borderRadius: 8,
+              padding: 10,
             }}
             onChangeText={text => {
               onChangeTK(text);
@@ -191,8 +191,8 @@ export default props => {
               width: '100%',
               borderWidth: 1,
               borderColor: '#c2c2c2',
-              borderRadius: 5,
-              padding: 15,
+              borderRadius: 8,
+              padding: 10,
             }}
             onChangeText={text => {
               onChangeTGV(text);

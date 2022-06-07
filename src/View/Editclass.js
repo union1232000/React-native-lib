@@ -159,7 +159,7 @@ export default props => {
         }}
       />
       {/* Tên buổi học  */}
-      <View style={{padding: 5}}>
+      <View style={{padding: 10}}>
         <View View style={{width: '100%'}}>
           <Text
             style={{
@@ -179,8 +179,8 @@ export default props => {
               width: '100%',
               borderWidth: 1,
               borderColor: '#c2c2c2',
-              borderRadius: 5,
-              padding: 15,
+              borderRadius: 8,
+              padding: 10,
             }}
             placeholder="Nhập tên buổi học"></TextInput>
           <Text style={{color: 'red', fontStyle: 'italic', fontSize: 15}}>
@@ -207,8 +207,8 @@ export default props => {
               width: '100%',
               borderWidth: 1,
               borderColor: '#c2c2c2',
-              borderRadius: 5,
-              padding: 15,
+              borderRadius: 8,
+              padding: 10,
             }}
             placeholder="Nhập tên giảng viên"></TextInput>
           <Text style={{color: 'red', fontStyle: 'italic', fontSize: 15}}>

@@ -196,7 +196,7 @@ export default Login = ({navigation}, props) => {
         <View
           style={{
             width: '100%',
-            alignItems: 'flex-start',
+            alignItems: 'center',
             flexDirection: 'row',
             marginTop: 15,
           }}>
@@ -241,9 +241,9 @@ export default Login = ({navigation}, props) => {
               backgroundColor: '#ff9336',
               borderRadius: 5,
               marginTop: 10,
-              paddingVertical: 15,
+              paddingVertical: 10,
             }}>
-            <Text style={{fontWeight: 'bold', fontSize: 25, color: 'white'}}>
+            <Text style={{fontWeight: 'bold', fontSize: 24, color: 'white'}}>
               ĐĂNG NHẬP
             </Text>
           </TouchableOpacity>
@@ -270,7 +270,9 @@ export default Login = ({navigation}, props) => {
         style={{
           paddingVertical: 12,
         }}>
-        <Text>Copyright C 2019, FPT Information system </Text>
+        <Text style={{fontSize: 14}}>
+          Copyright © 2019, FPT Information System{' '}
+        </Text>
       </View>
     </View>
   );

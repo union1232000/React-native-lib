@@ -171,7 +171,7 @@ export default Home = props => {
                       style={{
                         color: '#345173',
                         fontSize: 20,
-                        paddingLeft: 22,
+                        paddingLeft: 12,
                       }}>
                       Giảng viên: {/**/}
                       <Text
@@ -195,7 +195,7 @@ export default Home = props => {
                       style={{
                         color: '#345173',
                         fontSize: 20,
-                        paddingLeft: 18,
+                        paddingLeft: 6,
                       }}>
                       Cán bộ quản lý : {/**/}
                       <Text
@@ -218,7 +218,7 @@ export default Home = props => {
                       style={{
                         color: '#345173',
                         fontSize: 20,
-                        paddingLeft: 22,
+                        paddingLeft: 10,
                       }}>
                       Ngày: {/**/}
                       <Text
@@ -242,7 +242,7 @@ export default Home = props => {
                       style={{
                         color: '#345173',
                         fontSize: 20,
-                        paddingLeft: 22,
+                        paddingLeft: 10,
                       }}>
                       Thời gian: {/**/}
                       <Text
@@ -266,7 +266,7 @@ export default Home = props => {
                       style={{
                         color: '#345173',
                         fontSize: 20,
-                        paddingLeft: 25,
+                        paddingLeft: 14,
                       }}>
                       Tòa nhà: {/**/}
                       <Text
@@ -289,7 +289,7 @@ export default Home = props => {
                       style={{
                         color: '#345173',
                         fontSize: 20,
-                        paddingLeft: 18,
+                        paddingLeft: 5,
                       }}>
                       Phòng: {/**/}
                       <Text
@@ -308,7 +308,7 @@ export default Home = props => {
                       name="wifi"
                       size={25}
                       style={{color: '#34c96b', padding: 5}}></FontAwesome5>
-                    <Text style={{paddingLeft: 18}}>
+                    <Text style={{paddingLeft: 6}}>
                       <Text
                         style={{
                           color: '#345173',
@@ -334,7 +334,12 @@ export default Home = props => {
                       backgroundColor: '#e7ebee',
                       borderColor: '#c2c2c2',
                     }}>
-                    <Text style={{fontSize: 20, color: '#d67e3e'}}>
+                    <Text
+                      style={{
+                        fontSize: 20,
+                        color: '#d67e3e',
+                        fontWeight: 'bold',
+                      }}>
                       {item.code}
                     </Text>
                   </View>

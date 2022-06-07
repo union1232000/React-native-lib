@@ -12,13 +12,11 @@ export function* watchLogin() {
 }
 export function* signInFlow(action) {
   const {user, password} = action.data;
-  const response = yield postLogin(user, password);
-  const error = response.message;
+  const response = yield postLogin(action.data);
   if (response !== undefined) {
-    if (response.resultCode == 1) {
+    if (response !== undefined) {
       yield put({type: SIGNIN_SUCCESS, response: response});
     } else {
-      Alert.alert('đăng nhập thất bại');
       yield put({type: SIGNIN_ERROR, response: response});
     }
   } else {
