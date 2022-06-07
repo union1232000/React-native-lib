@@ -12,7 +12,6 @@ export function* watchCreate() {
 function* createFlow(action) {
   const {courseName, trainer, startedDate, endedDate, buildingId, roomId} =
     action.data;
-  console.log(action.data, 'sagas tao buoi hoc ne');
   const response = yield postCreate(action.data);
   if (response !== undefined) {
     if (response !== undefined) {

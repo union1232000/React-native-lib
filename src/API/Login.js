@@ -1,19 +1,25 @@
-export async function postLogin(user, password) {
-  let data = {
+export const postLogin = data => {
+  const {user, password} = data;
+  var myHeaders = new Headers();
+  myHeaders.append('Content-Type', 'application/json');
+
+  var raw = JSON.stringify({
     username: user,
     password: password,
-  };
-  const reponse = await fetch('http://118.69.123.51:5000/fis/api/login', {
+  });
+
+  var requestOptions = {
     method: 'POST',
-    headers: {
-      Accept: ',application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-    .then(reponse => reponse.json())
-    .catch(error => {
-      console.error(error);
-    });
-  return reponse;
-}
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow',
+  };
+
+  return fetch('http://118.69.123.51:5000/fis/api/login', requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result);
+      return result;
+    })
+    .catch(error => console.log('error', error));
+};

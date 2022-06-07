@@ -134,7 +134,7 @@ export default Home = props => {
                           style={{
                             color: '#345173',
                             fontSize: 18,
-                            paddingLeft: 15,
+                            paddingLeft: 9,
                           }}>
                           Giảng viên: {/**/}
                           <Text
@@ -158,7 +158,7 @@ export default Home = props => {
                         style={{
                           color: '#345173',
                           fontSize: 18,
-                          paddingLeft: 9,
+                          paddingLeft: 3,
                         }}>
                         Cán bộ quản lý: {/**/}
                         {item.name}
@@ -182,7 +182,7 @@ export default Home = props => {
                         style={{
                           color: '#345173',
                           fontSize: 18,
-                          paddingLeft: 14,
+                          paddingLeft: 5,
                         }}>
                         Thời gian: {/**/}
                         <Text
@@ -206,7 +206,7 @@ export default Home = props => {
                         style={{
                           color: '#345173',
                           fontSize: 18,
-                          paddingLeft: 18,
+                          paddingLeft: 10,
                         }}>
                         Tòa nhà: {/**/}
                         <Text
@@ -229,7 +229,7 @@ export default Home = props => {
                         style={{
                           color: '#345173',
                           fontSize: 18,
-                          paddingLeft: 10,
+                          paddingLeft: 4,
                         }}>
                         Phòng: {/**/}
                         <Text
