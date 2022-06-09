@@ -90,7 +90,7 @@ export default Login = ({navigation}, props) => {
           </Text>
           <Image
             source={require('../Images/stripe.png')}
-            style={{height: '6%', marginTop: 8}}
+            style={{height: '5.5%', marginTop: 10}}
             resizeMode="contain"></Image>
         </View>
         {/* đăng nhập  */}

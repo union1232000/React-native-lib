@@ -63,7 +63,18 @@ export default props => {
   }, [chontoanha]);
   // nút lưu API
   const Savehandler = () => {
-    dispatch(CreateAction(TK, TGV, date, date2, chontoanha, chonphong));
+    if (
+      TK == '' ||
+      TGV == '' ||
+      date == '' ||
+      date2 == '' ||
+      chontoanha == '' ||
+      chonphong == ''
+    ) {
+      Alert.alert('Tạo mới khóa học không thành công');
+    } else {
+      dispatch(CreateAction(TK, TGV, date, date2, chontoanha, chonphong));
+    }
   };
   useEffect(() => {
     if (createState?.resultCode) {
@@ -216,7 +227,7 @@ export default props => {
             <Text
               style={{
                 color: '#345173',
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: 'bold',
                 paddingBottom: 5,
               }}>
@@ -229,7 +240,7 @@ export default props => {
             <Text
               style={{
                 color: '#345173',
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: 'bold',
                 paddingBottom: 5,
               }}>
@@ -245,7 +256,7 @@ export default props => {
         <View style={{width: '100%'}}>
           <Text
             style={{
-              fontSize: 20,
+              fontSize: 22,
               color: '#345173',
               fontWeight: 'bold',
               paddingBottom: 5,
@@ -283,7 +294,7 @@ export default props => {
         <View style={{width: '100%'}}>
           <Text
             style={{
-              fontSize: 20,
+              fontSize: 22,
               color: '#345173',
               fontWeight: 'bold',
               paddingBottom: 5,
@@ -329,14 +340,14 @@ export default props => {
               Savehandler();
             }}
             style={{
-              width: '40%',
+              width: '32%',
               borderWidth: 2,
               justifyContent: 'center',
               alignItems: 'center',
               flexDirection: 'row',
-              padding: 15,
+              padding: 10,
               right: 0,
-              marginTop: 15,
+              marginTop: 10,
               borderRadius: 10,
               backgroundColor: '#ff9434',
               borderColor: '#c2c2c2',

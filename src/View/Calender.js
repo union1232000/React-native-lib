@@ -26,7 +26,7 @@ export default props => {
           flexDirection: 'row',
           borderWidth: 1,
           width: '100%',
-          padding: 12,
+          padding: 10,
           borderRadius: 8,
           borderColor: '#c2c2c2',
           justifyContent: 'center',

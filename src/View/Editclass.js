@@ -125,18 +125,31 @@ export default props => {
   }, [chontoanha]);
 
   const Savehandler = () => {
-    dispatch(
-      Editclasssaction(
-        classId,
-        tenbuoihoc,
-        tengiangvien,
-        date,
-        date2,
-        date3,
-        chontoanha,
-        chonphong,
-      ),
-    );
+    if (
+      classId == '' ||
+      tenbuoihoc == '' ||
+      tengiangvien == '' ||
+      date == '' ||
+      date2 == '' ||
+      date3 == '' ||
+      chontoanha == '' ||
+      chonphong == ''
+    ) {
+      Alert.alert('Sửa thông tin buổi học không thành công');
+    } else {
+      dispatch(
+        Editclasssaction(
+          classId,
+          tenbuoihoc,
+          tengiangvien,
+          date,
+          date2,
+          date3,
+          chontoanha,
+          chonphong,
+        ),
+      );
+    }
   };
   useEffect(() => {
     if (createState?.resultCode == 1) {
@@ -366,12 +379,12 @@ export default props => {
               Savehandler();
             }}
             style={{
-              width: '40%',
+              width: '32%',
               borderWidth: 2,
               justifyContent: 'center',
               alignItems: 'center',
               flexDirection: 'row',
-              padding: 15,
+              padding: 10,
               right: 0,
               marginTop: 15,
               borderRadius: 10,
