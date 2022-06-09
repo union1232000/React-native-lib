@@ -47,9 +47,12 @@ export default Home = props => {
     dispatch(Deletecourseaction(course_id));
   };
   useEffect(() => {
-    if (deletecoursestate?.resultCode == 1) {
-      Alert.alert('Xóa khóa học thành công');
-      dispatch(get_allcourseaction());
+    if (deletecoursestate?.resultCode) {
+      if (deletecoursestate?.resultCode == 1) {
+        Alert.alert('Thông Báo', 'Xóa khóa học thành công', [
+          {Text: 'OK', onPress: () => dispatch(get_allcourseaction())},
+        ]);
+      }
     }
   }, [deletecoursestate]);
 
@@ -88,7 +91,7 @@ export default Home = props => {
                   padding: 10,
                   borderWidth: 1,
                   borderColor: '#c2c2c2',
-                  marginTop: 10,
+                  marginTop: 15,
                   borderRadius: 10,
                 }}>
                 <TouchableOpacity
@@ -104,7 +107,10 @@ export default Home = props => {
                     {/* Tựa mục  */}
                     <View
                       style={{
+                        flexDirection: 'row',
                         width: '95%',
+                        paddingLeft: 2,
+                        alignItems: 'center',
                       }}>
                       <Text numberOfLines={2}>
                         {item.title}
@@ -127,13 +133,13 @@ export default Home = props => {
                       <FontAwesome5
                         name="user-tie"
                         size={25}
-                        style={{color: '#ffd237', padding: 7}}></FontAwesome5>
+                        style={{color: '#ffd237', padding: 8}}></FontAwesome5>
                       <View style={{width: '90%'}}>
                         <Text
                           numberOfLines={1}
                           style={{
                             color: '#345173',
-                            fontSize: 18,
+                            fontSize: 20,
                             paddingLeft: 9,
                           }}>
                           Giảng viên: {/**/}
@@ -153,11 +159,11 @@ export default Home = props => {
                       <FontAwesome5
                         name="address-card"
                         size={25}
-                        style={{color: '#40304d', padding: 7}}></FontAwesome5>
+                        style={{color: '#40304d', padding: 8}}></FontAwesome5>
                       <Text
                         style={{
                           color: '#345173',
-                          fontSize: 18,
+                          fontSize: 20,
                           paddingLeft: 3,
                         }}>
                         Cán bộ quản lý: {/**/}
@@ -177,11 +183,11 @@ export default Home = props => {
                       <FontAwesome
                         name="calendar-check-o"
                         size={25}
-                        style={{color: '#42c8fb', padding: 7}}></FontAwesome>
+                        style={{color: '#42c8fb', padding: 8}}></FontAwesome>
                       <Text
                         style={{
                           color: '#345173',
-                          fontSize: 18,
+                          fontSize: 20,
                           paddingLeft: 5,
                         }}>
                         Thời gian: {/**/}
@@ -201,11 +207,11 @@ export default Home = props => {
                       <FontAwesome5
                         name="building"
                         size={25}
-                        style={{color: '#0090d7', padding: 7}}></FontAwesome5>
+                        style={{color: '#0090d7', padding: 8}}></FontAwesome5>
                       <Text
                         style={{
                           color: '#345173',
-                          fontSize: 18,
+                          fontSize: 20,
                           paddingLeft: 10,
                         }}>
                         Tòa nhà: {/**/}
@@ -224,11 +230,11 @@ export default Home = props => {
                       <FontAwesome5
                         name="chalkboard-teacher"
                         size={25}
-                        style={{color: '#ff9126', padding: 7}}></FontAwesome5>
+                        style={{color: '#ff9126', padding: 8}}></FontAwesome5>
                       <Text
                         style={{
                           color: '#345173',
-                          fontSize: 18,
+                          fontSize: 20,
                           paddingLeft: 4,
                         }}>
                         Phòng: {/**/}

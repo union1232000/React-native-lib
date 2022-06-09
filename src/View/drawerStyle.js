@@ -27,7 +27,7 @@ const DrawerStyle = ({navigation}, props) => {
           source={require('../Images/stripe.png')}
           style={{
             resizeMode: 'contain',
-            width: '40%',
+            width: Dimensions.get('screen').width * 0.3,
             paddingBottom: 30,
           }}></Image>
 
@@ -49,7 +49,9 @@ const DrawerStyle = ({navigation}, props) => {
               name="info-with-circle"
               size={25}
               style={{marginRight: 10, color: '#00C2FC'}}></Entypo>
-            <Text style={{fontSize: 17}}>Thông tin ứng dụng </Text>
+            <Text style={{fontSize: 20, color: '#345173'}}>
+              Thông tin ứng dụng{' '}
+            </Text>
           </TouchableOpacity>
         </View>
         {/* Đăng xuất  */}
@@ -67,8 +69,8 @@ const DrawerStyle = ({navigation}, props) => {
             <Feather
               name="log-out"
               size={25}
-              style={{marginRight: 10, color: '#345173'}}></Feather>
-            <Text style={{fontSize: 17}}> Đăng xuất</Text>
+              style={{marginRight: 10}}></Feather>
+            <Text style={{fontSize: 20, color: '#345173'}}> Đăng xuất</Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -124,23 +124,41 @@ export default props => {
   }, [date]);
 
   const Savehandler = () => {
-    dispatch(
-      createclass(
-        courseId,
-        tenbuoihoc,
-        tengiangvien,
-        date,
-        date2,
-        date3,
-        chontoanha,
-        chonphong,
-      ),
-    );
+    if (
+      tenbuoihoc == '' ||
+      tengiangvien == '' ||
+      date == '' ||
+      date2 == '' ||
+      date3 == '' ||
+      chontoanha == '' ||
+      chonphong == ''
+    ) {
+      Alert.alert('Tạo mới khóa học không thành công');
+    } else {
+      dispatch(
+        createclass(
+          courseId,
+          tenbuoihoc,
+          tengiangvien,
+          date,
+          date2,
+          date3,
+          chontoanha,
+          chonphong,
+        ),
+      );
+    }
   };
   useEffect(() => {
     if (createState?.resultCode == 1) {
       Alert.alert('Thông Báo', 'Tạo mới buổi học thành công', [
-        {Text: 'OK', onPress: () => props.navigation.goBack()},
+        {
+          Text: 'OK',
+          onPress: () =>
+            props.navigation.navigate('Manager', {
+              courseId: props.route.params.courseId,
+            }),
+        },
       ]);
     }
   }, [createState]);
@@ -231,7 +249,7 @@ export default props => {
             <Text
               style={{
                 color: '#345173',
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: 'bold',
                 paddingBottom: 5,
               }}>
@@ -254,7 +272,7 @@ export default props => {
             <Text
               style={{
                 color: '#345173',
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: 'bold',
                 paddingBottom: 5,
               }}>
@@ -268,7 +286,7 @@ export default props => {
             <Text
               style={{
                 color: '#345173',
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: 'bold',
                 paddingBottom: 5,
               }}>
@@ -284,7 +302,7 @@ export default props => {
         <View style={{width: '100%'}}>
           <Text
             style={{
-              fontSize: 20,
+              fontSize: 22,
               color: '#345173',
               fontWeight: 'bold',
               paddingBottom: 5,
@@ -322,7 +340,7 @@ export default props => {
         <View style={{width: '100%'}}>
           <Text
             style={{
-              fontSize: 20,
+              fontSize: 22,
               color: '#345173',
               fontWeight: 'bold',
               paddingBottom: 5,
@@ -371,13 +389,12 @@ export default props => {
               Savehandler();
             }}
             style={{
-              width: '40%',
-              // position: 'absolute',
+              width: '32%',
               borderWidth: 2,
               justifyContent: 'center',
               alignItems: 'center',
               flexDirection: 'row',
-              padding: 15,
+              padding: 10,
               right: 0,
               marginTop: 15,
               borderRadius: 10,

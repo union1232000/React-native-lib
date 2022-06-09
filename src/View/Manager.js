@@ -336,7 +336,7 @@ export default Home = props => {
                     }}>
                     <Text
                       style={{
-                        fontSize: 20,
+                        fontSize: 22,
                         color: '#d67e3e',
                         fontWeight: 'bold',
                       }}>

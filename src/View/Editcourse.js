@@ -61,9 +61,21 @@ export default props => {
   }, [getbuildingstate]);
   // nút lưu API
   const Savehandler = () => {
-    dispatch(
-      Editcourseaction(courseId, TK, TGV, date, date2, chontoanha, chonphong),
-    );
+    if (
+      (courseId,
+      TK == '' ||
+        TGV == '' ||
+        date == '' ||
+        date2 == '' ||
+        chontoanha == '' ||
+        chonphong == '')
+    ) {
+      Alert.alert('Sửa thông tin khóa học không thành công');
+    } else {
+      dispatch(
+        Editcourseaction(courseId, TK, TGV, date, date2, chontoanha, chonphong),
+      );
+    }
   };
   useEffect(() => {
     if (editstate?.resultCode == 1) {
@@ -234,7 +246,7 @@ export default props => {
             <Text
               style={{
                 color: '#345173',
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: 'bold',
                 paddingBottom: 5,
               }}>
@@ -247,7 +259,7 @@ export default props => {
             <Text
               style={{
                 color: '#345173',
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: 'bold',
                 paddingBottom: 5,
               }}>
@@ -263,7 +275,7 @@ export default props => {
         <View style={{width: '100%'}}>
           <Text
             style={{
-              fontSize: 20,
+              fontSize: 22,
               color: '#345173',
               fontWeight: 'bold',
               paddingBottom: 5,
@@ -301,7 +313,7 @@ export default props => {
         <View style={{width: '100%'}}>
           <Text
             style={{
-              fontSize: 20,
+              fontSize: 22,
               color: '#345173',
               fontWeight: 'bold',
               paddingBottom: 5,
@@ -347,12 +359,12 @@ export default props => {
               Savehandler();
             }}
             style={{
-              width: '40%',
+              width: '32%',
               borderWidth: 2,
               justifyContent: 'center',
               alignItems: 'center',
               flexDirection: 'row',
-              padding: 15,
+              padding: 10,
               right: 0,
               marginTop: 15,
               borderRadius: 10,
