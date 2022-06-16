@@ -26,10 +26,10 @@ export default Login = ({navigation}, props) => {
   const [getPasswordVisible, setPasswordVisible] = useState(false);
   const [getCheckboxvisible, setCheckboxVisible] = useState(false);
   const [Username, setUsername] = useState('vannvv2@fpt.com.vn');
-  const [Password, setPassword] = useState('chuonng1080@');
+  const [Password, setPassword] = useState('chuonng1080');
 
-  const Loginhandler = async () => {
-    dispatch(loginAction(Username, Password));
+  const Loginhandler = () => {
+    return dispatch(loginAction(Username, Password));
   };
   useEffect(() => {
     if (loginState?.resultCode) {
@@ -90,7 +90,7 @@ export default Login = ({navigation}, props) => {
           </Text>
           <Image
             source={require('../Images/stripe.png')}
-            style={{height: '5.5%', marginTop: 10}}
+            style={{height: '5.5%', marginTop: 15}}
             resizeMode="contain"></Image>
         </View>
         {/* đăng nhập  */}

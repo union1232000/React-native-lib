@@ -329,7 +329,7 @@ export default Home = props => {
                       flexDirection: 'row',
                       padding: 15,
                       right: 0,
-                      margin: 5,
+                      margin: 10,
                       borderRadius: 30,
                       backgroundColor: '#e7ebee',
                       borderColor: '#c2c2c2',
