@@ -138,6 +138,10 @@ export default props => {
     }
   };
 
+
+  const toogleRoom = () => {
+    setOpen4(!open4)
+  }
   const verifychonphong = () => {
     if (chonphong == '') {
       setValidchonphong(false);
@@ -212,6 +216,7 @@ export default props => {
               onChangeTGV(text);
             }}
             value={TGV}
+            place
             placeholder="Nhập tên giảng viên"></TextInput>
           <Text style={{color: 'red', fontStyle: 'italic', fontSize: 15}}>
             {isValidTGV ? '' : 'Tên giảng viên không thể để trống'}
@@ -322,10 +327,10 @@ export default props => {
             zIndex={2000}
             zIndexInverse={2000}
             ArrowDownIconComponent={({style}) => (
-              <Icon toggle={toggleBuilding} isUp style={style} />
+              <Icon toggle={toogleRoom} isUp style={style} />
             )}
             ArrowUpIconComponent={({style}) => (
-              <Icon toggle={toggleBuilding} isDown style={style} />
+              <Icon toggle={toogleRoom} isDown style={style} />
             )}
           />
           <Text style={{color: 'red', fontStyle: 'italic', fontSize: 15}}>

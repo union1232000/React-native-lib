@@ -92,6 +92,9 @@ export default props => {
   };
   // Phòng
   const [open4, setOpen4] = useState(false);
+  const toogleRoom = () => {
+    setOpen4(!open4)
+  }
 
   const [items2, setItems2] = useState([]);
   const [chonphong, onChangechonphong] = useState('');
@@ -365,10 +368,10 @@ export default props => {
             zIndex={2000}
             zIndexInverse={2000}
             ArrowDownIconComponent={({style}) => (
-              <Icon toggle={toggleBuilding} isUp style={style} />
+              <Icon toggle={toogleRoom} isUp style={style} />
             )}
             ArrowUpIconComponent={({style}) => (
-              <Icon toggle={toggleBuilding} isDown style={style} />
+              <Icon toggle={toogleRoom} isDown style={style} />
             )}
           />
         </View>

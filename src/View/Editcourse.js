@@ -28,6 +28,9 @@ export default props => {
   const [isValidchontoanha, setValidchontoanha] = useState(true);
   // Phòng
   const [open4, setOpen4] = useState(false);
+  const toogleRoom = () => {
+    setOpen4(!open4)
+  }
   const [items2, setItems2] = useState([]);
   const [chonphong, onChangechonphong] = useState(props.route.params.roomId);
   const [isValidchonphong, setValidchonphong] = useState(true);
@@ -339,10 +342,10 @@ export default props => {
             zIndex={2000}
             zIndexInverse={2000}
             ArrowDownIconComponent={({style}) => (
-              <Icon toggle={toggleBuilding} isUp style={style} />
+              <Icon toggle={toogleRoom} isUp style={style} />
             )}
             ArrowUpIconComponent={({style}) => (
-              <Icon toggle={toggleBuilding} isDown style={style} />
+              <Icon toggle={toogleRoom} isDown style={style} />
             )}
           />
           <Text style={{color: 'red', fontStyle: 'italic', fontSize: 15}}>

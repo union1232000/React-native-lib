@@ -28,11 +28,17 @@ export default Login = ({navigation}, props) => {
   const [Username, setUsername] = useState('vannvv2@fpt.com.vn');
   const [Password, setPassword] = useState('union1232000A@');
 
-  const Loginhandler = async () => {
-    dispatch(loginAction(Username, Password));
-  };
+  const Loginhandler =  () => {
+    Alert.alert(' login ngu vl')
+  if ( Username =='' || Password == '' )
+  { Alert.alert("Vui lòng nhập đủ tài khoản mật khẩu")
+  }
+  else{
+    dispatch(loginAction(Username,Password));
+  };}
   useEffect(() => {
     if (loginState?.resultCode) {
+      Alert.alert('->>>>>>>>>>>>>>>>>>>>')
       if (loginState?.resultCode == 1) {
         user.token = loginState?.data.token;
         navigation.navigate('DrawerNavigator');
@@ -42,16 +48,6 @@ export default Login = ({navigation}, props) => {
     }
   }, [loginState]);
 
-  const createChanel = () => {
-    console.log('channell run ');
-    PushNotification.createChannel({
-      channelId: 'Test-chanel',
-      channelName: 'Test',
-    });
-  };
-  useEffect(() => {
-    createChanel();
-  }, []);
   return (
     <View
       style={{
@@ -127,7 +123,7 @@ export default Login = ({navigation}, props) => {
               onChangeText={value => setUsername(value)}
               value={Username}
               placeholderTextColor={'#335271'}
-              placeholder="Tài Khoản"></TextInput>
+              placeholder="Tài khoản"></TextInput>
             <FontAwesome
               style={style.icon}
               name={'user'}
@@ -231,6 +227,7 @@ export default Login = ({navigation}, props) => {
         {/* đăng nhập  */}
         <View style={{width: '100%'}}>
           <TouchableOpacity
+          
             onPress={() => {
               Loginhandler();
             }}
@@ -261,7 +258,7 @@ export default Login = ({navigation}, props) => {
             source={require('../Images/swipe.png')}
             style={{
               resizeMode: 'contain',
-              width: '100%',
+              width: '110%',
               height: '100%',
             }}></Image>
         </View>
