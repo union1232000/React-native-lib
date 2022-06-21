@@ -16,13 +16,10 @@ export function* signInFlow(action) {
   if (response) {
     if (response.resultCode === 1) {
       yield put({type: SIGNIN_SUCCESS, response: response});
-      Alert.alert("Đăng Nhập thành công rồi nè bro")
     } else  if (response.resultCode === -1){
       yield put({type: SIGNIN_ERROR, response: response});
-      Alert.alert("Đăng Nhập không thành công")
     }
   } else {
     yield put({type: SIGNIN_ERROR, response: response});
-    Alert.alert(`Đăng Nhập không thành công 2 ${response}`)
   }
 }

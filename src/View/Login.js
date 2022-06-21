@@ -29,7 +29,6 @@ export default Login = ({navigation}, props) => {
   const [Password, setPassword] = useState('union1232000A@');
 
   const Loginhandler =  () => {
- 
   if ( Username =='' || Password == '' )
   { Alert.alert("Vui lòng nhập đủ tài khoản mật khẩu")
   }
@@ -38,7 +37,6 @@ export default Login = ({navigation}, props) => {
   };}
   useEffect(() => {
     if (loginState?.resultCode) {
-      Alert.alert('->>>>>>>>>>>>>>>>>>>>')
       if (loginState?.resultCode == 1) {
         user.token = loginState?.data.token;
         navigation.navigate('DrawerNavigator');
@@ -47,7 +45,6 @@ export default Login = ({navigation}, props) => {
       }
     }
   }, [loginState]);
-
   return (
     <View
       style={{

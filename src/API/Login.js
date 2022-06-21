@@ -20,8 +20,7 @@ export const postLogin = data => {
   return fetch('http://118.69.123.51:5000/fis/api/login', requestOptions)
     .then(response => response.json())
     .then(result => {
-      Alert.alert('API Ngu đăng nhập dc r')
       return result;
     })
-    .catch(error => Alert.alert(`cái error ngu ${error}`));
+    .catch(error =>console.log('error', error));
 };  

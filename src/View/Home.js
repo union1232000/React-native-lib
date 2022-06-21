@@ -145,6 +145,7 @@ export default Home = props => {
                           }}>
                           Giảng viên: {/**/}
                           <Text
+                          numberOfLines={1}
                             style={{
                               color: '#0a8dc3',
                               fontSize: 20,
@@ -170,6 +171,7 @@ export default Home = props => {
                         Cán bộ quản lý: {/**/}
                         {item.name}
                         <Text
+                        numberOfLines={1}
                           style={{
                             color: '#f0943f',
                             fontSize: 20,
@@ -193,6 +195,7 @@ export default Home = props => {
                         }}>
                         Thời gian: {/**/}
                         <Text
+                          numberOfLines={1}
                           style={{
                             color: '#345173',
                             fontSize: 20,
@@ -253,7 +256,7 @@ export default Home = props => {
                 </TouchableOpacity>
                 <View
                   style={{
-                    width: '5%',
+                    width: '7%',
                     position: 'relative',
                   }}>
                   <Menu
