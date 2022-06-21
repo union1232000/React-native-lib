@@ -152,6 +152,7 @@ export default props => {
         title="TẠO MỚI KHÓA HỌC"
         isRightDisable={true}
         isBack={true}
+        isborderDisable={true}
         {...props}
         onClick={() => {
           props.navigation.navigate('Home');
@@ -181,7 +182,9 @@ export default props => {
               onChangeTK(text);
             }}
             value={TK}
-            placeholder="Nhập tên khóa học"></TextInput>
+        
+            placeholder="Nhập tên khóa học"
+            ></TextInput>
           <Text style={{color: 'red', fontStyle: 'italic', fontSize: 15}}>
             {isValidTK ? '' : 'Tên khóa không được bỏ trống '}
           </Text>

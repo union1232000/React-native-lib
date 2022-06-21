@@ -172,6 +172,7 @@ export default props => {
         {...props}
         isRightDisable={true}
         isBack={true}
+        isborderDisable={true}
         onClick={() => {
           props.navigation.navigate('Home');
         }}

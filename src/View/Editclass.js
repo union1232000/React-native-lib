@@ -166,6 +166,7 @@ export default props => {
         title="TẠO MỚI BUỔI HỌC"
         isRightDisable={true}
         isBack={true}
+        isborderDisable={true}
         {...props}
         onClick={() => {
           props.navigation.navigate('Manager');

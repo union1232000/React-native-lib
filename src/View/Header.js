@@ -3,6 +3,9 @@ import {Image, Text, TouchableOpacity, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 export default Header = props => {
+  const [isborderDisable , setisborderDisable] = useState (
+    props.isborderDisable ? false : true, 
+  );
   const [isLeftDisalbe, setIsLeftDisable] = useState(
     props.isLeftDisable ? false : true,
   );
@@ -15,7 +18,6 @@ export default Header = props => {
       <View
         style={{
           width: '100%',
-          borderBottomWidth: 1,
           padding: 30,
           justifyContent: 'center',
           alignItems: 'center',
@@ -66,9 +68,12 @@ export default Header = props => {
           {props.title}
         </Text>
       </View>
+      {isborderDisable ? (
       <Image
         style={{height: 2}}
         source={require('../Images/shadow_bottom.png')}></Image>
+      ) : (<View></View>)
+      }
     </View>
   );
 };

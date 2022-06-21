@@ -236,7 +236,7 @@ export default Home = props => {
                     <AntDesign
                       name="clockcircleo"
                       size={25}
-                      style={{color: '#345173', padding: 5}}></AntDesign>
+                      style={{color: '#ff0066', padding: 5}}></AntDesign>
                     <Text
                       numberOfLines={1}
                       style={{
@@ -247,7 +247,7 @@ export default Home = props => {
                       Thời gian: {/**/}
                       <Text
                         style={{
-                          color: '#345173',
+                          color: '#ff0066',
                           fontSize: 20,
                           fontWeight: 'bold',
                         }}>
@@ -327,10 +327,9 @@ export default Home = props => {
                       justifyContent: 'center',
                       position: 'absolute',
                       flexDirection: 'row',
-                      padding: 15,
+                      padding: 10,
                       right: 0,
-                      margin: 5,
-                      borderRadius: 30,
+                      margin: 10, 
                       backgroundColor: '#e7ebee',
                       borderColor: '#c2c2c2',
                     }}>
