@@ -29,7 +29,7 @@ export default Login = ({navigation}, props) => {
   const [Password, setPassword] = useState('union1232000A@');
 
   const Loginhandler =  () => {
-    Alert.alert(' login ngu vl')
+ 
   if ( Username =='' || Password == '' )
   { Alert.alert("Vui lòng nhập đủ tài khoản mật khẩu")
   }
@@ -86,7 +86,7 @@ export default Login = ({navigation}, props) => {
           </Text>
           <Image
             source={require('../Images/stripe.png')}
-            style={{height: '5.5%', marginTop: 10}}
+            style={{height: '5.5%', marginTop: 15}}
             resizeMode="contain"></Image>
         </View>
         {/* đăng nhập  */}

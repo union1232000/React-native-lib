@@ -243,7 +243,7 @@ export default props => {
             <Text
               style={{
                 color: '#345173',
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: 'bold',
                 paddingBottom: 5,
               }}>
@@ -265,7 +265,7 @@ export default props => {
             <Text
               style={{
                 color: '#345173',
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: 'bold',
                 paddingBottom: 5,
               }}>
@@ -279,7 +279,7 @@ export default props => {
             <Text
               style={{
                 color: '#345173',
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: 'bold',
                 paddingBottom: 5,
               }}>
@@ -295,7 +295,7 @@ export default props => {
         <View style={{width: '100%'}}>
           <Text
             style={{
-              fontSize: 20,
+              fontSize: 22,
               color: '#345173',
               fontWeight: 'bold',
               paddingBottom: 5,
@@ -333,7 +333,7 @@ export default props => {
         <View style={{width: '100%'}}>
           <Text
             style={{
-              fontSize: 20,
+              fontSize: 22,
               color: '#345173',
               fontWeight: 'bold',
               paddingBottom: 5,

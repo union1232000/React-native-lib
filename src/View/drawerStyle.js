@@ -27,7 +27,7 @@ const DrawerStyle = ({navigation}, props) => {
           source={require('../Images/stripe.png')}
           style={{
             resizeMode: 'contain',
-            width: Dimensions.get('screen').width * 0.3,
+            width: Dimensions.get('screen').width * 0.25,
             paddingBottom: 30,
           }}></Image>
 

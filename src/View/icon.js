@@ -10,7 +10,7 @@ const Icon = props => {
       {isUp ? (
         <TouchableOpacity
           onPress={() => {
-            props.toggle();
+            props.toggle();               
           }}>
           <FontAwesome
             name="caret-down"
