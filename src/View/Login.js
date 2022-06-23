@@ -65,7 +65,7 @@ export default Login = ({navigation}, props) => {
         }}>
         <View
           style={{
-            width: Dimensions.get('screen').width * 0.5,
+            width: Dimensions.get('screen').width * 0.51,
             height: Dimensions.get('screen').height * 0.1,
           }}>
           <Image
@@ -78,17 +78,17 @@ export default Login = ({navigation}, props) => {
         </View>
         {/* FPT INSIGHT Portal */}
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          <Text style={{color: '#335271', fontSize: 28, fontWeight: '700'}}>
+          <Text style={{color: '#335271', fontSize: 25, fontWeight: '700'}}>
             FIS INSIGHT PORTAL
           </Text>
           <Image
             source={require('../Images/stripe.png')}
-            style={{height: '5.5%', marginTop: 15}}
+            style={{height: '5.5%', }}
             resizeMode="contain"></Image>
         </View>
         {/* đăng nhập  */}
         <View style={{alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={{color: '#fea026', fontSize: 25, fontWeight: '700'}}>
+          <Text style={{color: '#fea026', fontSize: 22, fontWeight: '700'}}>
             ĐĂNG NHẬP HỆ THỐNG{' '}
           </Text>
         </View>
@@ -224,7 +224,6 @@ export default Login = ({navigation}, props) => {
         {/* đăng nhập  */}
         <View style={{width: '100%'}}>
           <TouchableOpacity
-          
             onPress={() => {
               Loginhandler();
             }}
@@ -235,9 +234,9 @@ export default Login = ({navigation}, props) => {
               backgroundColor: '#ff9336',
               borderRadius: 5,
               marginTop: 10,
-              paddingVertical: 10,
+              paddingVertical: 9,
             }}>
-            <Text style={{fontWeight: 'bold', fontSize: 24, color: 'white'}}>
+            <Text style={{fontWeight: 'bold', fontSize: 18, color: 'white'}}>
               ĐĂNG NHẬP
             </Text>
           </TouchableOpacity>
@@ -246,7 +245,7 @@ export default Login = ({navigation}, props) => {
         <View
           style={{
             marginTop: 10,
-            width: Dimensions.get('screen').width * 0.5,
+            width: Dimensions.get('screen').width * 0.6,
             height: Dimensions.get('screen').height * 0.2,
             justifyContent: 'center',
             alignItems: 'center',
@@ -265,7 +264,7 @@ export default Login = ({navigation}, props) => {
           paddingVertical: 12,
         }}>
         <Text style={{fontSize: 14}}>
-          Copyright © 2019, FPT Information System{' '}
+          Copyright © 2019, FPT Information System
         </Text>
       </View>
     </View>

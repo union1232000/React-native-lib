@@ -89,7 +89,7 @@ export default Home = props => {
           keyExtractor={item => item.code}
           renderItem={({item}) => {
             return (
-              <View>
+              <View >
                 <Text
                   style={{
                     color: '#0a8dc3',
